@@ -1,0 +1,21 @@
+# Files owned by this repo, not by the generator. `generate.sh` regenerates only the
+# gerrit_client/ package; everything below is hand-written and must survive regeneration.
+pyproject.toml
+README.md
+LICENSE.txt
+.gitignore
+.github/**
+gerrit_xssi/**
+examples/**
+tests/**
+# Generator scaffolding we don't ship (removed once; keep it from coming back).
+setup.py
+setup.cfg
+requirements.txt
+test-requirements.txt
+tox.ini
+git_push.sh
+docs/**
+test/**
+.travis.yml
+.gitlab-ci.yml

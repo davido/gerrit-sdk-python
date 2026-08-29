@@ -1,0 +1,30 @@
+[project]
+name = "gerrit-sdk-python"
+version = "3.15.0.dev0"
+description = "Generated Gerrit Code Review REST API SDK for Python (gerrit_client)."
+license = { text = "Apache-2.0" }
+readme = "README.md"
+requires-python = ">=3.10"
+keywords = ["gerrit", "openapi", "sdk"]
+dependencies = [
+  "urllib3 (>=2.7.0,<3.0.0)",
+  "python-dateutil (>=2.8.2)",
+  "pydantic (>=2.11)",
+  "typing-extensions (>=4.7.1)",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.urls]
+Repository = "https://github.com/davido/gerrit-sdk-python"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+# The generated import package (gerrit_client, with its api/ and models/ subpackages)
+# plus the hand-written XSSI package (gerrit_xssi). examples/ and tests/ are not
+# packaged (no __init__.py in examples/).
+[tool.setuptools.packages.find]
+include = ["gerrit_client*", "gerrit_xssi*"]
