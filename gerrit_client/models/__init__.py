@@ -127,6 +127,7 @@ from gerrit_client.models.entries_info import EntriesInfo
 from gerrit_client.models.evaluate_change_query_expression_result_info import EvaluateChangeQueryExpressionResultInfo
 from gerrit_client.models.experiment_info import ExperimentInfo
 from gerrit_client.models.fetch_info import FetchInfo
+from gerrit_client.models.field_json import FieldJson
 from gerrit_client.models.file_change import FileChange
 from gerrit_client.models.file_content_input import FileContentInput
 from gerrit_client.models.file_meta import FileMeta
@@ -144,11 +145,19 @@ from gerrit_client.models.flow_stage_state import FlowStageState
 from gerrit_client.models.garbage_collect_input import GarbageCollectInput
 from gerrit_client.models.general_preferences_info import GeneralPreferencesInfo
 from gerrit_client.models.gerrit_info import GerritInfo
+from gerrit_client.models.get_config_server_caches200_response import GetConfigServerCaches200Response
+from gerrit_client.models.get_config_server_indexes200_response_inner import GetConfigServerIndexes200ResponseInner
+from gerrit_client.models.get_config_server_indexes200_response_inner_versions_value import GetConfigServerIndexes200ResponseInnerVersionsValue
+from gerrit_client.models.get_config_server_version200_response import GetConfigServerVersion200Response
+from gerrit_client.models.get_config_server_version200_response_one_of import GetConfigServerVersion200ResponseOneOf
+from gerrit_client.models.get_groups_default_response import GetGroupsDefaultResponse
 from gerrit_client.models.get_meta_file_info import GetMetaFileInfo
+from gerrit_client.models.get_projects_default_response import GetProjectsDefaultResponse
 from gerrit_client.models.git_basic_auth_policy import GitBasicAuthPolicy
 from gerrit_client.models.git_person import GitPerson
 from gerrit_client.models.gpg_key_info import GpgKeyInfo
 from gerrit_client.models.gpg_key_info_status import GpgKeyInfoStatus
+from gerrit_client.models.gpg_keys_input import GpgKeysInput
 from gerrit_client.models.group_audit_event_info import GroupAuditEventInfo
 from gerrit_client.models.group_base_info import GroupBaseInfo
 from gerrit_client.models.group_info import GroupInfo
@@ -186,6 +195,7 @@ from gerrit_client.models.merge_input import MergeInput
 from gerrit_client.models.merge_patch_set_input import MergePatchSetInput
 from gerrit_client.models.mergeable_info import MergeableInfo
 from gerrit_client.models.metadata_info import MetadataInfo
+from gerrit_client.models.metric_json import MetricJson
 from gerrit_client.models.migrate_label_functions_to_submit_requirement_status import MigrateLabelFunctionsToSubmitRequirementStatus
 from gerrit_client.models.migrate_labels_info import MigrateLabelsInfo
 from gerrit_client.models.migrate_labels_review_info import MigrateLabelsReviewInfo
@@ -195,6 +205,7 @@ from gerrit_client.models.name_input import NameInput
 from gerrit_client.models.no_merge_base_reason import NoMergeBaseReason
 from gerrit_client.models.notify_handling import NotifyHandling
 from gerrit_client.models.notify_info import NotifyInfo
+from gerrit_client.models.o_auth_token_info import OAuthTokenInfo
 from gerrit_client.models.operation import Operation
 from gerrit_client.models.owner_input import OwnerInput
 from gerrit_client.models.parent_info import ParentInfo

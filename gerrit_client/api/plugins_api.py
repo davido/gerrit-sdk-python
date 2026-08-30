@@ -648,7 +648,7 @@ class PluginsApi:
 
 
     @validate_call
-    def get_plugins_plugin_id_status(
+    def get_plugins_plugin_id_gerrit_status(
         self,
         plugin_id: StrictStr,
         _request_timeout: Union[
@@ -664,8 +664,9 @@ class PluginsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> PluginInfo:
-        """get_plugins_plugin_id_status
+        """Get Plugin Status
 
+        Retrieves the status of a plugin on the Gerrit server.
 
         :param plugin_id: (required)
         :type plugin_id: str
@@ -691,7 +692,7 @@ class PluginsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_plugins_plugin_id_status_serialize(
+        _param = self._get_plugins_plugin_id_gerrit_status_serialize(
             plugin_id=plugin_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -714,7 +715,7 @@ class PluginsApi:
 
 
     @validate_call
-    def get_plugins_plugin_id_status_with_http_info(
+    def get_plugins_plugin_id_gerrit_status_with_http_info(
         self,
         plugin_id: StrictStr,
         _request_timeout: Union[
@@ -730,8 +731,9 @@ class PluginsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[PluginInfo]:
-        """get_plugins_plugin_id_status
+        """Get Plugin Status
 
+        Retrieves the status of a plugin on the Gerrit server.
 
         :param plugin_id: (required)
         :type plugin_id: str
@@ -757,7 +759,7 @@ class PluginsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_plugins_plugin_id_status_serialize(
+        _param = self._get_plugins_plugin_id_gerrit_status_serialize(
             plugin_id=plugin_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -780,7 +782,7 @@ class PluginsApi:
 
 
     @validate_call
-    def get_plugins_plugin_id_status_without_preload_content(
+    def get_plugins_plugin_id_gerrit_status_without_preload_content(
         self,
         plugin_id: StrictStr,
         _request_timeout: Union[
@@ -796,8 +798,9 @@ class PluginsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_plugins_plugin_id_status
+        """Get Plugin Status
 
+        Retrieves the status of a plugin on the Gerrit server.
 
         :param plugin_id: (required)
         :type plugin_id: str
@@ -823,7 +826,7 @@ class PluginsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_plugins_plugin_id_status_serialize(
+        _param = self._get_plugins_plugin_id_gerrit_status_serialize(
             plugin_id=plugin_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -841,7 +844,7 @@ class PluginsApi:
         return response_data.response
 
 
-    def _get_plugins_plugin_id_status_serialize(
+    def _get_plugins_plugin_id_gerrit_status_serialize(
         self,
         plugin_id,
         _request_auth,
@@ -889,7 +892,7 @@ class PluginsApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/plugins/{plugin-id}/status',
+            resource_path='/plugins/{plugin-id}/gerrit~status',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -906,7 +909,7 @@ class PluginsApi:
 
 
     @validate_call
-    def post_plugins_plugin_id_disable(
+    def post_plugins_plugin_id_gerrit_disable(
         self,
         plugin_id: StrictStr,
         _request_timeout: Union[
@@ -922,7 +925,7 @@ class PluginsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> PluginInfo:
-        """post_plugins_plugin_id_disable
+        """Disable Plugin
 
 
         :param plugin_id: (required)
@@ -949,7 +952,7 @@ class PluginsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._post_plugins_plugin_id_disable_serialize(
+        _param = self._post_plugins_plugin_id_gerrit_disable_serialize(
             plugin_id=plugin_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -972,7 +975,7 @@ class PluginsApi:
 
 
     @validate_call
-    def post_plugins_plugin_id_disable_with_http_info(
+    def post_plugins_plugin_id_gerrit_disable_with_http_info(
         self,
         plugin_id: StrictStr,
         _request_timeout: Union[
@@ -988,7 +991,7 @@ class PluginsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[PluginInfo]:
-        """post_plugins_plugin_id_disable
+        """Disable Plugin
 
 
         :param plugin_id: (required)
@@ -1015,7 +1018,7 @@ class PluginsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._post_plugins_plugin_id_disable_serialize(
+        _param = self._post_plugins_plugin_id_gerrit_disable_serialize(
             plugin_id=plugin_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1038,7 +1041,7 @@ class PluginsApi:
 
 
     @validate_call
-    def post_plugins_plugin_id_disable_without_preload_content(
+    def post_plugins_plugin_id_gerrit_disable_without_preload_content(
         self,
         plugin_id: StrictStr,
         _request_timeout: Union[
@@ -1054,7 +1057,7 @@ class PluginsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """post_plugins_plugin_id_disable
+        """Disable Plugin
 
 
         :param plugin_id: (required)
@@ -1081,7 +1084,7 @@ class PluginsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._post_plugins_plugin_id_disable_serialize(
+        _param = self._post_plugins_plugin_id_gerrit_disable_serialize(
             plugin_id=plugin_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1099,7 +1102,7 @@ class PluginsApi:
         return response_data.response
 
 
-    def _post_plugins_plugin_id_disable_serialize(
+    def _post_plugins_plugin_id_gerrit_disable_serialize(
         self,
         plugin_id,
         _request_auth,
@@ -1147,7 +1150,7 @@ class PluginsApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/plugins/{plugin-id}/disable',
+            resource_path='/plugins/{plugin-id}/gerrit~disable',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1164,7 +1167,7 @@ class PluginsApi:
 
 
     @validate_call
-    def post_plugins_plugin_id_enable(
+    def post_plugins_plugin_id_gerrit_enable(
         self,
         plugin_id: StrictStr,
         _request_timeout: Union[
@@ -1180,8 +1183,9 @@ class PluginsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> PluginInfo:
-        """post_plugins_plugin_id_enable
+        """Enable Plugin
 
+        Enables a plugin on the Gerrit server.
 
         :param plugin_id: (required)
         :type plugin_id: str
@@ -1207,7 +1211,7 @@ class PluginsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._post_plugins_plugin_id_enable_serialize(
+        _param = self._post_plugins_plugin_id_gerrit_enable_serialize(
             plugin_id=plugin_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1230,7 +1234,7 @@ class PluginsApi:
 
 
     @validate_call
-    def post_plugins_plugin_id_enable_with_http_info(
+    def post_plugins_plugin_id_gerrit_enable_with_http_info(
         self,
         plugin_id: StrictStr,
         _request_timeout: Union[
@@ -1246,8 +1250,9 @@ class PluginsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[PluginInfo]:
-        """post_plugins_plugin_id_enable
+        """Enable Plugin
 
+        Enables a plugin on the Gerrit server.
 
         :param plugin_id: (required)
         :type plugin_id: str
@@ -1273,7 +1278,7 @@ class PluginsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._post_plugins_plugin_id_enable_serialize(
+        _param = self._post_plugins_plugin_id_gerrit_enable_serialize(
             plugin_id=plugin_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1296,7 +1301,7 @@ class PluginsApi:
 
 
     @validate_call
-    def post_plugins_plugin_id_enable_without_preload_content(
+    def post_plugins_plugin_id_gerrit_enable_without_preload_content(
         self,
         plugin_id: StrictStr,
         _request_timeout: Union[
@@ -1312,8 +1317,9 @@ class PluginsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """post_plugins_plugin_id_enable
+        """Enable Plugin
 
+        Enables a plugin on the Gerrit server.
 
         :param plugin_id: (required)
         :type plugin_id: str
@@ -1339,7 +1345,7 @@ class PluginsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._post_plugins_plugin_id_enable_serialize(
+        _param = self._post_plugins_plugin_id_gerrit_enable_serialize(
             plugin_id=plugin_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1357,7 +1363,7 @@ class PluginsApi:
         return response_data.response
 
 
-    def _post_plugins_plugin_id_enable_serialize(
+    def _post_plugins_plugin_id_gerrit_enable_serialize(
         self,
         plugin_id,
         _request_auth,
@@ -1405,7 +1411,7 @@ class PluginsApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/plugins/{plugin-id}/enable',
+            resource_path='/plugins/{plugin-id}/gerrit~enable',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1422,7 +1428,7 @@ class PluginsApi:
 
 
     @validate_call
-    def post_plugins_plugin_id_reload(
+    def post_plugins_plugin_id_gerrit_reload(
         self,
         plugin_id: StrictStr,
         _request_timeout: Union[
@@ -1438,8 +1444,9 @@ class PluginsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> PluginInfo:
-        """post_plugins_plugin_id_reload
+        """Reload Plugin
 
+        Reloads a plugin on the Gerrit server.
 
         :param plugin_id: (required)
         :type plugin_id: str
@@ -1465,7 +1472,7 @@ class PluginsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._post_plugins_plugin_id_reload_serialize(
+        _param = self._post_plugins_plugin_id_gerrit_reload_serialize(
             plugin_id=plugin_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1488,7 +1495,7 @@ class PluginsApi:
 
 
     @validate_call
-    def post_plugins_plugin_id_reload_with_http_info(
+    def post_plugins_plugin_id_gerrit_reload_with_http_info(
         self,
         plugin_id: StrictStr,
         _request_timeout: Union[
@@ -1504,8 +1511,9 @@ class PluginsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[PluginInfo]:
-        """post_plugins_plugin_id_reload
+        """Reload Plugin
 
+        Reloads a plugin on the Gerrit server.
 
         :param plugin_id: (required)
         :type plugin_id: str
@@ -1531,7 +1539,7 @@ class PluginsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._post_plugins_plugin_id_reload_serialize(
+        _param = self._post_plugins_plugin_id_gerrit_reload_serialize(
             plugin_id=plugin_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1554,7 +1562,7 @@ class PluginsApi:
 
 
     @validate_call
-    def post_plugins_plugin_id_reload_without_preload_content(
+    def post_plugins_plugin_id_gerrit_reload_without_preload_content(
         self,
         plugin_id: StrictStr,
         _request_timeout: Union[
@@ -1570,8 +1578,9 @@ class PluginsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """post_plugins_plugin_id_reload
+        """Reload Plugin
 
+        Reloads a plugin on the Gerrit server.
 
         :param plugin_id: (required)
         :type plugin_id: str
@@ -1597,7 +1606,7 @@ class PluginsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._post_plugins_plugin_id_reload_serialize(
+        _param = self._post_plugins_plugin_id_gerrit_reload_serialize(
             plugin_id=plugin_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1615,7 +1624,7 @@ class PluginsApi:
         return response_data.response
 
 
-    def _post_plugins_plugin_id_reload_serialize(
+    def _post_plugins_plugin_id_gerrit_reload_serialize(
         self,
         plugin_id,
         _request_auth,
@@ -1663,7 +1672,7 @@ class PluginsApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/plugins/{plugin-id}/reload',
+            resource_path='/plugins/{plugin-id}/gerrit~reload',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

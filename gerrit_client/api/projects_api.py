@@ -40,6 +40,7 @@ from gerrit_client.models.delete_changes_input import DeleteChangesInput
 from gerrit_client.models.delete_tags_input import DeleteTagsInput
 from gerrit_client.models.diff_info import DiffInfo
 from gerrit_client.models.garbage_collect_input import GarbageCollectInput
+from gerrit_client.models.get_projects_default_response import GetProjectsDefaultResponse
 from gerrit_client.models.head_input import HeadInput
 from gerrit_client.models.included_in_info import IncludedInInfo
 from gerrit_client.models.index_project_input import IndexProjectInput
@@ -1700,6 +1701,20 @@ class ProjectsApi:
     @validate_call
     def get_projects(
         self,
+        all: Optional[StrictBool] = None,
+        description: Optional[StrictBool] = None,
+        format: Optional[StrictStr] = None,
+        has_acl_for: Optional[StrictStr] = None,
+        limit: Optional[StrictInt] = None,
+        match: Optional[StrictStr] = None,
+        prefix: Optional[StrictStr] = None,
+        query: Optional[StrictStr] = None,
+        r: Optional[StrictStr] = None,
+        show_branch: Optional[List[StrictStr]] = None,
+        start: Optional[StrictInt] = None,
+        state: Optional[StrictStr] = None,
+        tree: Optional[StrictBool] = None,
+        type: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1712,11 +1727,39 @@ class ProjectsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> GetProjectsDefaultResponse:
         """List projects
 
         Lists the projects accessible by the caller, optionally filtered by prefix, regex, or substring.
 
+        :param all:
+        :type all: bool
+        :param description:
+        :type description: bool
+        :param format:
+        :type format: str
+        :param has_acl_for:
+        :type has_acl_for: str
+        :param limit:
+        :type limit: int
+        :param match:
+        :type match: str
+        :param prefix:
+        :type prefix: str
+        :param query:
+        :type query: str
+        :param r:
+        :type r: str
+        :param show_branch:
+        :type show_branch: List[str]
+        :param start:
+        :type start: int
+        :param state:
+        :type state: str
+        :param tree:
+        :type tree: bool
+        :param type:
+        :type type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1740,6 +1783,20 @@ class ProjectsApi:
         """ # noqa: E501
 
         _param = self._get_projects_serialize(
+            all=all,
+            description=description,
+            format=format,
+            has_acl_for=has_acl_for,
+            limit=limit,
+            match=match,
+            prefix=prefix,
+            query=query,
+            r=r,
+            show_branch=show_branch,
+            start=start,
+            state=state,
+            tree=tree,
+            type=type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1747,7 +1804,7 @@ class ProjectsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "GetProjectsDefaultResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1763,6 +1820,20 @@ class ProjectsApi:
     @validate_call
     def get_projects_with_http_info(
         self,
+        all: Optional[StrictBool] = None,
+        description: Optional[StrictBool] = None,
+        format: Optional[StrictStr] = None,
+        has_acl_for: Optional[StrictStr] = None,
+        limit: Optional[StrictInt] = None,
+        match: Optional[StrictStr] = None,
+        prefix: Optional[StrictStr] = None,
+        query: Optional[StrictStr] = None,
+        r: Optional[StrictStr] = None,
+        show_branch: Optional[List[StrictStr]] = None,
+        start: Optional[StrictInt] = None,
+        state: Optional[StrictStr] = None,
+        tree: Optional[StrictBool] = None,
+        type: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1775,11 +1846,39 @@ class ProjectsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[GetProjectsDefaultResponse]:
         """List projects
 
         Lists the projects accessible by the caller, optionally filtered by prefix, regex, or substring.
 
+        :param all:
+        :type all: bool
+        :param description:
+        :type description: bool
+        :param format:
+        :type format: str
+        :param has_acl_for:
+        :type has_acl_for: str
+        :param limit:
+        :type limit: int
+        :param match:
+        :type match: str
+        :param prefix:
+        :type prefix: str
+        :param query:
+        :type query: str
+        :param r:
+        :type r: str
+        :param show_branch:
+        :type show_branch: List[str]
+        :param start:
+        :type start: int
+        :param state:
+        :type state: str
+        :param tree:
+        :type tree: bool
+        :param type:
+        :type type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1803,6 +1902,20 @@ class ProjectsApi:
         """ # noqa: E501
 
         _param = self._get_projects_serialize(
+            all=all,
+            description=description,
+            format=format,
+            has_acl_for=has_acl_for,
+            limit=limit,
+            match=match,
+            prefix=prefix,
+            query=query,
+            r=r,
+            show_branch=show_branch,
+            start=start,
+            state=state,
+            tree=tree,
+            type=type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1810,7 +1923,7 @@ class ProjectsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "GetProjectsDefaultResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1826,6 +1939,20 @@ class ProjectsApi:
     @validate_call
     def get_projects_without_preload_content(
         self,
+        all: Optional[StrictBool] = None,
+        description: Optional[StrictBool] = None,
+        format: Optional[StrictStr] = None,
+        has_acl_for: Optional[StrictStr] = None,
+        limit: Optional[StrictInt] = None,
+        match: Optional[StrictStr] = None,
+        prefix: Optional[StrictStr] = None,
+        query: Optional[StrictStr] = None,
+        r: Optional[StrictStr] = None,
+        show_branch: Optional[List[StrictStr]] = None,
+        start: Optional[StrictInt] = None,
+        state: Optional[StrictStr] = None,
+        tree: Optional[StrictBool] = None,
+        type: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1843,6 +1970,34 @@ class ProjectsApi:
 
         Lists the projects accessible by the caller, optionally filtered by prefix, regex, or substring.
 
+        :param all:
+        :type all: bool
+        :param description:
+        :type description: bool
+        :param format:
+        :type format: str
+        :param has_acl_for:
+        :type has_acl_for: str
+        :param limit:
+        :type limit: int
+        :param match:
+        :type match: str
+        :param prefix:
+        :type prefix: str
+        :param query:
+        :type query: str
+        :param r:
+        :type r: str
+        :param show_branch:
+        :type show_branch: List[str]
+        :param start:
+        :type start: int
+        :param state:
+        :type state: str
+        :param tree:
+        :type tree: bool
+        :param type:
+        :type type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1866,6 +2021,20 @@ class ProjectsApi:
         """ # noqa: E501
 
         _param = self._get_projects_serialize(
+            all=all,
+            description=description,
+            format=format,
+            has_acl_for=has_acl_for,
+            limit=limit,
+            match=match,
+            prefix=prefix,
+            query=query,
+            r=r,
+            show_branch=show_branch,
+            start=start,
+            state=state,
+            tree=tree,
+            type=type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1873,7 +2042,7 @@ class ProjectsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "GetProjectsDefaultResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1884,6 +2053,20 @@ class ProjectsApi:
 
     def _get_projects_serialize(
         self,
+        all,
+        description,
+        format,
+        has_acl_for,
+        limit,
+        match,
+        prefix,
+        query,
+        r,
+        show_branch,
+        start,
+        state,
+        tree,
+        type,
         _request_auth,
         _content_type,
         _headers,
@@ -1893,6 +2076,7 @@ class ProjectsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
+            'show-branch': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1906,6 +2090,62 @@ class ProjectsApi:
 
         # process the path parameters
         # process the query parameters
+        if all is not None:
+            
+            _query_params.append(('all', all))
+            
+        if description is not None:
+            
+            _query_params.append(('description', description))
+            
+        if format is not None:
+            
+            _query_params.append(('format', format))
+            
+        if has_acl_for is not None:
+            
+            _query_params.append(('has-acl-for', has_acl_for))
+            
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if match is not None:
+            
+            _query_params.append(('match', match))
+            
+        if prefix is not None:
+            
+            _query_params.append(('prefix', prefix))
+            
+        if query is not None:
+            
+            _query_params.append(('query', query))
+            
+        if r is not None:
+            
+            _query_params.append(('r', r))
+            
+        if show_branch is not None:
+            
+            _query_params.append(('show-branch', show_branch))
+            
+        if start is not None:
+            
+            _query_params.append(('start', start))
+            
+        if state is not None:
+            
+            _query_params.append(('state', state))
+            
+        if tree is not None:
+            
+            _query_params.append(('tree', tree))
+            
+        if type is not None:
+            
+            _query_params.append(('type', type))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -3088,10 +3328,11 @@ class ProjectsApi:
 
 
     @validate_call
-    def get_projects_project_id_branches_branch_id_files(
+    def get_projects_project_id_branches_branch_id_files_file_id_content(
         self,
         project_id: StrictStr,
         branch_id: StrictStr,
+        file_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3104,14 +3345,17 @@ class ProjectsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
-        """get_projects_project_id_branches_branch_id_files
+    ) -> bytes:
+        """Get Content
 
+        Gets the content of a file from the HEAD revision of a certain branch.
 
         :param project_id: (required)
         :type project_id: str
         :param branch_id: (required)
         :type branch_id: str
+        :param file_id: (required)
+        :type file_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3134,9 +3378,10 @@ class ProjectsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_projects_project_id_branches_branch_id_files_serialize(
+        _param = self._get_projects_project_id_branches_branch_id_files_file_id_content_serialize(
             project_id=project_id,
             branch_id=branch_id,
+            file_id=file_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3144,7 +3389,7 @@ class ProjectsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            '200': "bytes",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3158,10 +3403,11 @@ class ProjectsApi:
 
 
     @validate_call
-    def get_projects_project_id_branches_branch_id_files_with_http_info(
+    def get_projects_project_id_branches_branch_id_files_file_id_content_with_http_info(
         self,
         project_id: StrictStr,
         branch_id: StrictStr,
+        file_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3174,14 +3420,17 @@ class ProjectsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
-        """get_projects_project_id_branches_branch_id_files
+    ) -> ApiResponse[bytes]:
+        """Get Content
 
+        Gets the content of a file from the HEAD revision of a certain branch.
 
         :param project_id: (required)
         :type project_id: str
         :param branch_id: (required)
         :type branch_id: str
+        :param file_id: (required)
+        :type file_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3204,9 +3453,10 @@ class ProjectsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_projects_project_id_branches_branch_id_files_serialize(
+        _param = self._get_projects_project_id_branches_branch_id_files_file_id_content_serialize(
             project_id=project_id,
             branch_id=branch_id,
+            file_id=file_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3214,7 +3464,7 @@ class ProjectsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            '200': "bytes",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3228,10 +3478,11 @@ class ProjectsApi:
 
 
     @validate_call
-    def get_projects_project_id_branches_branch_id_files_without_preload_content(
+    def get_projects_project_id_branches_branch_id_files_file_id_content_without_preload_content(
         self,
         project_id: StrictStr,
         branch_id: StrictStr,
+        file_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3245,13 +3496,16 @@ class ProjectsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_projects_project_id_branches_branch_id_files
+        """Get Content
 
+        Gets the content of a file from the HEAD revision of a certain branch.
 
         :param project_id: (required)
         :type project_id: str
         :param branch_id: (required)
         :type branch_id: str
+        :param file_id: (required)
+        :type file_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3274,9 +3528,10 @@ class ProjectsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_projects_project_id_branches_branch_id_files_serialize(
+        _param = self._get_projects_project_id_branches_branch_id_files_file_id_content_serialize(
             project_id=project_id,
             branch_id=branch_id,
+            file_id=file_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3284,7 +3539,7 @@ class ProjectsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            '200': "bytes",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3293,10 +3548,11 @@ class ProjectsApi:
         return response_data.response
 
 
-    def _get_projects_project_id_branches_branch_id_files_serialize(
+    def _get_projects_project_id_branches_branch_id_files_file_id_content_serialize(
         self,
         project_id,
         branch_id,
+        file_id,
         _request_auth,
         _content_type,
         _headers,
@@ -3322,7 +3578,348 @@ class ProjectsApi:
             _path_params['project-id'] = project_id
         if branch_id is not None:
             _path_params['branch-id'] = branch_id
+        if file_id is not None:
+            _path_params['file-id'] = file_id
         # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/octet-stream'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'basicAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/projects/{project-id}/branches/{branch-id}/files/{file-id}/content',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_projects_project_id_branches_branch_id_files_file_id_diff(
+        self,
+        project_id: StrictStr,
+        branch_id: StrictStr,
+        file_id: StrictStr,
+        base: Optional[StrictStr] = None,
+        intraline: Optional[StrictBool] = None,
+        whitespace: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> DiffInfo:
+        """get_projects_project_id_branches_branch_id_files_file_id_diff
+
+
+        :param project_id: (required)
+        :type project_id: str
+        :param branch_id: (required)
+        :type branch_id: str
+        :param file_id: (required)
+        :type file_id: str
+        :param base:
+        :type base: str
+        :param intraline:
+        :type intraline: bool
+        :param whitespace:
+        :type whitespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_projects_project_id_branches_branch_id_files_file_id_diff_serialize(
+            project_id=project_id,
+            branch_id=branch_id,
+            file_id=file_id,
+            base=base,
+            intraline=intraline,
+            whitespace=whitespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DiffInfo",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_projects_project_id_branches_branch_id_files_file_id_diff_with_http_info(
+        self,
+        project_id: StrictStr,
+        branch_id: StrictStr,
+        file_id: StrictStr,
+        base: Optional[StrictStr] = None,
+        intraline: Optional[StrictBool] = None,
+        whitespace: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[DiffInfo]:
+        """get_projects_project_id_branches_branch_id_files_file_id_diff
+
+
+        :param project_id: (required)
+        :type project_id: str
+        :param branch_id: (required)
+        :type branch_id: str
+        :param file_id: (required)
+        :type file_id: str
+        :param base:
+        :type base: str
+        :param intraline:
+        :type intraline: bool
+        :param whitespace:
+        :type whitespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_projects_project_id_branches_branch_id_files_file_id_diff_serialize(
+            project_id=project_id,
+            branch_id=branch_id,
+            file_id=file_id,
+            base=base,
+            intraline=intraline,
+            whitespace=whitespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DiffInfo",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_projects_project_id_branches_branch_id_files_file_id_diff_without_preload_content(
+        self,
+        project_id: StrictStr,
+        branch_id: StrictStr,
+        file_id: StrictStr,
+        base: Optional[StrictStr] = None,
+        intraline: Optional[StrictBool] = None,
+        whitespace: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """get_projects_project_id_branches_branch_id_files_file_id_diff
+
+
+        :param project_id: (required)
+        :type project_id: str
+        :param branch_id: (required)
+        :type branch_id: str
+        :param file_id: (required)
+        :type file_id: str
+        :param base:
+        :type base: str
+        :param intraline:
+        :type intraline: bool
+        :param whitespace:
+        :type whitespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_projects_project_id_branches_branch_id_files_file_id_diff_serialize(
+            project_id=project_id,
+            branch_id=branch_id,
+            file_id=file_id,
+            base=base,
+            intraline=intraline,
+            whitespace=whitespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DiffInfo",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_projects_project_id_branches_branch_id_files_file_id_diff_serialize(
+        self,
+        project_id,
+        branch_id,
+        file_id,
+        base,
+        intraline,
+        whitespace,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if project_id is not None:
+            _path_params['project-id'] = project_id
+        if branch_id is not None:
+            _path_params['branch-id'] = branch_id
+        if file_id is not None:
+            _path_params['file-id'] = file_id
+        # process the query parameters
+        if base is not None:
+            
+            _query_params.append(('base', base))
+            
+        if intraline is not None:
+            
+            _query_params.append(('intraline', intraline))
+            
+        if whitespace is not None:
+            
+            _query_params.append(('whitespace', whitespace))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -3344,7 +3941,7 @@ class ProjectsApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/projects/{project-id}/branches/{branch-id}/files',
+            resource_path='/projects/{project-id}/branches/{branch-id}/files/{file-id}/diff',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5502,264 +6099,6 @@ class ProjectsApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/projects/{project-id}/children/{child-project-id}',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def get_projects_project_id_commits(
-        self,
-        project_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
-        """get_projects_project_id_commits
-
-
-        :param project_id: (required)
-        :type project_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_projects_project_id_commits_serialize(
-            project_id=project_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def get_projects_project_id_commits_with_http_info(
-        self,
-        project_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
-        """get_projects_project_id_commits
-
-
-        :param project_id: (required)
-        :type project_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_projects_project_id_commits_serialize(
-            project_id=project_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def get_projects_project_id_commits_without_preload_content(
-        self,
-        project_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """get_projects_project_id_commits
-
-
-        :param project_id: (required)
-        :type project_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_projects_project_id_commits_serialize(
-            project_id=project_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _get_projects_project_id_commits_serialize(
-        self,
-        project_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if project_id is not None:
-            _path_params['project-id'] = project_id
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'basicAuth'
-        ]
-
-        return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/projects/{project-id}/commits',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

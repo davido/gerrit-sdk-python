@@ -15,12 +15,13 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictBool, StrictStr
-from typing import Any, Dict, List, Optional
+from pydantic import StrictBool, StrictInt, StrictStr
+from typing import Any, List, Optional
 from gerrit_client.models.account_info import AccountInfo
 from gerrit_client.models.add_members_input import AddMembersInput
 from gerrit_client.models.add_subgroups_input import AddSubgroupsInput
 from gerrit_client.models.common_description_input import CommonDescriptionInput
+from gerrit_client.models.get_groups_default_response import GetGroupsDefaultResponse
 from gerrit_client.models.group_audit_event_info import GroupAuditEventInfo
 from gerrit_client.models.group_info import GroupInfo
 from gerrit_client.models.group_input import GroupInput
@@ -1126,6 +1127,20 @@ class GroupsApi:
     @validate_call
     def get_groups(
         self,
+        o: Optional[StrictStr] = None,
+        group: Optional[List[StrictStr]] = None,
+        limit: Optional[StrictInt] = None,
+        match: Optional[StrictStr] = None,
+        o2: Optional[List[StrictStr]] = None,
+        owned: Optional[StrictBool] = None,
+        owned_by: Optional[StrictStr] = None,
+        project: Optional[List[StrictStr]] = None,
+        query: Optional[StrictStr] = None,
+        regex: Optional[StrictStr] = None,
+        start: Optional[StrictInt] = None,
+        suggest: Optional[StrictStr] = None,
+        user: Optional[StrictStr] = None,
+        visible_to_all: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1138,11 +1153,39 @@ class GroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> GetGroupsDefaultResponse:
         """List groups
 
         Lists the internal groups visible to the caller.
 
+        :param o:
+        :type o: str
+        :param group:
+        :type group: List[str]
+        :param limit:
+        :type limit: int
+        :param match:
+        :type match: str
+        :param o2:
+        :type o2: List[str]
+        :param owned:
+        :type owned: bool
+        :param owned_by:
+        :type owned_by: str
+        :param project:
+        :type project: List[str]
+        :param query:
+        :type query: str
+        :param regex:
+        :type regex: str
+        :param start:
+        :type start: int
+        :param suggest:
+        :type suggest: str
+        :param user:
+        :type user: str
+        :param visible_to_all:
+        :type visible_to_all: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1166,6 +1209,20 @@ class GroupsApi:
         """ # noqa: E501
 
         _param = self._get_groups_serialize(
+            o=o,
+            group=group,
+            limit=limit,
+            match=match,
+            o2=o2,
+            owned=owned,
+            owned_by=owned_by,
+            project=project,
+            query=query,
+            regex=regex,
+            start=start,
+            suggest=suggest,
+            user=user,
+            visible_to_all=visible_to_all,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1173,7 +1230,7 @@ class GroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "GetGroupsDefaultResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1189,6 +1246,20 @@ class GroupsApi:
     @validate_call
     def get_groups_with_http_info(
         self,
+        o: Optional[StrictStr] = None,
+        group: Optional[List[StrictStr]] = None,
+        limit: Optional[StrictInt] = None,
+        match: Optional[StrictStr] = None,
+        o2: Optional[List[StrictStr]] = None,
+        owned: Optional[StrictBool] = None,
+        owned_by: Optional[StrictStr] = None,
+        project: Optional[List[StrictStr]] = None,
+        query: Optional[StrictStr] = None,
+        regex: Optional[StrictStr] = None,
+        start: Optional[StrictInt] = None,
+        suggest: Optional[StrictStr] = None,
+        user: Optional[StrictStr] = None,
+        visible_to_all: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1201,11 +1272,39 @@ class GroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[GetGroupsDefaultResponse]:
         """List groups
 
         Lists the internal groups visible to the caller.
 
+        :param o:
+        :type o: str
+        :param group:
+        :type group: List[str]
+        :param limit:
+        :type limit: int
+        :param match:
+        :type match: str
+        :param o2:
+        :type o2: List[str]
+        :param owned:
+        :type owned: bool
+        :param owned_by:
+        :type owned_by: str
+        :param project:
+        :type project: List[str]
+        :param query:
+        :type query: str
+        :param regex:
+        :type regex: str
+        :param start:
+        :type start: int
+        :param suggest:
+        :type suggest: str
+        :param user:
+        :type user: str
+        :param visible_to_all:
+        :type visible_to_all: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1229,6 +1328,20 @@ class GroupsApi:
         """ # noqa: E501
 
         _param = self._get_groups_serialize(
+            o=o,
+            group=group,
+            limit=limit,
+            match=match,
+            o2=o2,
+            owned=owned,
+            owned_by=owned_by,
+            project=project,
+            query=query,
+            regex=regex,
+            start=start,
+            suggest=suggest,
+            user=user,
+            visible_to_all=visible_to_all,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1236,7 +1349,7 @@ class GroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "GetGroupsDefaultResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1252,6 +1365,20 @@ class GroupsApi:
     @validate_call
     def get_groups_without_preload_content(
         self,
+        o: Optional[StrictStr] = None,
+        group: Optional[List[StrictStr]] = None,
+        limit: Optional[StrictInt] = None,
+        match: Optional[StrictStr] = None,
+        o2: Optional[List[StrictStr]] = None,
+        owned: Optional[StrictBool] = None,
+        owned_by: Optional[StrictStr] = None,
+        project: Optional[List[StrictStr]] = None,
+        query: Optional[StrictStr] = None,
+        regex: Optional[StrictStr] = None,
+        start: Optional[StrictInt] = None,
+        suggest: Optional[StrictStr] = None,
+        user: Optional[StrictStr] = None,
+        visible_to_all: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1269,6 +1396,34 @@ class GroupsApi:
 
         Lists the internal groups visible to the caller.
 
+        :param o:
+        :type o: str
+        :param group:
+        :type group: List[str]
+        :param limit:
+        :type limit: int
+        :param match:
+        :type match: str
+        :param o2:
+        :type o2: List[str]
+        :param owned:
+        :type owned: bool
+        :param owned_by:
+        :type owned_by: str
+        :param project:
+        :type project: List[str]
+        :param query:
+        :type query: str
+        :param regex:
+        :type regex: str
+        :param start:
+        :type start: int
+        :param suggest:
+        :type suggest: str
+        :param user:
+        :type user: str
+        :param visible_to_all:
+        :type visible_to_all: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1292,6 +1447,20 @@ class GroupsApi:
         """ # noqa: E501
 
         _param = self._get_groups_serialize(
+            o=o,
+            group=group,
+            limit=limit,
+            match=match,
+            o2=o2,
+            owned=owned,
+            owned_by=owned_by,
+            project=project,
+            query=query,
+            regex=regex,
+            start=start,
+            suggest=suggest,
+            user=user,
+            visible_to_all=visible_to_all,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1299,7 +1468,7 @@ class GroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "GetGroupsDefaultResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1310,6 +1479,20 @@ class GroupsApi:
 
     def _get_groups_serialize(
         self,
+        o,
+        group,
+        limit,
+        match,
+        o2,
+        owned,
+        owned_by,
+        project,
+        query,
+        regex,
+        start,
+        suggest,
+        user,
+        visible_to_all,
         _request_auth,
         _content_type,
         _headers,
@@ -1319,6 +1502,9 @@ class GroupsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
+            'group': 'multi',
+            'o': 'multi',
+            'project': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1332,6 +1518,62 @@ class GroupsApi:
 
         # process the path parameters
         # process the query parameters
+        if o is not None:
+            
+            _query_params.append(('O', o))
+            
+        if group is not None:
+            
+            _query_params.append(('group', group))
+            
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if match is not None:
+            
+            _query_params.append(('match', match))
+            
+        if o2 is not None:
+            
+            _query_params.append(('o', o2))
+            
+        if owned is not None:
+            
+            _query_params.append(('owned', owned))
+            
+        if owned_by is not None:
+            
+            _query_params.append(('owned-by', owned_by))
+            
+        if project is not None:
+            
+            _query_params.append(('project', project))
+            
+        if query is not None:
+            
+            _query_params.append(('query', query))
+            
+        if regex is not None:
+            
+            _query_params.append(('regex', regex))
+            
+        if start is not None:
+            
+            _query_params.append(('start', start))
+            
+        if suggest is not None:
+            
+            _query_params.append(('suggest', suggest))
+            
+        if user is not None:
+            
+            _query_params.append(('user', user))
+            
+        if visible_to_all is not None:
+            
+            _query_params.append(('visible-to-all', visible_to_all))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
