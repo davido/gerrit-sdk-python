@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from gerrit_client.models.change_status import ChangeStatus
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -33,7 +34,7 @@ class ParentInfo(BaseModel):
     change_id: Optional[StrictStr] = Field(default=None, description="If the parent commit is a patch-set of another gerrit change, this field will hold the change ID of the parent change. Otherwise, will be null.")
     change_number: Optional[StrictInt] = Field(default=None, description="If the parent commit is a patch-set of another gerrit change, this field will hold the change number of the parent change. Otherwise, will be null.")
     patch_set_number: Optional[StrictInt] = Field(default=None, description="If the parent commit is a patch-set of another gerrit change, this field will hold the patch-set number of the parent change. Otherwise, will be null.")
-    change_status: Optional[StrictStr] = Field(default=None, description="If the parent commit is a patch-set of another gerrit change, this field will hold the change status of the parent change. Otherwise, will be null.")
+    change_status: Optional[ChangeStatus] = Field(default=None, description="If the parent commit is a patch-set of another gerrit change, this field will hold the change status of the parent change. Otherwise, will be null.")
     __properties: ClassVar[List[str]] = ["branch_name", "commit_id", "is_merged_in_target_branch", "change_id", "change_number", "patch_set_number", "change_status"]
 
     model_config = ConfigDict(

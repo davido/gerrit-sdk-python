@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,17 +27,17 @@ class CommonFileInfo(BaseModel):
     """
     CommonFileInfo
     """ # noqa: E501
-    status: Optional[StrictStr] = None
-    old_mode: Optional[StrictInt] = None
-    new_mode: Optional[StrictInt] = None
-    old_sha: Optional[StrictStr] = None
-    new_sha: Optional[StrictStr] = None
-    binary: Optional[StrictBool] = None
-    old_path: Optional[StrictStr] = None
-    lines_inserted: Optional[StrictInt] = None
-    lines_deleted: Optional[StrictInt] = None
-    size_delta: Optional[StrictInt] = None
-    size: Optional[StrictInt] = None
+    status: Optional[StrictStr] = Field(default=None, description="The status of the file (\"A\"=Added, \"D\"=Deleted, \"R\"=Renamed, \"C\"=Copied, \"W\"=Rewritten). + Not set if the file was Modified (\"M\").")
+    old_mode: Optional[StrictInt] = Field(default=None, description="File mode in octal (e.g. 100644) at the old commit. The first three digits indicate the file type and the last three digits contain the file permission bits. For added files, this field will not be present.")
+    new_mode: Optional[StrictInt] = Field(default=None, description="File mode in octal (e.g. 100644) at the new commit. The first three digits indicate the file type and the last three digits contain the file permission bits. For deleted files, this field will not be present.")
+    old_sha: Optional[StrictStr] = Field(default=None, description="SHA-1 of the file content at the old commit. For added files, this field will not be present.")
+    new_sha: Optional[StrictStr] = Field(default=None, description="SHA-1 of the file content at the new commit. For deleted files, this field will not be present.")
+    binary: Optional[StrictBool] = Field(default=None, description="Whether the file is binary.")
+    old_path: Optional[StrictStr] = Field(default=None, description="The old file path. + Only set if the file was renamed or copied.")
+    lines_inserted: Optional[StrictInt] = Field(default=None, description="Number of inserted lines. + Not set for binary files or if no lines were inserted. + An empty last line is not included in the count and hence this number can differ by one from details provided in DiffInfo.")
+    lines_deleted: Optional[StrictInt] = Field(default=None, description="Number of deleted lines. + Not set for binary files or if no lines were deleted. + An empty last line is not included in the count and hence this number can differ by one from details provided in DiffInfo.")
+    size_delta: Optional[StrictInt] = Field(default=None, description="Number of bytes by which the file size increased/decreased.")
+    size: Optional[StrictInt] = Field(default=None, description="File size in bytes.")
     diffs_too_expensive_to_compute: Optional[StrictBool] = None
     __properties: ClassVar[List[str]] = ["status", "old_mode", "new_mode", "old_sha", "new_sha", "binary", "old_path", "lines_inserted", "lines_deleted", "size_delta", "size", "diffs_too_expensive_to_compute"]
 

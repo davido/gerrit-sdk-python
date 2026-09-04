@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from gerrit_client.models.field_json import FieldJson
 from typing import Optional, Set
@@ -28,31 +28,31 @@ class MetricJson(BaseModel):
     """
     MetricJson
     """ # noqa: E501
-    description: Optional[StrictStr] = None
-    unit: Optional[StrictStr] = None
-    constant: Optional[StrictBool] = None
-    rate: Optional[StrictBool] = None
-    gauge: Optional[StrictBool] = None
-    cumulative: Optional[StrictBool] = None
-    count: Optional[StrictInt] = None
-    value: Optional[Dict[str, Any]] = None
-    rate_1m: Optional[Union[StrictFloat, StrictInt]] = None
-    rate_5m: Optional[Union[StrictFloat, StrictInt]] = None
-    rate_15m: Optional[Union[StrictFloat, StrictInt]] = None
-    rate_mean: Optional[Union[StrictFloat, StrictInt]] = None
-    p50: Optional[Union[StrictFloat, StrictInt]] = None
-    p75: Optional[Union[StrictFloat, StrictInt]] = None
-    p95: Optional[Union[StrictFloat, StrictInt]] = None
-    p98: Optional[Union[StrictFloat, StrictInt]] = None
-    p99: Optional[Union[StrictFloat, StrictInt]] = None
-    p99_9: Optional[Union[StrictFloat, StrictInt]] = None
-    min: Optional[Union[StrictFloat, StrictInt]] = None
-    avg: Optional[Union[StrictFloat, StrictInt]] = None
-    max: Optional[Union[StrictFloat, StrictInt]] = None
-    sum: Optional[Union[StrictFloat, StrictInt]] = None
-    std_dev: Optional[Union[StrictFloat, StrictInt]] = None
-    fields: Optional[List[FieldJson]] = None
-    buckets: Optional[Dict[str, Dict[str, Any]]] = None
+    description: Optional[StrictStr] = Field(default=None, description="The description of the metric.")
+    unit: Optional[StrictStr] = Field(default=None, description="The unit of measurement of the recorded values.")
+    constant: Optional[StrictBool] = Field(default=None, description="Whether the metric reports a single constant value.")
+    rate: Optional[StrictBool] = Field(default=None, description="Whether the metric reports a rate.")
+    gauge: Optional[StrictBool] = Field(default=None, description="Whether the metric is a gauge that reports an instantaneous value.")
+    cumulative: Optional[StrictBool] = Field(default=None, description="Whether the metric accumulates over time.")
+    count: Optional[StrictInt] = Field(default=None, description="The number of recorded events.")
+    value: Optional[Dict[str, Any]] = Field(default=None, description="The current value, for constant metrics and gauges.")
+    rate_1m: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The one-minute moving average rate.")
+    rate_5m: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The five-minute moving average rate.")
+    rate_15m: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The fifteen-minute moving average rate.")
+    rate_mean: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The mean rate since the metric was registered.")
+    p50: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The median (50th percentile) of the recorded values.")
+    p75: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The 75th percentile of the recorded values.")
+    p95: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The 95th percentile of the recorded values.")
+    p98: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The 98th percentile of the recorded values.")
+    p99: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The 99th percentile of the recorded values.")
+    p99_9: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The 99.9th percentile of the recorded values.")
+    min: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The minimum recorded value.")
+    avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The average of the recorded values.")
+    max: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The maximum recorded value.")
+    sum: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The sum of the recorded values.")
+    std_dev: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The standard deviation of the recorded values.")
+    fields: Optional[List[FieldJson]] = Field(default=None, description="The fields of the metric as a list of FieldJson entities.")
+    buckets: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, description="The per-field-value breakdown of the metric, as a map of field values to the recorded value for that combination.")
     __properties: ClassVar[List[str]] = ["description", "unit", "constant", "rate", "gauge", "cumulative", "count", "value", "rate_1m", "rate_5m", "rate_15m", "rate_mean", "p50", "p75", "p95", "p98", "p99", "p99_9", "min", "avg", "max", "sum", "std_dev", "fields", "buckets"]
 
     model_config = ConfigDict(

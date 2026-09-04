@@ -46,7 +46,7 @@ class ConfigInfo(BaseModel):
     reject_implicit_merges: Optional[InheritedBooleanInfo] = Field(default=None, description="InheritedBooleanInfo that tells whether implicit merges should be rejected on changes pushed to or submitted in the project.")
     private_by_default: Optional[InheritedBooleanInfo] = Field(default=None, description="InheritedBooleanInfo that tells whether all new changes are set as private by default.")
     work_in_progress_by_default: Optional[InheritedBooleanInfo] = Field(default=None, description="InheritedBooleanInfo that tells whether all new changes are set as work-in-progress by default.")
-    enable_reviewer_by_email: Optional[InheritedBooleanInfo] = None
+    enable_reviewer_by_email: Optional[InheritedBooleanInfo] = Field(default=None, description="InheritedBooleanInfo that tells whether reviewers and CCs that do not have a Gerrit account can be added to a change by their email address.")
     match_author_to_committer_date: Optional[InheritedBooleanInfo] = Field(default=None, description="InheritedBooleanInfo that indicates whether a change's author date will be changed to match its submitter date upon submit.")
     reject_empty_commit: Optional[InheritedBooleanInfo] = Field(default=None, description="InheritedBooleanInfo that tells whether empty commits should be rejected when a change is merged. ActionInfo entities.")
     skip_adding_author_and_committer_as_reviewers: Optional[InheritedBooleanInfo] = Field(default=None, description="Whether to skip adding the Git commit author and committer as reviewers for a new change.")
@@ -57,7 +57,7 @@ class ConfigInfo(BaseModel):
     plugin_config: Optional[Dict[str, Dict[str, ConfigParameterInfo]]] = Field(default=None, description="Plugin configuration as map which maps the plugin name to a map of parameter names to ConfigParameterInfo entities. Only filled for users who have read access to refs/meta/config.")
     actions: Optional[Dict[str, ActionInfo]] = Field(default=None, description="Actions the caller might be able to perform on this project. The information is a map of view names to")
     commentlinks: Optional[Dict[str, CommentLinkInfo]] = Field(default=None, description="Map with the comment link configurations of the project. The name of the comment link configuration is mapped to a CommentlinkInfo entity.")
-    extension_panel_names: Optional[Dict[str, List[StrictStr]]] = None
+    extension_panel_names: Optional[Dict[str, List[StrictStr]]] = Field(default=None, description="Views that are shown as extension panels, as a map of panel section name to the list of panel names configured for the project.")
     __properties: ClassVar[List[str]] = ["description", "use_contributor_agreements", "use_content_merge", "use_signed_off_by", "create_new_change_for_all_not_in_target", "require_change_id", "enable_signed_push", "require_signed_push", "reject_implicit_merges", "private_by_default", "work_in_progress_by_default", "enable_reviewer_by_email", "match_author_to_committer_date", "reject_empty_commit", "skip_adding_author_and_committer_as_reviewers", "max_object_size_limit", "submit_type", "default_submit_type", "state", "plugin_config", "actions", "commentlinks", "extension_panel_names"]
 
     model_config = ConfigDict(

@@ -28,10 +28,10 @@ class TaskSummaryInfo(BaseModel):
     TaskSummaryInfo
     """ # noqa: E501
     total: Optional[StrictInt] = Field(default=None, description="Total number of current tasks.")
-    stopping: Optional[StrictInt] = None
+    stopping: Optional[StrictInt] = Field(default=None, description="Number of currently stopping tasks.")
     running: Optional[StrictInt] = Field(default=None, description="Number of currently running tasks.")
-    parked: Optional[StrictInt] = None
-    starting: Optional[StrictInt] = None
+    parked: Optional[StrictInt] = Field(default=None, description="Number of currently parked tasks.")
+    starting: Optional[StrictInt] = Field(default=None, description="Number of currently starting tasks.")
     ready: Optional[StrictInt] = Field(default=None, description="Number of currently ready tasks.")
     sleeping: Optional[StrictInt] = Field(default=None, description="Number of currently sleeping tasks.")
     __properties: ClassVar[List[str]] = ["total", "stopping", "running", "parked", "starting", "ready", "sleeping"]

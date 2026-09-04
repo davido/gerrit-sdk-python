@@ -27,10 +27,10 @@ class GitPerson(BaseModel):
     """
     GitPerson
     """ # noqa: E501
-    name: Optional[StrictStr] = None
-    email: Optional[StrictStr] = None
-    var_date: Optional[StrictStr] = Field(default=None, alias="date")
-    tz: Optional[StrictInt] = None
+    name: Optional[StrictStr] = Field(default=None, description="The name of the author/committer.")
+    email: Optional[StrictStr] = Field(default=None, description="The email address of the author/committer.")
+    var_date: Optional[StrictStr] = Field(default=None, description="The timestamp of when this identity was constructed.", alias="date")
+    tz: Optional[StrictInt] = Field(default=None, description="The timezone offset from UTC of when this identity was constructed.")
     __properties: ClassVar[List[str]] = ["name", "email", "date", "tz"]
 
     model_config = ConfigDict(

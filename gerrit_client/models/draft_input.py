@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.fix_suggestion_info import FixSuggestionInfo
 from gerrit_client.models.range import Range
@@ -30,21 +30,21 @@ class DraftInput(BaseModel):
     """
     DraftInput
     """ # noqa: E501
-    tag: Optional[StrictStr] = None
-    unresolved: Optional[StrictBool] = None
-    patch_set: Optional[StrictInt] = None
-    id: Optional[StrictStr] = None
-    path: Optional[StrictStr] = None
-    side: Optional[Side] = None
-    parent: Optional[StrictInt] = None
-    line: Optional[StrictInt] = None
-    range: Optional[Range] = None
-    in_reply_to: Optional[StrictStr] = None
-    updated: Optional[StrictStr] = None
-    message: Optional[StrictStr] = None
-    commit_id: Optional[StrictStr] = None
-    fix_suggestions: Optional[List[FixSuggestionInfo]] = None
-    is_ai: Optional[StrictBool] = None
+    tag: Optional[StrictStr] = Field(default=None, description="Value of the tag field from ReviewInput set while posting the review. NOTE: To apply different tags on different votes/comments multiple invocations of the REST call are required.")
+    unresolved: Optional[StrictBool] = Field(default=None, description="Whether or not the comment must be addressed by the user. The state of resolution of a comment thread is stored in the last comment in that thread chronologically.")
+    patch_set: Optional[StrictInt] = Field(default=None, description="The patch set number for the comment; only set in contexts where + comments may be returned for multiple patch sets.")
+    id: Optional[StrictStr] = Field(default=None, description="The URL encoded UUID of the comment.")
+    path: Optional[StrictStr] = Field(default=None, description="The file path for which the inline comment was done. + Not set if returned in a map where the key is the file path.")
+    side: Optional[Side] = Field(default=None, description="The side on which the comment was added. + Allowed values are REVISION and PARENT. + If not set, the default is REVISION.")
+    parent: Optional[StrictInt] = Field(default=None, description="The 1-based parent number. Used only for merge commits when side == PARENT. When not set the comment is for the auto-merge tree.")
+    line: Optional[StrictInt] = Field(default=None, description="The number of the line for which the comment was done. + If range is set, this equals the end line of the range. + If neither line nor range is set, it's a file comment.")
+    range: Optional[Range] = Field(default=None, description="The range of the comment as a CommentRange entity.")
+    in_reply_to: Optional[StrictStr] = Field(default=None, description="The URL encoded UUID of the comment to which this comment is a reply.")
+    updated: Optional[StrictStr] = Field(default=None, description="The timestamp of when this comment was written.")
+    message: Optional[StrictStr] = Field(default=None, description="The comment message.")
+    commit_id: Optional[StrictStr] = Field(default=None, description="Hex commit SHA-1 (40 characters string) of the commit of the patchset to which this comment applies.")
+    fix_suggestions: Optional[List[FixSuggestionInfo]] = Field(default=None, description="Suggested fixes for this comment as a list of FixSuggestionInfo entities.")
+    is_ai: Optional[StrictBool] = Field(default=None, description="Whether the comment was created by an AI agent. Not set if false.")
     __properties: ClassVar[List[str]] = ["tag", "unresolved", "patch_set", "id", "path", "side", "parent", "line", "range", "in_reply_to", "updated", "message", "commit_id", "fix_suggestions", "is_ai"]
 
     model_config = ConfigDict(

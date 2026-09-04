@@ -28,7 +28,7 @@ class FlowActionTypeInfo(BaseModel):
     FlowActionTypeInfo
     """ # noqa: E501
     name: Optional[StrictStr] = Field(default=None, description="The name of the action.")
-    parameters_placeholder: Optional[StrictStr] = None
+    parameters_placeholder: Optional[StrictStr] = Field(default=None, description="Placeholder text shown for the action's parameters in the UI.")
     __properties: ClassVar[List[str]] = ["name", "parameters_placeholder"]
 
     model_config = ConfigDict(

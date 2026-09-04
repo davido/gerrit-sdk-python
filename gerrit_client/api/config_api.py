@@ -3180,8 +3180,9 @@ class ConfigApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Dict[str, MetricJson]:
-        """get_config_server_metrics
+        """List Metrics
 
+        Lists the metrics of the server, returning a map of metric name to a MetricJson entity.
 
         :param data_only:
         :type data_only: bool
@@ -3250,8 +3251,9 @@ class ConfigApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Dict[str, MetricJson]]:
-        """get_config_server_metrics
+        """List Metrics
 
+        Lists the metrics of the server, returning a map of metric name to a MetricJson entity.
 
         :param data_only:
         :type data_only: bool
@@ -3320,8 +3322,9 @@ class ConfigApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_config_server_metrics
+        """List Metrics
 
+        Lists the metrics of the server, returning a map of metric name to a MetricJson entity.
 
         :param data_only:
         :type data_only: bool
@@ -3458,8 +3461,9 @@ class ConfigApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> MetricJson:
-        """get_config_server_metrics_metric_id
+        """Get Metric
 
+        Retrieves a single metric of the server. The metric name is used as the \\{metric-id\\} and must be URL-encoded because it may contain slashes.
 
         :param metric_id: (required)
         :type metric_id: str
@@ -3528,8 +3532,9 @@ class ConfigApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[MetricJson]:
-        """get_config_server_metrics_metric_id
+        """Get Metric
 
+        Retrieves a single metric of the server. The metric name is used as the \\{metric-id\\} and must be URL-encoded because it may contain slashes.
 
         :param metric_id: (required)
         :type metric_id: str
@@ -3598,8 +3603,9 @@ class ConfigApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_config_server_metrics_metric_id
+        """Get Metric
 
+        Retrieves a single metric of the server. The metric name is used as the \\{metric-id\\} and must be URL-encoded because it may contain slashes.
 
         :param metric_id: (required)
         :type metric_id: str

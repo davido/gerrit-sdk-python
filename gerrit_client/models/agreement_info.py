@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.group_info import GroupInfo
 from typing import Optional, Set
@@ -28,10 +28,10 @@ class AgreementInfo(BaseModel):
     """
     AgreementInfo
     """ # noqa: E501
-    name: Optional[StrictStr] = None
-    description: Optional[StrictStr] = None
-    url: Optional[StrictStr] = None
-    auto_verify_group: Optional[GroupInfo] = None
+    name: Optional[StrictStr] = Field(default=None, description="The unique name of the contributor agreement.")
+    description: Optional[StrictStr] = Field(default=None, description="The description of the contributor agreement.")
+    url: Optional[StrictStr] = Field(default=None, description="The URL of the contributor agreement.")
+    auto_verify_group: Optional[GroupInfo] = Field(default=None, description="The group to which a user that signs the contributor agreement online is added automatically as a GroupInfo entity. If not set, users cannot sign the contributor agreement online.")
     __properties: ClassVar[List[str]] = ["name", "description", "url", "auto_verify_group"]
 
     model_config = ConfigDict(

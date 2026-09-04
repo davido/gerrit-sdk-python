@@ -31,7 +31,7 @@ class AuthInfo(BaseModel):
     """
     AuthInfo
     """ # noqa: E501
-    auth_type: Optional[AuthType] = None
+    auth_type: Optional[AuthType] = Field(default=None, description="The authentication type that is configured on the server; see auth.type.")
     use_contributor_agreements: Optional[StrictBool] = Field(default=None, description="Whether contributor agreements are required.")
     contributor_agreements: Optional[List[AgreementInfo]] = Field(default=None, description="List of contributor agreements as ContributorAgreementInfo entities.")
     editable_account_fields: Optional[List[AccountFieldName]] = Field(default=None, description="List of account fields that are editable. Possible values are FULL_NAME, USER_NAME and REGISTER_NEW_EMAIL.")

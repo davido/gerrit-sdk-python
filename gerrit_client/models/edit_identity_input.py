@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.change_edit_identity_type import ChangeEditIdentityType
 from typing import Optional, Set
@@ -28,9 +28,9 @@ class EditIdentityInput(BaseModel):
     """
     EditIdentityInput
     """ # noqa: E501
-    name: Optional[StrictStr] = None
-    email: Optional[StrictStr] = None
-    type: Optional[ChangeEditIdentityType] = None
+    name: Optional[StrictStr] = Field(default=None, description="The name of the author/committer. If not specified, the existing name will be used.")
+    email: Optional[StrictStr] = Field(default=None, description="The email of the author/committer. If not specified, the existing email will be used.")
+    type: Optional[ChangeEditIdentityType] = Field(default=None, description="Type of the identity being edited. Must be either AUTHOR or COMMITTER.")
     __properties: ClassVar[List[str]] = ["name", "email", "type"]
 
     model_config = ConfigDict(

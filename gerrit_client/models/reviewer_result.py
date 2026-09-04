@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.account_info import AccountInfo
 from gerrit_client.models.reviewer_info import ReviewerInfo
@@ -29,12 +29,12 @@ class ReviewerResult(BaseModel):
     """
     ReviewerResult
     """ # noqa: E501
-    input: Optional[StrictStr] = None
-    error: Optional[StrictStr] = None
-    confirm: Optional[StrictBool] = None
-    reviewers: Optional[List[ReviewerInfo]] = None
-    ccs: Optional[List[AccountInfo]] = None
-    removed: Optional[AccountInfo] = None
+    input: Optional[StrictStr] = Field(default=None, description="Value of the reviewer field from ReviewerInput set while adding the reviewer.")
+    error: Optional[StrictStr] = Field(default=None, description="Error message explaining why the reviewer could not be added. + If a group was specified in the input and an error is returned, it means that none of the members were added as reviewer.")
+    confirm: Optional[StrictBool] = Field(default=None, description="Whether adding the reviewer requires confirmation.")
+    reviewers: Optional[List[ReviewerInfo]] = Field(default=None, description="The newly added reviewers as a list of ReviewerInfo entities.")
+    ccs: Optional[List[AccountInfo]] = Field(default=None, description="The newly CCed accounts as a list of AccountInfo entities. This field will only appear if the requested state for the reviewer was CC.")
+    removed: Optional[AccountInfo] = Field(default=None, description="The newly removed accounts as a list of AccountInfo entities. This field will only appear if the requested state for the reviewer was REMOVED.")
     __properties: ClassVar[List[str]] = ["input", "error", "confirm", "reviewers", "ccs", "removed"]
 
     model_config = ConfigDict(

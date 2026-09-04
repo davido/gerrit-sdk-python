@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,9 +27,9 @@ class FieldJson(BaseModel):
     """
     FieldJson
     """ # noqa: E501
-    name: Optional[StrictStr] = None
-    type: Optional[StrictStr] = None
-    description: Optional[StrictStr] = None
+    name: Optional[StrictStr] = Field(default=None, description="The name of the field.")
+    type: Optional[StrictStr] = Field(default=None, description="The type of the field, set only for enum-valued fields.")
+    description: Optional[StrictStr] = Field(default=None, description="The description of the field.")
     __properties: ClassVar[List[str]] = ["name", "type", "description"]
 
     model_config = ConfigDict(

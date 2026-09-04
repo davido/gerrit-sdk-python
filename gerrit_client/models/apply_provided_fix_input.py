@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.fix_replacement_info import FixReplacementInfo
 from typing import Optional, Set
@@ -28,8 +28,8 @@ class ApplyProvidedFixInput(BaseModel):
     """
     ApplyProvidedFixInput
     """ # noqa: E501
-    fix_replacement_infos: Optional[List[FixReplacementInfo]] = None
-    original_patchset_for_fix: Optional[StrictInt] = None
+    fix_replacement_infos: Optional[List[FixReplacementInfo]] = Field(default=None, description="The replacements that make up the fix, as a list of FixReplacementInfo entities.")
+    original_patchset_for_fix: Optional[StrictInt] = Field(default=None, description="Number of the patch set the fix was originally computed against.")
     __properties: ClassVar[List[str]] = ["fix_replacement_infos", "original_patchset_for_fix"]
 
     model_config = ConfigDict(

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.change_info import ChangeInfo
 from gerrit_client.models.reviewer_result import ReviewerResult
@@ -29,11 +29,11 @@ class ReviewResult(BaseModel):
     """
     ReviewResult
     """ # noqa: E501
-    labels: Optional[Dict[str, StrictInt]] = None
-    reviewers: Optional[Dict[str, ReviewerResult]] = None
-    ready: Optional[StrictBool] = None
-    error: Optional[StrictStr] = None
-    change_info: Optional[ChangeInfo] = None
+    labels: Optional[Dict[str, StrictInt]] = Field(default=None, description="Map of labels to values after the review was posted. Null if any reviewer additions were rejected.")
+    reviewers: Optional[Dict[str, ReviewerResult]] = Field(default=None, description="Map of account or group identifier to ReviewerResult representing the outcome of adding/removing a reviewer. Absent if no reviewer additions were requested.")
+    ready: Optional[StrictBool] = Field(default=None, description="If true, the change was moved from WIP to ready for review as a result of this action. Not set if false.")
+    error: Optional[StrictStr] = Field(default=None, description="Error message for non-200 responses.")
+    change_info: Optional[ChangeInfo] = Field(default=None, description="Post-update change information.")
     __properties: ClassVar[List[str]] = ["labels", "reviewers", "ready", "error", "change_info"]
 
     model_config = ConfigDict(

@@ -30,17 +30,17 @@ class ReviewerInfo(BaseModel):
     """ # noqa: E501
     approvals: Optional[Dict[str, StrictStr]] = Field(default=None, description="The approvals of the reviewer as a map that maps the label names to the approval values (\"-2\", \"-1\", \"0\", \"+1\", \"+2\").")
     account_id: Optional[StrictInt] = Field(default=None, description="This field is inherited from AccountInfo but is optional here if an unregistered reviewer was added by email. See add-reviewer for details.", alias="_account_id")
-    name: Optional[StrictStr] = None
-    display_name: Optional[StrictStr] = None
-    email: Optional[StrictStr] = None
-    secondary_emails: Optional[List[StrictStr]] = None
-    username: Optional[StrictStr] = None
-    avatars: Optional[List[AvatarInfo]] = None
-    more_accounts: Optional[StrictBool] = Field(default=None, alias="_more_accounts")
-    status: Optional[StrictStr] = None
-    inactive: Optional[StrictBool] = None
-    deleted: Optional[StrictBool] = None
-    tags: Optional[List[StrictStr]] = None
+    name: Optional[StrictStr] = Field(default=None, description="The full name of the user. + Only set if detailed account information is requested. + See option DETAILED_ACCOUNTS for change queries + and option DETAILS for account queries.")
+    display_name: Optional[StrictStr] = Field(default=None, description="The display name of the user. + Only set if detailed account information is requested. + See option DETAILED_ACCOUNTS for change queries + and option DETAILS for account queries.")
+    email: Optional[StrictStr] = Field(default=None, description="The email address the user prefers to be contacted through. + Only set if detailed account information is requested. + See option DETAILED_ACCOUNTS for change queries + and options DETAILS and ALL_EMAILS for account queries.")
+    secondary_emails: Optional[List[StrictStr]] = Field(default=None, description="A list of the secondary email addresses of the user. + Only set for account queries when the ALL_EMAILS option or the suggest parameter is set. + Secondary emails are only included if the calling user has the Modify Account, and hence is allowed to see secondary emails of other users.")
+    username: Optional[StrictStr] = Field(default=None, description="The username of the user. + Only set if detailed account information is requested. + See option DETAILED_ACCOUNTS for change queries + and option DETAILS for account queries.")
+    avatars: Optional[List[AvatarInfo]] = Field(default=None, description="List of AvatarInfo + entities that provide information about avatar images of the account.")
+    more_accounts: Optional[StrictBool] = Field(default=None, description="Whether the query would deliver more results if not limited. + Only set on the last account that is returned.", alias="_more_accounts")
+    status: Optional[StrictStr] = Field(default=None, description="Status message of the account.")
+    inactive: Optional[StrictBool] = Field(default=None, description="Whether the account is inactive.")
+    deleted: Optional[StrictBool] = Field(default=None, description="Whether the account is deleted. + Only set if detailed account information is requested. + See option DETAILED_ACCOUNTS")
+    tags: Optional[List[StrictStr]] = Field(default=None, description="List of additional tags that this account has. The only + current tag an account can have is SERVICE_USER. + Only set if detailed account information is requested. + See option DETAILED_ACCOUNTS")
     __properties: ClassVar[List[str]] = ["approvals", "_account_id", "name", "display_name", "email", "secondary_emails", "username", "avatars", "_more_accounts", "status", "inactive", "deleted", "tags"]
 
     model_config = ConfigDict(

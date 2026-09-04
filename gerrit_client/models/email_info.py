@@ -29,7 +29,7 @@ class EmailInfo(BaseModel):
     """ # noqa: E501
     email: Optional[StrictStr] = Field(default=None, description="The email address.")
     preferred: Optional[StrictBool] = Field(default=None, description="Whether this is the preferred email address of the user.")
-    avatar: Optional[StrictBool] = None
+    avatar: Optional[StrictBool] = Field(default=None, description="Whether this email address is the one used to display the user's avatar.")
     pending_confirmation: Optional[StrictBool] = Field(default=None, description="Set true if the user must confirm control of the email address by following a verification link before Gerrit will permit use of this address.")
     __properties: ClassVar[List[str]] = ["email", "preferred", "avatar", "pending_confirmation"]
 

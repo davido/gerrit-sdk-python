@@ -30,7 +30,7 @@ class EvaluateChangeQueryExpressionResultInfo(BaseModel):
     status: Optional[StrictBool] = Field(default=None, description="Whether the change matches the change query expression.")
     passing_atoms: Optional[List[StrictStr]] = Field(default=None, description="List of passing leaf atoms (atoms that match the change).")
     failing_atoms: Optional[List[StrictStr]] = Field(default=None, description="List of failing leaf atoms (atoms that do not match the change).")
-    atom_explanations: Optional[Dict[str, StrictStr]] = None
+    atom_explanations: Optional[Dict[str, StrictStr]] = Field(default=None, description="Explanations for why atoms pass or fail. Explanations are only available for a few atoms, for most atoms no explanation is provided. Not set if none of the atoms has an explanation.")
     __properties: ClassVar[List[str]] = ["status", "passing_atoms", "failing_atoms", "atom_explanations"]
 
     model_config = ConfigDict(

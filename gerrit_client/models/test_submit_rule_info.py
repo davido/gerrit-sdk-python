@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.account_info import AccountInfo
 from typing import Optional, Set
@@ -28,13 +28,13 @@ class TestSubmitRuleInfo(BaseModel):
     """
     TestSubmitRuleInfo
     """ # noqa: E501
-    status: Optional[StrictStr] = None
-    error_message: Optional[StrictStr] = None
-    ok: Optional[Dict[str, AccountInfo]] = None
-    reject: Optional[Dict[str, AccountInfo]] = None
-    need: Optional[Dict[str, Dict[str, Any]]] = None
-    may: Optional[Dict[str, AccountInfo]] = None
-    impossible: Optional[Dict[str, Dict[str, Any]]] = None
+    status: Optional[StrictStr] = Field(default=None, description="OK, the change can be submitted. + NOT_READY, additional labels are required before submit. + CLOSED, closed changes cannot be submitted. + RULE_ERROR, rule code failed with an error.")
+    error_message: Optional[StrictStr] = Field(default=None, description="When status is RULE_ERROR this message provides some text describing the failure of the rule predicate.")
+    ok: Optional[Dict[str, AccountInfo]] = Field(default=None, description="Map of labels that are approved; an AccountInfo identifies the voter chosen by the rule.")
+    reject: Optional[Dict[str, AccountInfo]] = Field(default=None, description="Map of labels that are preventing submit; AccountInfo identifies voter.")
+    need: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, description="Map of labels that need to be given to submit. The value is currently an empty object.")
+    may: Optional[Dict[str, AccountInfo]] = Field(default=None, description="Map of labels that can be used, but do not affect submit. AccountInfo identifies voter, if the label has been applied.")
+    impossible: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, description="Map of labels that should have been in need but cannot be used by any user because of access restrictions. The value is currently an empty object.")
     __properties: ClassVar[List[str]] = ["status", "error_message", "ok", "reject", "need", "may", "impossible"]
 
     model_config = ConfigDict(

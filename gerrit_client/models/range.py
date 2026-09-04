@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,10 +27,10 @@ class Range(BaseModel):
     """
     Range
     """ # noqa: E501
-    start_line: Optional[StrictInt] = None
-    start_character: Optional[StrictInt] = None
-    end_line: Optional[StrictInt] = None
-    end_character: Optional[StrictInt] = None
+    start_line: Optional[StrictInt] = Field(default=None, description="The start line number of the range. (1-based)")
+    start_character: Optional[StrictInt] = Field(default=None, description="The character position in the start line. (0-based)")
+    end_line: Optional[StrictInt] = Field(default=None, description="The end line number of the range. (1-based)")
+    end_character: Optional[StrictInt] = Field(default=None, description="The character position in the end line. (0-based)")
     __properties: ClassVar[List[str]] = ["start_line", "start_character", "end_line", "end_character"]
 
     model_config = ConfigDict(

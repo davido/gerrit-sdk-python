@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.web_link_info import WebLinkInfo
 from typing import Optional, Set
@@ -28,10 +28,10 @@ class FileMeta(BaseModel):
     """
     FileMeta
     """ # noqa: E501
-    name: Optional[StrictStr] = None
-    content_type: Optional[StrictStr] = None
-    lines: Optional[StrictInt] = None
-    web_links: Optional[List[WebLinkInfo]] = None
+    name: Optional[StrictStr] = Field(default=None, description="The name of the file.")
+    content_type: Optional[StrictStr] = Field(default=None, description="The content type of the file. For the commit message and merge list the value is text/x-gerrit-commit-message and text/x-gerrit-merge-list respectively. For git links the value is x-git/gitlink. For symlinks the value is x-git/symlink. For regular files the value is the file mime type (e.g.")
+    lines: Optional[StrictInt] = Field(default=None, description="The total number of lines in the file.")
+    web_links: Optional[List[WebLinkInfo]] = Field(default=None, description="Links to the file in external sites as a list of WebLinkInfo entries.")
     __properties: ClassVar[List[str]] = ["name", "content_type", "lines", "web_links"]
 
     model_config = ConfigDict(

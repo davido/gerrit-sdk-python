@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,14 +27,14 @@ class ContentEntry(BaseModel):
     """
     ContentEntry
     """ # noqa: E501
-    ab: Optional[List[StrictStr]] = None
-    a: Optional[List[StrictStr]] = None
-    b: Optional[List[StrictStr]] = None
-    edit_a: Optional[List[List[StrictInt]]] = None
-    edit_b: Optional[List[List[StrictInt]]] = None
-    due_to_rebase: Optional[StrictBool] = None
-    common: Optional[StrictBool] = None
-    skip: Optional[StrictInt] = None
+    ab: Optional[List[StrictStr]] = Field(default=None, description="Content in the file on both sides (unchanged).")
+    a: Optional[List[StrictStr]] = Field(default=None, description="Content only in the file on side A (deleted in B).")
+    b: Optional[List[StrictStr]] = Field(default=None, description="Content only in the file on side B (added in B).")
+    edit_a: Optional[List[List[StrictInt]]] = Field(default=None, description="Text sections deleted from side A as a DiffIntralineInfo entity.")
+    edit_b: Optional[List[List[StrictInt]]] = Field(default=None, description="Text sections inserted in side B as a DiffIntralineInfo entity.")
+    due_to_rebase: Optional[StrictBool] = Field(default=None, description="Indicates whether this entry was introduced by a rebase.")
+    common: Optional[StrictBool] = Field(default=None, description="Set to true if the region is common according to the requested ignore-whitespace parameter, but a and b contain differing amounts of whitespace. When present and true a and b are used instead of ab.")
+    skip: Optional[StrictInt] = Field(default=None, description="count of lines skipped on both sides when the file is too large to include all common lines.")
     __properties: ClassVar[List[str]] = ["ab", "a", "b", "edit_a", "edit_b", "due_to_rebase", "common", "skip"]
 
     model_config = ConfigDict(

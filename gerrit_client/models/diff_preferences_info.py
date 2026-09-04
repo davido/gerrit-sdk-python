@@ -44,15 +44,15 @@ class DiffPreferencesInfo(BaseModel):
     hide_top_menu: Optional[StrictBool] = Field(default=None, description="If true the top menu header and site header are hidden.")
     auto_hide_diff_table_header: Optional[StrictBool] = Field(default=None, description="If true the diff table header is automatically hidden when scrolling down more than half of a page.")
     hide_line_numbers: Optional[StrictBool] = Field(default=None, description="If true the line numbers are hidden.")
-    render_entire_file: Optional[StrictBool] = None
-    hide_empty_pane: Optional[StrictBool] = None
+    render_entire_file: Optional[StrictBool] = Field(default=None, description="Whether the whole file should be rendered instead of only the changed parts.")
+    hide_empty_pane: Optional[StrictBool] = Field(default=None, description="Whether empty panes should be hidden. The left pane is empty when a file was added; the right pane is empty when a file was deleted.")
     match_brackets: Optional[StrictBool] = Field(default=None, description="Whether matching brackets should be highlighted.")
     line_wrapping: Optional[StrictBool] = Field(default=None, description="Whether to enable line wrapping or not.")
-    responsive_mode: Optional[ResponsiveMode] = None
+    responsive_mode: Optional[ResponsiveMode] = Field(default=None, description="The responsive-rendering mode of the diff view. Allowed values are NONE, SHRINK_ONLY and FULL_RESPONSIVE.")
     ignore_whitespace: Optional[Whitespace] = Field(default=None, description="Whether whitespace changes should be ignored and if yes, which whitespace changes should be ignored. + Allowed values are IGNORE_NONE, IGNORE_TRAILING, IGNORE_LEADING_AND_TRAILING, IGNORE_ALL.")
     retain_header: Optional[StrictBool] = Field(default=None, description="Whether the header that is displayed above the patch (that either shows the commit message, the diff preferences, the patch sets or the files) should be retained on file switch.")
     skip_deleted: Optional[StrictBool] = Field(default=None, description="Whether deleted files should be skipped on file switch.")
-    skip_unchanged: Optional[StrictBool] = None
+    skip_unchanged: Optional[StrictBool] = Field(default=None, description="Whether files without changes are skipped when switching between files.")
     skip_uncommented: Optional[StrictBool] = Field(default=None, description="Whether uncommented files should be skipped on file switch.")
     __properties: ClassVar[List[str]] = ["context", "tab_size", "font_size", "line_length", "cursor_blink_rate", "expand_all_comments", "intraline_difference", "manual_review", "show_line_endings", "show_tabs", "show_whitespace_errors", "syntax_highlighting", "hide_top_menu", "auto_hide_diff_table_header", "hide_line_numbers", "render_entire_file", "hide_empty_pane", "match_brackets", "line_wrapping", "responsive_mode", "ignore_whitespace", "retain_header", "skip_deleted", "skip_unchanged", "skip_uncommented"]
 

@@ -27,9 +27,9 @@ class GarbageCollectInput(BaseModel):
     """
     GarbageCollectInput
     """ # noqa: E501
-    show_progress: Optional[StrictBool] = None
-    aggressive: Optional[StrictBool] = None
-    var_async: Optional[StrictBool] = Field(default=None, alias="async")
+    show_progress: Optional[StrictBool] = Field(default=None, description="Whether progress information should be shown.")
+    aggressive: Optional[StrictBool] = Field(default=None, description="Whether an aggressive garbage collection should be done.")
+    var_async: Optional[StrictBool] = Field(default=None, description="Whether the garbage collection should run asynchronously.", alias="async")
     __properties: ClassVar[List[str]] = ["show_progress", "aggressive", "async"]
 
     model_config = ConfigDict(

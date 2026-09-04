@@ -29,7 +29,7 @@ class BranchInfo(BaseModel):
     """
     BranchInfo
     """ # noqa: E501
-    actions: Optional[Dict[str, ActionInfo]] = None
+    actions: Optional[Dict[str, ActionInfo]] = Field(default=None, description="Actions the caller might be able to perform on this branch, as a map of action name to ActionInfo entities.")
     web_links: Optional[List[WebLinkInfo]] = Field(default=None, description="Links to the branch in external sites as a list of WebLinkInfo entries.")
     ref: Optional[StrictStr] = Field(default=None, description="The ref of the branch.")
     revision: Optional[StrictStr] = Field(default=None, description="The revision to which the branch points.")

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.date_format import DateFormat
 from gerrit_client.models.default_base import DefaultBase
@@ -35,33 +35,33 @@ class GeneralPreferencesInfo(BaseModel):
     """
     GeneralPreferencesInfo
     """ # noqa: E501
-    changes_per_page: Optional[StrictInt] = None
-    download_scheme: Optional[StrictStr] = None
-    theme: Optional[Theme] = None
-    date_format: Optional[DateFormat] = None
-    time_format: Optional[TimeFormat] = None
-    expand_inline_diffs: Optional[StrictBool] = None
-    relative_date_in_change_table: Optional[StrictBool] = None
-    diff_view: Optional[DiffView] = None
-    size_bar_in_change_table: Optional[StrictBool] = None
-    legacycid_in_change_table: Optional[StrictBool] = None
-    mute_common_path_prefixes: Optional[StrictBool] = None
-    signed_off_by: Optional[StrictBool] = None
-    email_strategy: Optional[EmailStrategy] = None
-    email_format: Optional[EmailFormat] = None
-    default_base_for_merges: Optional[DefaultBase] = None
-    publish_comments_on_push: Optional[StrictBool] = None
-    disable_keyboard_shortcuts: Optional[StrictBool] = None
-    disable_token_highlighting: Optional[StrictBool] = None
-    work_in_progress_by_default: Optional[StrictBool] = None
-    my: Optional[List[MenuItem]] = None
-    change_table: Optional[List[StrictStr]] = None
-    allow_browser_notifications: Optional[StrictBool] = None
-    allow_suggest_code_while_commenting: Optional[StrictBool] = None
-    allow_autocompleting_comments: Optional[StrictBool] = None
-    ai_chat_selected_model: Optional[StrictStr] = None
-    label_filter: Optional[StrictStr] = None
-    diff_page_sidebar: Optional[StrictStr] = None
+    changes_per_page: Optional[StrictInt] = Field(default=None, description="The number of changes to show on each page. Allowed values are 10, 25, 50, 100.")
+    download_scheme: Optional[StrictStr] = Field(default=None, description="The type of download URL the user prefers to use. May be any key from the schemes map in DownloadInfo.")
+    theme: Optional[Theme] = Field(default=None, description="Which theme to use. Allowed values are AUTO or DARK or LIGHT.")
+    date_format: Optional[DateFormat] = Field(default=None, description="The format to display the date in. Allowed values are STD, US, ISO, EURO, UK.")
+    time_format: Optional[TimeFormat] = Field(default=None, description="The format to display the time in. Allowed values are HHMM_12, HHMM_24.")
+    expand_inline_diffs: Optional[StrictBool] = Field(default=None, description="Whether to expand diffs inline instead of opening as separate page (Gerrit web app UI only).")
+    relative_date_in_change_table: Optional[StrictBool] = Field(default=None, description="Whether to show relative dates in the changes table.")
+    diff_view: Optional[DiffView] = Field(default=None, description="The type of diff view to show. Allowed values are SIDE_BY_SIDE, UNIFIED_DIFF.")
+    size_bar_in_change_table: Optional[StrictBool] = Field(default=None, description="Whether to show the change sizes as colored bars in the change table.")
+    legacycid_in_change_table: Optional[StrictBool] = Field(default=None, description="Whether to show change number in the change table.")
+    mute_common_path_prefixes: Optional[StrictBool] = Field(default=None, description="Whether to mute common path prefixes in file names in the file table.")
+    signed_off_by: Optional[StrictBool] = Field(default=None, description="Whether to insert Signed-off-by footer in changes created with the inline edit feature.")
+    email_strategy: Optional[EmailStrategy] = Field(default=None, description="The type of email strategy to use. On ENABLED, the user will receive emails from Gerrit. On CC_ON_OWN_COMMENTS the user will also receive emails for their own comments. On ATTENTION_SET_ONLY, on emails about changes, the user will receive emails only if they are in the attention set of that change.")
+    email_format: Optional[EmailFormat] = Field(default=None, description="The format to use for outgoing email. Allowed values are PLAINTEXT and HTML_PLAINTEXT.")
+    default_base_for_merges: Optional[DefaultBase] = Field(default=None, description="The base which should be pre-selected in the 'Diff Against' drop-down list when the change screen is opened for a merge commit. Allowed values are AUTO_MERGE and FIRST_PARENT.")
+    publish_comments_on_push: Optional[StrictBool] = Field(default=None, description="Whether to publish draft comments on push by default.")
+    disable_keyboard_shortcuts: Optional[StrictBool] = Field(default=None, description="Whether to disable all keyboard shortcuts.")
+    disable_token_highlighting: Optional[StrictBool] = Field(default=None, description="Whether to disable token highlighting on hover.")
+    work_in_progress_by_default: Optional[StrictBool] = Field(default=None, description="Whether to set work-in-progress on push or on create changes online by default.")
+    my: Optional[List[MenuItem]] = Field(default=None, description="The menu items of the MY top menu as a list of TopMenuItemInfo entities.")
+    change_table: Optional[List[StrictStr]] = Field(default=None, description="The columns to display in the change table (Gerrit web app UI only). The default is empty, which will default columns as determined by the frontend.")
+    allow_browser_notifications: Optional[StrictBool] = Field(default=None, description="Whether to prompt user to enable browser notification in browser.")
+    allow_suggest_code_while_commenting: Optional[StrictBool] = Field(default=None, description="Whether to receive suggested code while writing comments. This feature needs a plugin implementation.")
+    allow_autocompleting_comments: Optional[StrictBool] = Field(default=None, description="Whether to receive autocompletions while writing comments. This feature needs a plugin implementation.")
+    ai_chat_selected_model: Optional[StrictStr] = Field(default=None, description="The name of the AI model selected for the AI chat. This feature needs a plugin implementation.")
+    label_filter: Optional[StrictStr] = Field(default=None, description="A comma-separated list of label names that limits which label columns are shown in the change table. If empty, all labels are shown.")
+    diff_page_sidebar: Optional[StrictStr] = Field(default=None, description="String indicating which sidebar should be open on the diff page. Set to \"NONE\" if no sidebars should be open. Plugin-supplied sidebars will be prefixed with \"plugin-\".")
     __properties: ClassVar[List[str]] = ["changes_per_page", "download_scheme", "theme", "date_format", "time_format", "expand_inline_diffs", "relative_date_in_change_table", "diff_view", "size_bar_in_change_table", "legacycid_in_change_table", "mute_common_path_prefixes", "signed_off_by", "email_strategy", "email_format", "default_base_for_merges", "publish_comments_on_push", "disable_keyboard_shortcuts", "disable_token_highlighting", "work_in_progress_by_default", "my", "change_table", "allow_browser_notifications", "allow_suggest_code_while_commenting", "allow_autocompleting_comments", "ai_chat_selected_model", "label_filter", "diff_page_sidebar"]
 
     model_config = ConfigDict(

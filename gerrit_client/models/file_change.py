@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,10 +27,10 @@ class FileChange(BaseModel):
     """
     FileChange
     """ # noqa: E501
-    content: Optional[StrictStr] = None
-    file_mode: Optional[StrictInt] = None
-    delete: Optional[StrictBool] = None
-    rename_from: Optional[StrictStr] = None
+    content: Optional[StrictStr] = Field(default=None, description="The new file content, base64-encoded, for a create or update. For a 120000 (symlink) entry, the decoded content is the symlink target path.")
+    file_mode: Optional[StrictInt] = Field(default=None, description="The file mode in octal format (100644 regular file, 100755 executable, 120000 symlink). If not set, new files are created as 100644 and existing files keep their mode.")
+    delete: Optional[StrictBool] = Field(default=None, description="If true, deletes the file at this path.")
+    rename_from: Optional[StrictStr] = Field(default=None, description="Source path to rename from. The file at rename_from is moved to this entry's path.")
     __properties: ClassVar[List[str]] = ["content", "file_mode", "delete", "rename_from"]
 
     model_config = ConfigDict(

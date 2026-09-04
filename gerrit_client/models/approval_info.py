@@ -34,18 +34,18 @@ class ApprovalInfo(BaseModel):
     var_date: Optional[StrictStr] = Field(default=None, description="The time and date describing when the approval was made.", alias="date")
     post_submit: Optional[StrictBool] = Field(default=None, description="If true, this vote was made after the change was submitted.")
     permitted_voting_range: Optional[VotingRangeInfo] = Field(default=None, description="The VotingRangeInfo the user is authorized to vote on that label. If present, the user is permitted to vote on the label regarding the range values. If absent, the user is not permitted to vote on that label.")
-    account_id: Optional[StrictInt] = Field(default=None, alias="_account_id")
-    name: Optional[StrictStr] = None
-    display_name: Optional[StrictStr] = None
-    email: Optional[StrictStr] = None
-    secondary_emails: Optional[List[StrictStr]] = None
-    username: Optional[StrictStr] = None
-    avatars: Optional[List[AvatarInfo]] = None
-    more_accounts: Optional[StrictBool] = Field(default=None, alias="_more_accounts")
-    status: Optional[StrictStr] = None
-    inactive: Optional[StrictBool] = None
-    deleted: Optional[StrictBool] = None
-    tags: Optional[List[StrictStr]] = None
+    account_id: Optional[StrictInt] = Field(default=None, description="The numeric ID of the account.", alias="_account_id")
+    name: Optional[StrictStr] = Field(default=None, description="The full name of the user. + Only set if detailed account information is requested. + See option DETAILED_ACCOUNTS for change queries + and option DETAILS for account queries.")
+    display_name: Optional[StrictStr] = Field(default=None, description="The display name of the user. + Only set if detailed account information is requested. + See option DETAILED_ACCOUNTS for change queries + and option DETAILS for account queries.")
+    email: Optional[StrictStr] = Field(default=None, description="The email address the user prefers to be contacted through. + Only set if detailed account information is requested. + See option DETAILED_ACCOUNTS for change queries + and options DETAILS and ALL_EMAILS for account queries.")
+    secondary_emails: Optional[List[StrictStr]] = Field(default=None, description="A list of the secondary email addresses of the user. + Only set for account queries when the ALL_EMAILS option or the suggest parameter is set. + Secondary emails are only included if the calling user has the Modify Account, and hence is allowed to see secondary emails of other users.")
+    username: Optional[StrictStr] = Field(default=None, description="The username of the user. + Only set if detailed account information is requested. + See option DETAILED_ACCOUNTS for change queries + and option DETAILS for account queries.")
+    avatars: Optional[List[AvatarInfo]] = Field(default=None, description="List of AvatarInfo + entities that provide information about avatar images of the account.")
+    more_accounts: Optional[StrictBool] = Field(default=None, description="Whether the query would deliver more results if not limited. + Only set on the last account that is returned.", alias="_more_accounts")
+    status: Optional[StrictStr] = Field(default=None, description="Status message of the account.")
+    inactive: Optional[StrictBool] = Field(default=None, description="Whether the account is inactive.")
+    deleted: Optional[StrictBool] = Field(default=None, description="Whether the account is deleted. + Only set if detailed account information is requested. + See option DETAILED_ACCOUNTS")
+    tags: Optional[List[StrictStr]] = Field(default=None, description="List of additional tags that this account has. The only + current tag an account can have is SERVICE_USER. + Only set if detailed account information is requested. + See option DETAILED_ACCOUNTS")
     __properties: ClassVar[List[str]] = ["tag", "value", "date", "post_submit", "permitted_voting_range", "_account_id", "name", "display_name", "email", "secondary_emails", "username", "avatars", "_more_accounts", "status", "inactive", "deleted", "tags"]
 
     model_config = ConfigDict(

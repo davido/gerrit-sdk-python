@@ -50,7 +50,7 @@ class CommentInfo(BaseModel):
     message: Optional[StrictStr] = Field(default=None, description="The comment message.")
     commit_id: Optional[StrictStr] = Field(default=None, description="Hex commit SHA-1 (40 characters string) of the commit of the patchset to which this comment applies.")
     fix_suggestions: Optional[List[FixSuggestionInfo]] = Field(default=None, description="Suggested fixes for this comment as a list of FixSuggestionInfo entities.")
-    is_ai: Optional[StrictBool] = None
+    is_ai: Optional[StrictBool] = Field(default=None, description="Whether the comment was created by an AI agent. Not set if false.")
     __properties: ClassVar[List[str]] = ["author", "tag", "change_message_id", "unresolved", "context_lines", "source_content_type", "patch_set", "id", "path", "side", "parent", "line", "range", "in_reply_to", "updated", "message", "commit_id", "fix_suggestions", "is_ai"]
 
     model_config = ConfigDict(

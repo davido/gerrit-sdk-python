@@ -27,13 +27,13 @@ class GerritInfo(BaseModel):
     """
     GerritInfo
     """ # noqa: E501
-    all_projects: Optional[StrictStr] = None
-    all_users: Optional[StrictStr] = None
+    all_projects: Optional[StrictStr] = Field(default=None, description="The name of the All-Projects root project.")
+    all_users: Optional[StrictStr] = Field(default=None, description="The name of the All-Users project, in which per-user data such as account preferences and watched projects is stored.")
     doc_search: Optional[StrictBool] = Field(default=None, description="Whether documentation search is available.")
     doc_url: Optional[StrictStr] = Field(default=None, description="Custom base URL where Gerrit server documentation is located. (Documentation may still be available at /Documentation relative to the Gerrit base path even if this value is unset.)")
     edit_gpg_keys: Optional[StrictBool] = Field(default=None, description="Whether to enable the web UI for editing GPG keys.")
     report_bug_url: Optional[StrictStr] = Field(default=None, description="URL to report bugs.")
-    primary_weblink_name: Optional[StrictStr] = None
+    primary_weblink_name: Optional[StrictStr] = Field(default=None, description="The name of the configured primary web link (gerrit.primaryWeblinkName), if one is set.")
     instance_id: Optional[StrictStr] = Field(default=None, description="Short identifier for this Gerrit installation.")
     default_branch: Optional[StrictStr] = Field(default=None, description="Name of the default branch to use on the project creation.")
     project_state_predicate_enabled: Optional[StrictBool] = Field(default=None, description="Whether the instance supports filtering projects by state.")

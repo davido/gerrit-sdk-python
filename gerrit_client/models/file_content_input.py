@@ -27,7 +27,7 @@ class FileContentInput(BaseModel):
     """
     FileContentInput
     """ # noqa: E501
-    content: Optional[Dict[str, Any]] = None
+    content: Optional[Dict[str, Any]] = Field(default=None, description="The new content of the file, sent as the raw request body. If not set, an empty file is created or the existing content is cleared.")
     binary_content: Optional[StrictStr] = Field(default=None, description="The file content as a base-64 encoded data URI. If no content is provided, an empty is created or if an existing file is updated the file content is removed so that the file becomes empty. The content must be a SHA1 if the file mode is 160000 (gitlink).")
     file_mode: Optional[StrictInt] = Field(default=None, description="The file mode in octal format. Supported values are 100644 (regular file), 100755 (executable file), 120000 (symlink) and 160000 (gitlink). If unset, new files are created with file mode 100644 (regular file) and for existing files the existing file mode is kept.")
     __properties: ClassVar[List[str]] = ["content", "binary_content", "file_mode"]

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.validation_option_info import ValidationOptionInfo
 from typing import Optional, Set
@@ -28,7 +28,7 @@ class ValidationOptionInfos(BaseModel):
     """
     ValidationOptionInfos
     """ # noqa: E501
-    validation_options: Optional[List[ValidationOptionInfo]] = None
+    validation_options: Optional[List[ValidationOptionInfo]] = Field(default=None, description="The list of all possible validation options.")
     __properties: ClassVar[List[str]] = ["validation_options"]
 
     model_config = ConfigDict(

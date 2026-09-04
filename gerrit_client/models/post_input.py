@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,9 +27,9 @@ class PostInput(BaseModel):
     """
     PostInput
     """ # noqa: E501
-    restore_path: Optional[StrictStr] = None
-    old_path: Optional[StrictStr] = None
-    new_path: Optional[StrictStr] = None
+    restore_path: Optional[StrictStr] = Field(default=None, description="Path to file to restore.")
+    old_path: Optional[StrictStr] = Field(default=None, description="Old path to file to rename.")
+    new_path: Optional[StrictStr] = Field(default=None, description="New path to file to rename.")
     __properties: ClassVar[List[str]] = ["restore_path", "old_path", "new_path"]
 
     model_config = ConfigDict(

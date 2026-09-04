@@ -12401,8 +12401,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> bytes:
-        """get_changes_change_id_revisions_revision_id_archive
+        """Get Archive
 
+        Retrieves an archive of the files in a revision.
 
         :param change_id: (required)
         :type change_id: str
@@ -12475,8 +12476,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[bytes]:
-        """get_changes_change_id_revisions_revision_id_archive
+        """Get Archive
 
+        Retrieves an archive of the files in a revision.
 
         :param change_id: (required)
         :type change_id: str
@@ -12549,8 +12551,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_changes_change_id_revisions_revision_id_archive
+        """Get Archive
 
+        Retrieves an archive of the files in a revision.
 
         :param change_id: (required)
         :type change_id: str
@@ -19303,8 +19306,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Dict[str, List[RobotCommentInfo]]:
-        """get_changes_change_id_revisions_revision_id_robotcomments
+        """List Robot Comments
 
+        Lists the robot comments of a revision.
 
         :param change_id: (required)
         :type change_id: str
@@ -19373,8 +19377,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Dict[str, List[RobotCommentInfo]]]:
-        """get_changes_change_id_revisions_revision_id_robotcomments
+        """List Robot Comments
 
+        Lists the robot comments of a revision.
 
         :param change_id: (required)
         :type change_id: str
@@ -19443,8 +19448,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_changes_change_id_revisions_revision_id_robotcomments
+        """List Robot Comments
 
+        Lists the robot comments of a revision.
 
         :param change_id: (required)
         :type change_id: str
@@ -19577,8 +19583,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RobotCommentInfo:
-        """get_changes_change_id_revisions_revision_id_robotcomments_robot_comment_id
+        """Get Robot Comment
 
+        Retrieves a robot comment of a revision.
 
         :param change_id: (required)
         :type change_id: str
@@ -19651,8 +19658,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[RobotCommentInfo]:
-        """get_changes_change_id_revisions_revision_id_robotcomments_robot_comment_id
+        """Get Robot Comment
 
+        Retrieves a robot comment of a revision.
 
         :param change_id: (required)
         :type change_id: str
@@ -19725,8 +19733,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_changes_change_id_revisions_revision_id_robotcomments_robot_comment_id
+        """Get Robot Comment
 
+        Retrieves a robot comment of a revision.
 
         :param change_id: (required)
         :type change_id: str
@@ -20139,8 +20148,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Dict[str, List[RobotCommentInfo]]:
-        """get_changes_change_id_robotcomments
+        """List Change Robot Comments
 
+        Lists the robot comments of all revisions of the change.
 
         :param change_id: (required)
         :type change_id: str
@@ -20205,8 +20215,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Dict[str, List[RobotCommentInfo]]]:
-        """get_changes_change_id_robotcomments
+        """List Change Robot Comments
 
+        Lists the robot comments of all revisions of the change.
 
         :param change_id: (required)
         :type change_id: str
@@ -20271,8 +20282,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_changes_change_id_robotcomments
+        """List Change Robot Comments
 
+        Lists the robot comments of all revisions of the change.
 
         :param change_id: (required)
         :type change_id: str

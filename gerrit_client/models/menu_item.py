@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,10 +27,10 @@ class MenuItem(BaseModel):
     """
     MenuItem
     """ # noqa: E501
-    url: Optional[StrictStr] = None
-    name: Optional[StrictStr] = None
-    target: Optional[StrictStr] = None
-    id: Optional[StrictStr] = None
+    url: Optional[StrictStr] = Field(default=None, description="The URL of the menu item link.")
+    name: Optional[StrictStr] = Field(default=None, description="The name of the menu item.")
+    target: Optional[StrictStr] = Field(default=None, description="Target attribute of the menu item link.")
+    id: Optional[StrictStr] = Field(default=None, description="The id attribute of the menu item link.")
     __properties: ClassVar[List[str]] = ["url", "name", "target", "id"]
 
     model_config = ConfigDict(

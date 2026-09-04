@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +27,7 @@ class ReceiveInfo(BaseModel):
     """
     ReceiveInfo
     """ # noqa: E501
-    enable_signed_push: Optional[StrictBool] = None
+    enable_signed_push: Optional[StrictBool] = Field(default=None, description="Whether signed push validation support is enabled on the server; see the global configuration for details.")
     __properties: ClassVar[List[str]] = ["enable_signed_push"]
 
     model_config = ConfigDict(

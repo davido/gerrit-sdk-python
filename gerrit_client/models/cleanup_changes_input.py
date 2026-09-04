@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,10 +27,10 @@ class CleanupChangesInput(BaseModel):
     """
     CleanupChangesInput
     """ # noqa: E501
-    after: Optional[StrictStr] = None
-    if_mergeable: Optional[StrictBool] = None
-    message: Optional[StrictStr] = None
-    query: Optional[StrictStr] = None
+    after: Optional[StrictStr] = Field(default=None, description="Abandon all changes that weren't updated in the timespan given here")
+    if_mergeable: Optional[StrictBool] = Field(default=None, description="Whether to also abandon changes that are mergeable")
+    message: Optional[StrictStr] = Field(default=None, description="Message to post to changes abandoned by the cleanup")
+    query: Optional[StrictStr] = Field(default=None, description="Additional query predicates appended to the base cleanup query. Can be used to limit the batch size, exclude changes, or both, e.g. age:4w limit:100 -project:some/repo -hashtag:keep-alive. By default unset.")
     __properties: ClassVar[List[str]] = ["after", "if_mergeable", "message", "query"]
 
     model_config = ConfigDict(

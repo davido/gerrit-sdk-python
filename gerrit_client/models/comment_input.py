@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +27,7 @@ class CommentInput(BaseModel):
     """
     CommentInput
     """ # noqa: E501
-    enable_context: Optional[StrictBool] = None
+    enable_context: Optional[StrictBool] = Field(default=None, description="Whether to include the source lines around the comment as context in the response.")
     __properties: ClassVar[List[str]] = ["enable_context"]
 
     model_config = ConfigDict(
