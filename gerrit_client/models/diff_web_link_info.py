@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,12 +27,12 @@ class DiffWebLinkInfo(BaseModel):
     """
     DiffWebLinkInfo
     """ # noqa: E501
-    show_on_side_by_side_diff_view: Optional[StrictBool] = None
-    show_on_unified_diff_view: Optional[StrictBool] = None
-    name: Optional[StrictStr] = None
-    tooltip: Optional[StrictStr] = None
-    image_url: Optional[StrictStr] = None
-    url: Optional[StrictStr] = None
+    show_on_side_by_side_diff_view: Optional[StrictBool] = Field(default=None, description="Whether the web link should be shown on the side-by-side diff screen.")
+    show_on_unified_diff_view: Optional[StrictBool] = Field(default=None, description="Whether the web link should be shown on the unified diff screen.")
+    name: Optional[StrictStr] = Field(default=None, description="See WebLinkInfo")
+    tooltip: Optional[StrictStr] = Field(default=None, description="See WebLinkInfo")
+    image_url: Optional[StrictStr] = Field(default=None, description="See WebLinkInfo")
+    url: Optional[StrictStr] = Field(default=None, description="See WebLinkInfo")
     __properties: ClassVar[List[str]] = ["show_on_side_by_side_diff_view", "show_on_unified_diff_view", "name", "tooltip", "image_url", "url"]
 
     model_config = ConfigDict(

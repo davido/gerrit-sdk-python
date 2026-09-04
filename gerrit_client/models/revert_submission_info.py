@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.change_info import ChangeInfo
 from typing import Optional, Set
@@ -28,7 +28,7 @@ class RevertSubmissionInfo(BaseModel):
     """
     RevertSubmissionInfo
     """ # noqa: E501
-    revert_changes: Optional[List[ChangeInfo]] = None
+    revert_changes: Optional[List[ChangeInfo]] = Field(default=None, description="A list of ChangeInfo that describes the revert changes. Each entity in that list is a revert change that was created in that revert submission.")
     __properties: ClassVar[List[str]] = ["revert_changes"]
 
     model_config = ConfigDict(

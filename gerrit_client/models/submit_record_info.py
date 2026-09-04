@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.label import Label
 from gerrit_client.models.legacy_submit_requirement_info import LegacySubmitRequirementInfo
@@ -30,11 +30,11 @@ class SubmitRecordInfo(BaseModel):
     """
     SubmitRecordInfo
     """ # noqa: E501
-    rule_name: Optional[StrictStr] = None
-    status: Optional[SubmitRecordInfoStatus] = None
-    labels: Optional[List[Label]] = None
-    requirements: Optional[List[LegacySubmitRequirementInfo]] = None
-    error_message: Optional[StrictStr] = None
+    rule_name: Optional[StrictStr] = Field(default=None, description="The name of the submit rule that created this submit record. The submit rule is specified in the form of \"$plugin~$rule\" where $plugin is the plugin name and $rule is the name of the class that implemented the submit rule.")
+    status: Optional[SubmitRecordInfoStatus] = Field(default=None, description="OK, the change can be submitted. + NOT_READY, additional labels are required before submit. + CLOSED, closed changes cannot be submitted. + FORCED, the change was submitted bypassing the submit rule. + RULE_ERROR, rule code failed with an error.")
+    labels: Optional[List[Label]] = Field(default=None, description="A list of labels, each containing the following fields. + * label: the label name. + * status: the label status: {OK, REJECT, MAY, NEED, IMPOSSIBLE}. + * appliedBy: the AccountInfo that applied the vote to the label.")
+    requirements: Optional[List[LegacySubmitRequirementInfo]] = Field(default=None, description="List of the requirements to be met before this change can be submitted.")
+    error_message: Optional[StrictStr] = Field(default=None, description="When status is RULE_ERROR this message provides some text describing the failure of the rule predicate.")
     __properties: ClassVar[List[str]] = ["rule_name", "status", "labels", "requirements", "error_message"]
 
     model_config = ConfigDict(

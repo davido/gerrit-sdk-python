@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.label_definition_input import LabelDefinitionInput
 from typing import Optional, Set
@@ -28,10 +28,10 @@ class BatchLabelInput(BaseModel):
     """
     BatchLabelInput
     """ # noqa: E501
-    commit_message: Optional[StrictStr] = None
-    delete: Optional[List[StrictStr]] = None
-    create: Optional[List[LabelDefinitionInput]] = None
-    update: Optional[Dict[str, LabelDefinitionInput]] = None
+    commit_message: Optional[StrictStr] = Field(default=None, description="Message that should be used to commit the label updates in the project.config file to the refs/meta/config branch.")
+    delete: Optional[List[StrictStr]] = Field(default=None, description="List of labels that should be deleted.")
+    create: Optional[List[LabelDefinitionInput]] = Field(default=None, description="List of LabelDefinitionInput entities that describe labels that should be created.")
+    update: Optional[Dict[str, LabelDefinitionInput]] = Field(default=None, description="Map of label names to LabelDefinitionInput entities that describe the updates that should be done for the labels. The given inputs only need to set the properties that are being changed.")
     __properties: ClassVar[List[str]] = ["commit_message", "delete", "create", "update"]
 
     model_config = ConfigDict(

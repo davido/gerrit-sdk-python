@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,8 +27,8 @@ class LabelTypeInfo(BaseModel):
     """
     LabelTypeInfo
     """ # noqa: E501
-    values: Optional[Dict[str, StrictStr]] = None
-    default_value: Optional[StrictInt] = None
+    values: Optional[Dict[str, StrictStr]] = Field(default=None, description="Map of the available values to their description.")
+    default_value: Optional[StrictInt] = Field(default=None, description="The default value of this label.")
     __properties: ClassVar[List[str]] = ["values", "default_value"]
 
     model_config = ConfigDict(

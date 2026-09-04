@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.account_input import AccountInput
 from gerrit_client.models.apply_patch_input import ApplyPatchInput
@@ -30,12 +30,12 @@ class ApplyPatchPatchSetInput(BaseModel):
     """
     ApplyPatchPatchSetInput
     """ # noqa: E501
-    patch: Optional[ApplyPatchInput] = None
-    commit_message: Optional[StrictStr] = None
-    base: Optional[StrictStr] = None
-    author: Optional[AccountInput] = None
-    response_format_options: Optional[List[ListChangesOption]] = None
-    amend: Optional[StrictBool] = None
+    patch: Optional[ApplyPatchInput] = Field(default=None, description="The details of the patch to be applied as a ApplyPatchInput entity.")
+    commit_message: Optional[StrictStr] = Field(default=None, description="The commit message for the new patch set. If not specified, the latest patch-set message will be used.")
+    base: Optional[StrictStr] = Field(default=None, description="40-hex digit SHA-1 of the commit which will be the parent commit of the newly created patch set. If set, it must be a merged commit or a change revision on the destination branch. Otherwise, the target change's branch tip will be used.")
+    author: Optional[AccountInput] = Field(default=None, description="The author of the commit to create. Must be an AccountInput entity with at least the name and email fields set. The caller needs \"Forge Author\" permission when using this field, unless specifies their own details.")
+    response_format_options: Optional[List[ListChangesOption]] = Field(default=None, description="List of query options to format the response.")
+    amend: Optional[StrictBool] = Field(default=None, description="If true, the revision from the URL will be amended by the patch. This will use the tree of the revision, apply the patch and create a new commit whose tree is the resulting tree of the operation and whose parent(s) are the parent(s) of the revision. Cannot be used together with base.")
     __properties: ClassVar[List[str]] = ["patch", "commit_message", "base", "author", "response_format_options", "amend"]
 
     model_config = ConfigDict(

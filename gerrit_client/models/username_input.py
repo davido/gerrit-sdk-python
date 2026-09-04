@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +27,7 @@ class UsernameInput(BaseModel):
     """
     UsernameInput
     """ # noqa: E501
-    username: Optional[StrictStr] = None
+    username: Optional[StrictStr] = Field(default=None, description="The new username of the account.")
     __properties: ClassVar[List[str]] = ["username"]
 
     model_config = ConfigDict(

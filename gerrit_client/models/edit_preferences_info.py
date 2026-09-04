@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,20 +27,20 @@ class EditPreferencesInfo(BaseModel):
     """
     EditPreferencesInfo
     """ # noqa: E501
-    tab_size: Optional[StrictInt] = None
-    line_length: Optional[StrictInt] = None
-    indent_unit: Optional[StrictInt] = None
-    cursor_blink_rate: Optional[StrictInt] = None
-    hide_top_menu: Optional[StrictBool] = None
-    show_tabs: Optional[StrictBool] = None
-    show_whitespace_errors: Optional[StrictBool] = None
-    syntax_highlighting: Optional[StrictBool] = None
-    hide_line_numbers: Optional[StrictBool] = None
-    match_brackets: Optional[StrictBool] = None
-    line_wrapping: Optional[StrictBool] = None
-    indent_with_tabs: Optional[StrictBool] = None
-    auto_close_brackets: Optional[StrictBool] = None
-    show_base: Optional[StrictBool] = None
+    tab_size: Optional[StrictInt] = Field(default=None, description="Number of spaces that should be used to display one tab.")
+    line_length: Optional[StrictInt] = Field(default=None, description="Number of characters that should be displayed per line.")
+    indent_unit: Optional[StrictInt] = Field(default=None, description="Number of spaces that should be used for auto-indent.")
+    cursor_blink_rate: Optional[StrictInt] = Field(default=None, description="Half-period in milliseconds used for cursor blinking. Setting it to 0 disables cursor blinking.")
+    hide_top_menu: Optional[StrictBool] = Field(default=None, description="If true the top menu header and site header is hidden.")
+    show_tabs: Optional[StrictBool] = Field(default=None, description="Whether tabs should be shown.")
+    show_whitespace_errors: Optional[StrictBool] = Field(default=None, description="Whether whitespace errors should be shown.")
+    syntax_highlighting: Optional[StrictBool] = Field(default=None, description="Whether syntax highlighting should be enabled.")
+    hide_line_numbers: Optional[StrictBool] = Field(default=None, description="Whether line numbers should be hidden.")
+    match_brackets: Optional[StrictBool] = Field(default=None, description="Whether matching brackets should be highlighted.")
+    line_wrapping: Optional[StrictBool] = Field(default=None, description="Whether to enable line wrapping or not.")
+    indent_with_tabs: Optional[StrictBool] = Field(default=None, description="Whether to indent with tabs or not.")
+    auto_close_brackets: Optional[StrictBool] = Field(default=None, description="Whether brackets and quotes should be auto-closed during typing.")
+    show_base: Optional[StrictBool] = Field(default=None, description="Whether to show the inline edit base version or not.")
     __properties: ClassVar[List[str]] = ["tab_size", "line_length", "indent_unit", "cursor_blink_rate", "hide_top_menu", "show_tabs", "show_whitespace_errors", "syntax_highlighting", "hide_line_numbers", "match_brackets", "line_wrapping", "indent_with_tabs", "auto_close_brackets", "show_base"]
 
     model_config = ConfigDict(

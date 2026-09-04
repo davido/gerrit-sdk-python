@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.account_info import AccountInfo
 from gerrit_client.models.group_base_info import GroupBaseInfo
@@ -29,10 +29,10 @@ class SuggestedReviewerInfo(BaseModel):
     """
     SuggestedReviewerInfo
     """ # noqa: E501
-    account: Optional[AccountInfo] = None
-    group: Optional[GroupBaseInfo] = None
-    count: Optional[StrictInt] = None
-    confirm: Optional[StrictBool] = None
+    account: Optional[AccountInfo] = Field(default=None, description="An AccountInfo entity, if the suggestion is an account.")
+    group: Optional[GroupBaseInfo] = Field(default=None, description="A GroupBaseInfo entity, if the suggestion is a group.")
+    count: Optional[StrictInt] = Field(default=None, description="The total number of accounts in the suggestion. This is 1 if account is present. If group is present, the total number of accounts that are members of the group is returned (this count includes members of nested groups).")
+    confirm: Optional[StrictBool] = Field(default=None, description="True if group is present and count is above the threshold where the confirmed flag must be passed to add the group as a reviewer.")
     __properties: ClassVar[List[str]] = ["account", "group", "count", "confirm"]
 
     model_config = ConfigDict(

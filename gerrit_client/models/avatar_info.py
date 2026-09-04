@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,8 +27,8 @@ class AvatarInfo(BaseModel):
     """
     AvatarInfo
     """ # noqa: E501
-    url: Optional[StrictStr] = None
-    height: Optional[StrictInt] = None
+    url: Optional[StrictStr] = Field(default=None, description="The URL to the avatar image.")
+    height: Optional[StrictInt] = Field(default=None, description="The height of the avatar image in pixels.")
     __properties: ClassVar[List[str]] = ["url", "height"]
 
     model_config = ConfigDict(

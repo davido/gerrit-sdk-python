@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +27,7 @@ class NotifyInfo(BaseModel):
     """
     NotifyInfo
     """ # noqa: E501
-    accounts: Optional[List[StrictStr]] = None
+    accounts: Optional[List[StrictStr]] = Field(default=None, description="A list of account IDs that identify the accounts that should be should be notified.")
     __properties: ClassVar[List[str]] = ["accounts"]
 
     model_config = ConfigDict(

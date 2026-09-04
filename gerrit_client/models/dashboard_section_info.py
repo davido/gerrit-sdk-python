@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,8 +27,8 @@ class DashboardSectionInfo(BaseModel):
     """
     DashboardSectionInfo
     """ # noqa: E501
-    name: Optional[StrictStr] = None
-    query: Optional[StrictStr] = None
+    name: Optional[StrictStr] = Field(default=None, description="The title of the section.")
+    query: Optional[StrictStr] = Field(default=None, description="The query of the section. + Tokens such as ${project} are not resolved.")
     __properties: ClassVar[List[str]] = ["name", "query"]
 
     model_config = ConfigDict(

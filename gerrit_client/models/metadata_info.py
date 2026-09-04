@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.web_link_info import WebLinkInfo
 from typing import Optional, Set
@@ -28,10 +28,10 @@ class MetadataInfo(BaseModel):
     """
     MetadataInfo
     """ # noqa: E501
-    name: Optional[StrictStr] = None
-    value: Optional[StrictStr] = None
-    description: Optional[StrictStr] = None
-    web_links: Optional[List[WebLinkInfo]] = None
+    name: Optional[StrictStr] = Field(default=None, description="The metadata name. Not guaranteed to be unique, e.g. multiple metadata entries with the same name may be returned.")
+    value: Optional[StrictStr] = Field(default=None, description="The metadata value.")
+    description: Optional[StrictStr] = Field(default=None, description="A description of the metadata.")
+    web_links: Optional[List[WebLinkInfo]] = Field(default=None, description="A list of web links as WebLinkInfo entities.")
     __properties: ClassVar[List[str]] = ["name", "value", "description", "web_links"]
 
     model_config = ConfigDict(

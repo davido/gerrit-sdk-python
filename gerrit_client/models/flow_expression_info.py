@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.flow_action_info import FlowActionInfo
 from typing import Optional, Set
@@ -28,8 +28,8 @@ class FlowExpressionInfo(BaseModel):
     """
     FlowExpressionInfo
     """ # noqa: E501
-    condition: Optional[StrictStr] = None
-    action: Optional[FlowActionInfo] = None
+    condition: Optional[StrictStr] = Field(default=None, description="The condition which must be satisfied for the action to be triggered. Can contain multiple conditions separated by comma. The syntax of the condition depends on the flow service implementation.")
+    action: Optional[FlowActionInfo] = Field(default=None, description="The action that should be triggered when the condition is satisfied as a FlowActionInfo entity.")
     __properties: ClassVar[List[str]] = ["condition", "action"]
 
     model_config = ConfigDict(

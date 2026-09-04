@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.config_value import ConfigValue
 from gerrit_client.models.inheritable_boolean import InheritableBoolean
@@ -30,25 +30,25 @@ class ProjectInput(BaseModel):
     """
     ProjectInput
     """ # noqa: E501
-    name: Optional[StrictStr] = None
-    parent: Optional[StrictStr] = None
-    description: Optional[StrictStr] = None
-    permissions_only: Optional[StrictBool] = None
-    create_empty_commit: Optional[StrictBool] = None
-    submit_type: Optional[SubmitType] = None
-    branches: Optional[List[StrictStr]] = None
-    owners: Optional[List[StrictStr]] = None
-    use_contributor_agreements: Optional[InheritableBoolean] = None
-    use_signed_off_by: Optional[InheritableBoolean] = None
-    use_content_merge: Optional[InheritableBoolean] = None
-    require_change_id: Optional[InheritableBoolean] = None
-    create_new_change_for_all_not_in_target: Optional[InheritableBoolean] = None
-    reject_empty_commit: Optional[InheritableBoolean] = None
-    enable_signed_push: Optional[InheritableBoolean] = None
-    require_signed_push: Optional[InheritableBoolean] = None
-    max_object_size_limit: Optional[StrictStr] = None
-    plugin_config_values: Optional[Dict[str, Dict[str, ConfigValue]]] = None
-    init_only: Optional[StrictBool] = None
+    name: Optional[StrictStr] = Field(default=None, description="The name of the project (not encoded). + If set, must match the project name in the URL. + If name ends with .git the suffix will be automatically removed.")
+    parent: Optional[StrictStr] = Field(default=None, description="The name of the parent project. + If not set, the All-Projects project will be the parent project.")
+    description: Optional[StrictStr] = Field(default=None, description="The description of the project.")
+    permissions_only: Optional[StrictBool] = Field(default=None, description="Whether a permission-only project should be created.")
+    create_empty_commit: Optional[StrictBool] = Field(default=None, description="Whether an empty initial commit should be created.")
+    submit_type: Optional[SubmitType] = Field(default=None, description="The submit type that should be set for the project (MERGE_IF_NECESSARY, REBASE_IF_NECESSARY, REBASE_ALWAYS, FAST_FORWARD_ONLY, MERGE_ALWAYS, CHERRY_PICK). + If not set, MERGE_IF_NECESSARY is set as submit type unless repository.<name>.defaultSubmitType is set to a different value.")
+    branches: Optional[List[StrictStr]] = Field(default=None, description="A list of branches that should be initially created. + For the branch names the refs/heads/ prefix can be omitted. + The first entry of the list will be the default branch. + If the list is empty, host-level default is used.")
+    owners: Optional[List[StrictStr]] = Field(default=None, description="A list of groups that should be assigned as project owner. + Each group in the list must be specified as group-id. + If not set, the groups that are configured as default owners are set as project owners.")
+    use_contributor_agreements: Optional[InheritableBoolean] = Field(default=None, description="Whether contributor agreements should be used for the project (TRUE, FALSE, INHERIT).")
+    use_signed_off_by: Optional[InheritableBoolean] = Field(default=None, description="Whether the usage of 'Signed-Off-By' footers is required for the project (TRUE, FALSE, INHERIT).")
+    use_content_merge: Optional[InheritableBoolean] = Field(default=None, description="Whether content merge should be enabled for the project (TRUE, FALSE, INHERIT). + FALSE, if the submit_type is FAST_FORWARD_ONLY.")
+    require_change_id: Optional[InheritableBoolean] = Field(default=None, description="Whether the usage of Change-Ids is required for the project (TRUE, FALSE, INHERIT). This property is deprecated and will be removed in a future release.")
+    create_new_change_for_all_not_in_target: Optional[InheritableBoolean] = Field(default=None, description="Whether a new change is created for every commit not in target branch for the project (TRUE, FALSE, INHERIT).")
+    reject_empty_commit: Optional[InheritableBoolean] = Field(default=None, description="Whether empty commits should be rejected when a change is merged (TRUE, FALSE, INHERIT).")
+    enable_signed_push: Optional[InheritableBoolean] = Field(default=None, description="Whether signed push validation is enabled on the project (TRUE, FALSE, INHERIT).")
+    require_signed_push: Optional[InheritableBoolean] = Field(default=None, description="Whether signed push validation is required on the project (TRUE, FALSE, INHERIT).")
+    max_object_size_limit: Optional[StrictStr] = Field(default=None, description="Max allowed Git object size for this project. Common unit suffixes of 'k', 'm', or 'g' are supported.")
+    plugin_config_values: Optional[Dict[str, Dict[str, ConfigValue]]] = Field(default=None, description="Plugin configuration values as map which maps the plugin name to a map of parameter names to values.")
+    init_only: Optional[StrictBool] = Field(default=None, description="If set, only the project initialization is being (re-)done and the repository creation is skipped. The project initialization consists out of setting HEAD, creating the project.config file in refs/meta/config and creating initial branches with empty commits.")
     __properties: ClassVar[List[str]] = ["name", "parent", "description", "permissions_only", "create_empty_commit", "submit_type", "branches", "owners", "use_contributor_agreements", "use_signed_off_by", "use_content_merge", "require_change_id", "create_new_change_for_all_not_in_target", "reject_empty_commit", "enable_signed_push", "require_signed_push", "max_object_size_limit", "plugin_config_values", "init_only"]
 
     model_config = ConfigDict(

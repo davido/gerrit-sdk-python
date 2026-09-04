@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,9 +27,9 @@ class ConfigUpdateEntryInfo(BaseModel):
     """
     ConfigUpdateEntryInfo
     """ # noqa: E501
-    config_key: Optional[StrictStr] = None
-    old_value: Optional[StrictStr] = None
-    new_value: Optional[StrictStr] = None
+    config_key: Optional[StrictStr] = Field(default=None, description="The config key that contains the value.")
+    old_value: Optional[StrictStr] = Field(default=None, description="The old config value. + Missing if value was not previously configured.")
+    new_value: Optional[StrictStr] = Field(default=None, description="The new config value, picked up after reload.")
     __properties: ClassVar[List[str]] = ["config_key", "old_value", "new_value"]
 
     model_config = ConfigDict(

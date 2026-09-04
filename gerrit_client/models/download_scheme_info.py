@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,12 +27,12 @@ class DownloadSchemeInfo(BaseModel):
     """
     DownloadSchemeInfo
     """ # noqa: E501
-    url: Optional[StrictStr] = None
-    description: Optional[StrictStr] = None
-    is_auth_required: Optional[StrictBool] = None
-    is_auth_supported: Optional[StrictBool] = None
-    commands: Optional[Dict[str, StrictStr]] = None
-    clone_commands: Optional[Dict[str, StrictStr]] = None
+    url: Optional[StrictStr] = Field(default=None, description="The URL of the download scheme, where '${project}' is used as placeholder for the project name.")
+    description: Optional[StrictStr] = Field(default=None, description="An optional description of how the scheme works and maybe comparing it to other schemes, explaining the pros and cons of each option.")
+    is_auth_required: Optional[StrictBool] = Field(default=None, description="Whether this download scheme requires authentication.")
+    is_auth_supported: Optional[StrictBool] = Field(default=None, description="Whether this download scheme supports authentication.")
+    commands: Optional[Dict[str, StrictStr]] = Field(default=None, description="Download commands as a map which maps the command name to the download command. In the download command '${project}' is used as placeholder for the project name, and '${ref}' is used as placeholder for the (change) ref. Empty, if accessed anonymously and the download scheme requires authentication.")
+    clone_commands: Optional[Dict[str, StrictStr]] = Field(default=None, description="Clone commands as a map which maps the command name to the clone command. In the clone command '${project}' is used as placeholder for the project name and '${project-base-name}' as name for the project base name (e.g.")
     __properties: ClassVar[List[str]] = ["url", "description", "is_auth_required", "is_auth_supported", "commands", "clone_commands"]
 
     model_config = ConfigDict(

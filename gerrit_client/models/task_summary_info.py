@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,13 +27,13 @@ class TaskSummaryInfo(BaseModel):
     """
     TaskSummaryInfo
     """ # noqa: E501
-    total: Optional[StrictInt] = None
+    total: Optional[StrictInt] = Field(default=None, description="Total number of current tasks.")
     stopping: Optional[StrictInt] = None
-    running: Optional[StrictInt] = None
+    running: Optional[StrictInt] = Field(default=None, description="Number of currently running tasks.")
     parked: Optional[StrictInt] = None
     starting: Optional[StrictInt] = None
-    ready: Optional[StrictInt] = None
-    sleeping: Optional[StrictInt] = None
+    ready: Optional[StrictInt] = Field(default=None, description="Number of currently ready tasks.")
+    sleeping: Optional[StrictInt] = Field(default=None, description="Number of currently sleeping tasks.")
     __properties: ClassVar[List[str]] = ["total", "stopping", "running", "parked", "starting", "ready", "sleeping"]
 
     model_config = ConfigDict(

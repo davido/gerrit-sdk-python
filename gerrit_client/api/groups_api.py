@@ -21,7 +21,6 @@ from gerrit_client.models.account_info import AccountInfo
 from gerrit_client.models.add_members_input import AddMembersInput
 from gerrit_client.models.add_subgroups_input import AddSubgroupsInput
 from gerrit_client.models.common_description_input import CommonDescriptionInput
-from gerrit_client.models.get_groups_default_response import GetGroupsDefaultResponse
 from gerrit_client.models.group_audit_event_info import GroupAuditEventInfo
 from gerrit_client.models.group_info import GroupInfo
 from gerrit_client.models.group_input import GroupInput
@@ -1153,7 +1152,7 @@ class GroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetGroupsDefaultResponse:
+    ) -> object:
         """List groups
 
         Lists the internal groups visible to the caller.
@@ -1230,7 +1229,7 @@ class GroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "GetGroupsDefaultResponse",
+            'default': "object",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1272,7 +1271,7 @@ class GroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetGroupsDefaultResponse]:
+    ) -> ApiResponse[object]:
         """List groups
 
         Lists the internal groups visible to the caller.
@@ -1349,7 +1348,7 @@ class GroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "GetGroupsDefaultResponse",
+            'default': "object",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1468,7 +1467,7 @@ class GroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "GetGroupsDefaultResponse",
+            'default': "object",
         }
         response_data = self.api_client.call_api(
             *_param,

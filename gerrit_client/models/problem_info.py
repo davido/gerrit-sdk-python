@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.problem_info_status import ProblemInfoStatus
 from typing import Optional, Set
@@ -28,9 +28,9 @@ class ProblemInfo(BaseModel):
     """
     ProblemInfo
     """ # noqa: E501
-    message: Optional[StrictStr] = None
-    status: Optional[ProblemInfoStatus] = None
-    outcome: Optional[StrictStr] = None
+    message: Optional[StrictStr] = Field(default=None, description="Plaintext message describing the problem with the change.")
+    status: Optional[ProblemInfoStatus] = Field(default=None, description="The status of fixing the problem (FIXED, FIX_FAILED). Only set if a fix was attempted.")
+    outcome: Optional[StrictStr] = Field(default=None, description="If status is set, an additional plaintext message describing the outcome of the fix.")
     __properties: ClassVar[List[str]] = ["message", "status", "outcome"]
 
     model_config = ConfigDict(

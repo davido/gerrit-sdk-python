@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.notify_handling import NotifyHandling
 from gerrit_client.models.notify_info import NotifyInfo
@@ -30,9 +30,9 @@ class SubmitInput(BaseModel):
     SubmitInput
     """ # noqa: E501
     wait_for_merge: Optional[StrictBool] = None
-    on_behalf_of: Optional[StrictStr] = None
-    notify: Optional[NotifyHandling] = None
-    notify_details: Optional[Dict[str, NotifyInfo]] = None
+    on_behalf_of: Optional[StrictStr] = Field(default=None, description="If set, submit the change on behalf of the given user. The value may take any format accepted by the accounts REST API. Using this option requires Submit (On Behalf Of) permission on the branch.")
+    notify: Optional[NotifyHandling] = Field(default=None, description="Notify handling that defines to whom email notifications should be sent after the change is submitted. + Allowed values are NONE, OWNER, OWNER_REVIEWERS and ALL. + If not set, the default is ALL. + Ignored if a post approval diff is present (i.e.")
+    notify_details: Optional[Dict[str, NotifyInfo]] = Field(default=None, description="Additional information about whom to notify about the update as a map of recipient type to NotifyInfo entity.")
     __properties: ClassVar[List[str]] = ["wait_for_merge", "on_behalf_of", "notify", "notify_details"]
 
     model_config = ConfigDict(

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.file_change import FileChange
 from typing import Optional, Set
@@ -28,10 +28,10 @@ class CreateCommitInput(BaseModel):
     """
     CreateCommitInput
     """ # noqa: E501
-    commit_message: Optional[StrictStr] = None
-    base_revision: Optional[StrictStr] = None
-    files: Optional[Dict[str, FileChange]] = None
-    validation_options: Optional[Dict[str, StrictStr]] = None
+    commit_message: Optional[StrictStr] = Field(default=None, description="The commit message. Must be non-empty.")
+    base_revision: Optional[StrictStr] = Field(default=None, description="The commit (SHA-1) the target branch is expected to point at: the request is rejected with \"409 Conflict\" if the branch tip is any other commit (optimistic concurrency).")
+    files: Optional[Dict[str, FileChange]] = Field(default=None, description="A map of file path to FileChange describing the operation to apply at that path. Applied together as one commit.")
+    validation_options: Optional[Dict[str, StrictStr]] = Field(default=None, description="Map with key-value pairs that are forwarded as options to the ref-operation and commit validation listeners (e.g. to skip certain validations). Which options are supported depends on the installed validation listeners; Gerrit core supports none. Unknown options are silently ignored.")
     __properties: ClassVar[List[str]] = ["commit_message", "base_revision", "files", "validation_options"]
 
     model_config = ConfigDict(

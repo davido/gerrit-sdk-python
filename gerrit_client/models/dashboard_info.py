@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.dashboard_section_info import DashboardSectionInfo
 from typing import Optional, Set
@@ -28,17 +28,17 @@ class DashboardInfo(BaseModel):
     """
     DashboardInfo
     """ # noqa: E501
-    id: Optional[StrictStr] = None
-    project: Optional[StrictStr] = None
-    defining_project: Optional[StrictStr] = None
-    ref: Optional[StrictStr] = None
-    path: Optional[StrictStr] = None
-    description: Optional[StrictStr] = None
-    foreach: Optional[StrictStr] = None
-    url: Optional[StrictStr] = None
-    is_default: Optional[StrictBool] = None
-    title: Optional[StrictStr] = None
-    sections: Optional[List[DashboardSectionInfo]] = None
+    id: Optional[StrictStr] = Field(default=None, description="The ID of the dashboard. The ID has the format '<ref>:<path>', where ref and path are URL encoded.")
+    project: Optional[StrictStr] = Field(default=None, description="The name of the project for which this dashboard is returned.")
+    defining_project: Optional[StrictStr] = Field(default=None, description="The name of the project in which this dashboard is defined. This is different from project if the dashboard is inherited from a parent project.")
+    ref: Optional[StrictStr] = Field(default=None, description="The name of the ref in which the dashboard is defined, without the refs/meta/dashboards/ prefix, which is common for all dashboard refs.")
+    path: Optional[StrictStr] = Field(default=None, description="The path of the file in which the dashboard is defined.")
+    description: Optional[StrictStr] = Field(default=None, description="The description of the dashboard.")
+    foreach: Optional[StrictStr] = Field(default=None, description="Subquery that applies to all sections in the dashboard. + Tokens such as ${project} are not resolved.")
+    url: Optional[StrictStr] = Field(default=None, description="The URL under which the dashboard can be opened in the Gerrit Web UI. + The URL is relative to the canonical web URL. + Tokens in the queries such as ${project} are resolved.")
+    is_default: Optional[StrictBool] = Field(default=None, description="Whether this is the default dashboard of the project.")
+    title: Optional[StrictStr] = Field(default=None, description="The title of the dashboard.")
+    sections: Optional[List[DashboardSectionInfo]] = Field(default=None, description="The list of sections in the dashboard.")
     __properties: ClassVar[List[str]] = ["id", "project", "defining_project", "ref", "path", "description", "foreach", "url", "is_default", "title", "sections"]
 
     model_config = ConfigDict(

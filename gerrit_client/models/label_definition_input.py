@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,18 +27,18 @@ class LabelDefinitionInput(BaseModel):
     """
     LabelDefinitionInput
     """ # noqa: E501
-    name: Optional[StrictStr] = None
-    description: Optional[StrictStr] = None
-    function: Optional[StrictStr] = None
-    values: Optional[Dict[str, StrictStr]] = None
-    default_value: Optional[StrictInt] = None
-    branches: Optional[List[StrictStr]] = None
-    can_override: Optional[StrictBool] = None
-    copy_condition: Optional[StrictStr] = None
-    unset_copy_condition: Optional[StrictBool] = None
-    allow_post_submit: Optional[StrictBool] = None
-    ignore_self_approval: Optional[StrictBool] = None
-    commit_message: Optional[StrictStr] = None
+    name: Optional[StrictStr] = Field(default=None, description="The new name of the label.+ For label creation the name is required if this LabelDefinitionInput entity is contained in a BatchLabelInput entity.")
+    description: Optional[StrictStr] = Field(default=None, description="The new description for the label.")
+    function: Optional[StrictStr] = Field(default=None, description="The new function of the label (can be NoOp/NoBlock and PatchSetLock). By default NoOp when creating new labels.")
+    values: Optional[Dict[str, StrictStr]] = Field(default=None, description="The new values of the label as a map of label value to value description. The label values are formatted strings, e.g. \"+1\" instead of \"1\", \" 0\" instead of \"0\".")
+    default_value: Optional[StrictInt] = Field(default=None, description="The new default value of the label (as integer).")
+    branches: Optional[List[StrictStr]] = Field(default=None, description="The new branches for which the label applies as a list of branches. A branch can be a ref, a ref pattern or a regular expression. If not set, the label applies for all branches.")
+    can_override: Optional[StrictBool] = Field(default=None, description="Whether this label can be overridden by child projects.")
+    copy_condition: Optional[StrictStr] = Field(default=None, description="See copyCondition.")
+    unset_copy_condition: Optional[StrictBool] = Field(default=None, description="If true, clears the value stored in copy_condition.")
+    allow_post_submit: Optional[StrictBool] = Field(default=None, description="Whether allowPostSubmit is set on the label.")
+    ignore_self_approval: Optional[StrictBool] = Field(default=None, description="Whether ignoreSelfApproval is set on the label.")
+    commit_message: Optional[StrictStr] = Field(default=None, description="Message that should be used to commit the change of the label in the project.config file to the refs/meta/config branch.+ Must not be set if this LabelDefinitionInput entity is contained in a BatchLabelInput entity.")
     __properties: ClassVar[List[str]] = ["name", "description", "function", "values", "default_value", "branches", "can_override", "copy_condition", "unset_copy_condition", "allow_post_submit", "ignore_self_approval", "commit_message"]
 
     model_config = ConfigDict(

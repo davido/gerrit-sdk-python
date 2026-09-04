@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,12 +27,12 @@ class OAuthTokenInfo(BaseModel):
     """
     OAuthTokenInfo
     """ # noqa: E501
-    username: Optional[StrictStr] = None
-    resource_host: Optional[StrictStr] = None
-    access_token: Optional[StrictStr] = None
-    provider_id: Optional[StrictStr] = None
-    expires_at: Optional[StrictStr] = None
-    type: Optional[StrictStr] = None
+    username: Optional[StrictStr] = Field(default=None, description="The owner of the OAuth access token.")
+    resource_host: Optional[StrictStr] = Field(default=None, description="The host of the Gerrit instance.")
+    access_token: Optional[StrictStr] = Field(default=None, description="The actual token value.")
+    provider_id: Optional[StrictStr] = Field(default=None, description="The identifier of the OAuth provider in the form plugin-name:provider-name.")
+    expires_at: Optional[StrictStr] = Field(default=None, description="Time of expiration of this token in milliseconds.")
+    type: Optional[StrictStr] = Field(default=None, description="The type of the OAuth access token, always bearer.")
     __properties: ClassVar[List[str]] = ["username", "resource_host", "access_token", "provider_id", "expires_at", "type"]
 
     model_config = ConfigDict(

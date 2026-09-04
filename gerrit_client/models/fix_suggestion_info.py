@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.fix_replacement_info import FixReplacementInfo
 from typing import Optional, Set
@@ -28,9 +28,9 @@ class FixSuggestionInfo(BaseModel):
     """
     FixSuggestionInfo
     """ # noqa: E501
-    fix_id: Optional[StrictStr] = None
-    description: Optional[StrictStr] = None
-    replacements: Optional[List[FixReplacementInfo]] = None
+    fix_id: Optional[StrictStr] = Field(default=None, description="The UUID of the suggested fix. It will be generated automatically and hence will be ignored if it's set for input objects.")
+    description: Optional[StrictStr] = Field(default=None, description="A description of the suggested fix.")
+    replacements: Optional[List[FixReplacementInfo]] = Field(default=None, description="A list of FixReplacementInfo entities indicating how the content of one or several files should be modified. Within a file, they should refer to non-overlapping regions.")
     __properties: ClassVar[List[str]] = ["fix_id", "description", "replacements"]
 
     model_config = ConfigDict(

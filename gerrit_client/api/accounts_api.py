@@ -26,6 +26,7 @@ from gerrit_client.models.agreement_info import AgreementInfo
 from gerrit_client.models.agreement_input import AgreementInput
 from gerrit_client.models.auth_token_info import AuthTokenInfo
 from gerrit_client.models.auth_token_input import AuthTokenInput
+from gerrit_client.models.change_info import ChangeInfo
 from gerrit_client.models.delete_draft_comments_input import DeleteDraftCommentsInput
 from gerrit_client.models.deleted_draft_comment_info import DeletedDraftCommentInfo
 from gerrit_client.models.diff_preferences_info import DiffPreferencesInfo
@@ -8413,10 +8414,10 @@ class AccountsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
-        """Get Changes With Default Star
+    ) -> List[ChangeInfo]:
+        """Get changes with default star
 
-        Gets the changes that were starred with the default star by the identified user account. This URL endpoint is functionally identical to the changes query GET /changes/?q=is:starred. The result is a list of ChangeInfo entities.
+        Gets the changes that were starred with the default star by the identified user account.
 
         :param account_id: (required)
         :type account_id: str
@@ -8451,7 +8452,7 @@ class AccountsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            '200': "List[ChangeInfo]",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8480,10 +8481,10 @@ class AccountsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
-        """Get Changes With Default Star
+    ) -> ApiResponse[List[ChangeInfo]]:
+        """Get changes with default star
 
-        Gets the changes that were starred with the default star by the identified user account. This URL endpoint is functionally identical to the changes query GET /changes/?q=is:starred. The result is a list of ChangeInfo entities.
+        Gets the changes that were starred with the default star by the identified user account.
 
         :param account_id: (required)
         :type account_id: str
@@ -8518,7 +8519,7 @@ class AccountsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            '200': "List[ChangeInfo]",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8548,9 +8549,9 @@ class AccountsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get Changes With Default Star
+        """Get changes with default star
 
-        Gets the changes that were starred with the default star by the identified user account. This URL endpoint is functionally identical to the changes query GET /changes/?q=is:starred. The result is a list of ChangeInfo entities.
+        Gets the changes that were starred with the default star by the identified user account.
 
         :param account_id: (required)
         :type account_id: str
@@ -8585,7 +8586,7 @@ class AccountsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            '200': "List[ChangeInfo]",
         }
         response_data = self.api_client.call_api(
             *_param,

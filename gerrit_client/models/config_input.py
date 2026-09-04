@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.comment_link_input import CommentLinkInput
 from gerrit_client.models.config_value import ConfigValue
@@ -32,25 +32,25 @@ class ConfigInput(BaseModel):
     """
     ConfigInput
     """ # noqa: E501
-    description: Optional[StrictStr] = None
-    use_contributor_agreements: Optional[InheritableBoolean] = None
-    use_content_merge: Optional[InheritableBoolean] = None
-    use_signed_off_by: Optional[InheritableBoolean] = None
-    create_new_change_for_all_not_in_target: Optional[InheritableBoolean] = None
-    require_change_id: Optional[InheritableBoolean] = None
+    description: Optional[StrictStr] = Field(default=None, description="The new description of the project. + If not set, the description is removed.")
+    use_contributor_agreements: Optional[InheritableBoolean] = Field(default=None, description="Whether authors must complete a contributor agreement on the site before pushing any commits or changes to this project. + Can be TRUE, FALSE or INHERIT. + If not set, this setting is not updated.")
+    use_content_merge: Optional[InheritableBoolean] = Field(default=None, description="Whether Gerrit will try to perform a 3-way merge of text file content when a file has been modified by both the destination branch and the change being submitted. This option only takes effect if submit type is not FAST_FORWARD_ONLY. + Can be TRUE, FALSE or INHERIT.")
+    use_signed_off_by: Optional[InheritableBoolean] = Field(default=None, description="Whether each change must contain a Signed-off-by line from either the author or the uploader in the commit message. + Can be TRUE, FALSE or INHERIT. + If not set, this setting is not updated.")
+    create_new_change_for_all_not_in_target: Optional[InheritableBoolean] = Field(default=None, description="Whether a new change will be created for every commit not in target branch. + Can be TRUE, FALSE or INHERIT. + If not set, this setting is not updated.")
+    require_change_id: Optional[InheritableBoolean] = Field(default=None, description="Whether a valid Change-Id footer in any commit uploaded for review is required. This does not apply to commits pushed directly to a branch or tag. + Can be TRUE, FALSE or INHERIT. + If not set, this setting is not updated. This property is deprecated and will be removed in a future release.")
     enable_signed_push: Optional[InheritableBoolean] = None
     require_signed_push: Optional[InheritableBoolean] = None
-    reject_implicit_merges: Optional[InheritableBoolean] = None
+    reject_implicit_merges: Optional[InheritableBoolean] = Field(default=None, description="Whether a check for implicit merges will be performed when changes are pushed for review or submitted. + Can be TRUE, FALSE or INHERIT. + If not set, this setting is not updated.")
     private_by_default: Optional[InheritableBoolean] = None
     work_in_progress_by_default: Optional[InheritableBoolean] = None
     enable_reviewer_by_email: Optional[InheritableBoolean] = None
     match_author_to_committer_date: Optional[InheritableBoolean] = None
-    reject_empty_commit: Optional[InheritableBoolean] = None
+    reject_empty_commit: Optional[InheritableBoolean] = Field(default=None, description="Whether empty commits should be rejected when a change is merged. Can be TRUE, FALSE or INHERIT. + If not set, this setting is not updated.")
     skip_adding_author_and_committer_as_reviewers: Optional[InheritableBoolean] = None
-    max_object_size_limit: Optional[StrictStr] = None
-    submit_type: Optional[SubmitType] = None
-    state: Optional[ProjectState] = None
-    plugin_config_values: Optional[Dict[str, Dict[str, ConfigValue]]] = None
+    max_object_size_limit: Optional[StrictStr] = Field(default=None, description="The max object size limit of this project as a MaxObjectSizeLimitInfo entity. + If set to 0, the max object size limit is removed. + If not set, this setting is not updated.")
+    submit_type: Optional[SubmitType] = Field(default=None, description="The default submit type of the project, can be MERGE_IF_NECESSARY, FAST_FORWARD_ONLY, REBASE_IF_NECESSARY, REBASE_ALWAYS, MERGE_ALWAYS or CHERRY_PICK. + If not set, the submit type is not updated.")
+    state: Optional[ProjectState] = Field(default=None, description="The state of the project, can be ACTIVE, READ_ONLY or HIDDEN. + Not set if the project state is ACTIVE. + If not set, the project state is not updated.")
+    plugin_config_values: Optional[Dict[str, Dict[str, ConfigValue]]] = Field(default=None, description="Plugin configuration values as map which maps the plugin name to a map of parameter names to values.")
     comment_links: Optional[Dict[str, CommentLinkInput]] = None
     commit_message: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["description", "use_contributor_agreements", "use_content_merge", "use_signed_off_by", "create_new_change_for_all_not_in_target", "require_change_id", "enable_signed_push", "require_signed_push", "reject_implicit_merges", "private_by_default", "work_in_progress_by_default", "enable_reviewer_by_email", "match_author_to_committer_date", "reject_empty_commit", "skip_adding_author_and_committer_as_reviewers", "max_object_size_limit", "submit_type", "state", "plugin_config_values", "comment_links", "commit_message"]

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,9 +27,9 @@ class AuthTokenInfo(BaseModel):
     """
     AuthTokenInfo
     """ # noqa: E501
-    id: Optional[StrictStr] = None
-    token: Optional[StrictStr] = None
-    expiration: Optional[StrictStr] = None
+    id: Optional[StrictStr] = Field(default=None, description="The id of the token.")
+    token: Optional[StrictStr] = Field(default=None, description="The token in plain text. Will only be returned once when creating the token.")
+    expiration: Optional[StrictStr] = Field(default=None, description="The timestamp at which the token will expire or has been expired. If null, token lifetime is unlimited.")
     __properties: ClassVar[List[str]] = ["id", "token", "expiration"]
 
     model_config = ConfigDict(

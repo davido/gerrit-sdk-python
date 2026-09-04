@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +27,7 @@ class PureRevertInfo(BaseModel):
     """
     PureRevertInfo
     """ # noqa: E501
-    is_pure_revert: Optional[StrictBool] = None
+    is_pure_revert: Optional[StrictBool] = Field(default=None, description="Outcome of the check as boolean.")
     __properties: ClassVar[List[str]] = ["is_pure_revert"]
 
     model_config = ConfigDict(

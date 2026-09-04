@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,8 +27,8 @@ class FixInput(BaseModel):
     """
     FixInput
     """ # noqa: E501
-    delete_patch_set_if_commit_missing: Optional[StrictBool] = None
-    expect_merged_as: Optional[StrictStr] = None
+    delete_patch_set_if_commit_missing: Optional[StrictBool] = Field(default=None, description="If true, delete patch sets from the database if they refer to missing commit options.")
+    expect_merged_as: Optional[StrictStr] = Field(default=None, description="If set, check that the change is merged into the destination branch as this exact SHA-1. If not, insert a new patch set referring to this commit.")
     __properties: ClassVar[List[str]] = ["delete_patch_set_if_commit_missing", "expect_merged_as"]
 
     model_config = ConfigDict(

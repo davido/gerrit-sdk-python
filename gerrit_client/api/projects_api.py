@@ -40,7 +40,6 @@ from gerrit_client.models.delete_changes_input import DeleteChangesInput
 from gerrit_client.models.delete_tags_input import DeleteTagsInput
 from gerrit_client.models.diff_info import DiffInfo
 from gerrit_client.models.garbage_collect_input import GarbageCollectInput
-from gerrit_client.models.get_projects_default_response import GetProjectsDefaultResponse
 from gerrit_client.models.head_input import HeadInput
 from gerrit_client.models.included_in_info import IncludedInInfo
 from gerrit_client.models.index_project_input import IndexProjectInput
@@ -1727,7 +1726,7 @@ class ProjectsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetProjectsDefaultResponse:
+    ) -> object:
         """List projects
 
         Lists the projects accessible by the caller, optionally filtered by prefix, regex, or substring.
@@ -1804,7 +1803,7 @@ class ProjectsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "GetProjectsDefaultResponse",
+            'default': "object",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1846,7 +1845,7 @@ class ProjectsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetProjectsDefaultResponse]:
+    ) -> ApiResponse[object]:
         """List projects
 
         Lists the projects accessible by the caller, optionally filtered by prefix, regex, or substring.
@@ -1923,7 +1922,7 @@ class ProjectsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "GetProjectsDefaultResponse",
+            'default': "object",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2042,7 +2041,7 @@ class ProjectsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "GetProjectsDefaultResponse",
+            'default': "object",
         }
         response_data = self.api_client.call_api(
             *_param,

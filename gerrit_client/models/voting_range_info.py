@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,8 +27,8 @@ class VotingRangeInfo(BaseModel):
     """
     VotingRangeInfo
     """ # noqa: E501
-    min: Optional[StrictInt] = None
-    max: Optional[StrictInt] = None
+    min: Optional[StrictInt] = Field(default=None, description="The minimum voting value.")
+    max: Optional[StrictInt] = Field(default=None, description="The maximum voting value.")
     __properties: ClassVar[List[str]] = ["min", "max"]
 
     model_config = ConfigDict(

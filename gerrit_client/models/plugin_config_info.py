@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,8 +27,8 @@ class PluginConfigInfo(BaseModel):
     """
     PluginConfigInfo
     """ # noqa: E501
-    has_avatars: Optional[StrictBool] = None
-    js_resource_paths: Optional[List[StrictStr]] = None
+    has_avatars: Optional[StrictBool] = Field(default=None, description="Whether an avatar provider is registered.")
+    js_resource_paths: Optional[List[StrictStr]] = Field(default=None, description="A list of relative paths (strings). Each path points to a frontend plugin that should be loaded, e.g. plugins/codemirror_editor/static/codemirror_editor.js.")
     __properties: ClassVar[List[str]] = ["has_avatars", "js_resource_paths"]
 
     model_config = ConfigDict(

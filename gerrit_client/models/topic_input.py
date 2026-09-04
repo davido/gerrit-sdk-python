@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +27,7 @@ class TopicInput(BaseModel):
     """
     TopicInput
     """ # noqa: E501
-    topic: Optional[StrictStr] = None
+    topic: Optional[StrictStr] = Field(default=None, description="The topic. + The topic will be deleted if not set. Topic can't contain quotation marks.")
     __properties: ClassVar[List[str]] = ["topic"]
 
     model_config = ConfigDict(

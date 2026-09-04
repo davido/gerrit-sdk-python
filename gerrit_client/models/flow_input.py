@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.flow_expression_info import FlowExpressionInfo
 from typing import Optional, Set
@@ -28,7 +28,7 @@ class FlowInput(BaseModel):
     """
     FlowInput
     """ # noqa: E501
-    stage_expressions: Optional[List[FlowExpressionInfo]] = None
+    stage_expressions: Optional[List[FlowExpressionInfo]] = Field(default=None, description="The expressions for the stages of the flow (sorted by execution order) as a list of FlowExpressionInfo entities.")
     __properties: ClassVar[List[str]] = ["stage_expressions"]
 
     model_config = ConfigDict(

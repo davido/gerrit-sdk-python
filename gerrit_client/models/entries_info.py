@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,9 +27,9 @@ class EntriesInfo(BaseModel):
     """
     EntriesInfo
     """ # noqa: E501
-    mem: Optional[StrictInt] = None
-    disk: Optional[StrictInt] = None
-    space: Optional[StrictStr] = None
+    mem: Optional[StrictInt] = Field(default=None, description="Number of cache entries that are held in memory.")
+    disk: Optional[StrictInt] = Field(default=None, description="Number of cache entries on the disk. For non-disk caches this value is not set; for disk caches it is only set if there are entries in the cache.")
+    space: Optional[StrictStr] = Field(default=None, description="The space that is consumed by the cache on disk. The value is returned with a unit abbreviation (k: kilobytes, m: megabytes, g: gigabytes). Only set for disk caches.")
     __properties: ClassVar[List[str]] = ["mem", "disk", "space"]
 
     model_config = ConfigDict(

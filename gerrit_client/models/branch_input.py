@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,11 +27,11 @@ class BranchInput(BaseModel):
     """
     BranchInput
     """ # noqa: E501
-    revision: Optional[StrictStr] = None
-    create_empty_commit: Optional[StrictBool] = None
-    ref: Optional[StrictStr] = None
-    source_ref: Optional[StrictStr] = None
-    validation_options: Optional[Dict[str, StrictStr]] = None
+    revision: Optional[StrictStr] = Field(default=None, description="The base revision of the new branch. + If not set and create_empty_commit is true the branch is created with an empty initial commit. + If not set and create_empty_commit is false or unset HEAD will be used as base revision.")
+    create_empty_commit: Optional[StrictBool] = Field(default=None, description="Whether the branch should be created with an empty initial commit. + Cannot be used in combination with setting a revision. + Can be used to review the initial content of a branch (create the branch with an empty initial commit, make a second commit with the initial content, e.g.")
+    ref: Optional[StrictStr] = Field(default=None, description="The name of the branch. The prefix refs/heads/ can be omitted. + If set, must match the branch ID in the URL.")
+    source_ref: Optional[StrictStr] = Field(default=None, description="The full name of the source ref where revision can be found. + Used when revision is not a ref name in order to check reachability from a specific ref. This ref should be visible to the caller. + If not set, then all visible refs under refs/heads/ and refs/tags/ are searched.")
+    validation_options: Optional[Dict[str, StrictStr]] = Field(default=None, description="Map with key-value pairs that are forwarded as options to the ref operation validation listeners (e.g. can be used to skip certain validations). Which validation options are supported depends on the installed ref operation validation listeners.")
     __properties: ClassVar[List[str]] = ["revision", "create_empty_commit", "ref", "source_ref", "validation_options"]
 
     model_config = ConfigDict(

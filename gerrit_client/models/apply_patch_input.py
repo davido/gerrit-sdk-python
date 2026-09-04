@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,8 +27,8 @@ class ApplyPatchInput(BaseModel):
     """
     ApplyPatchInput
     """ # noqa: E501
-    patch: Optional[StrictStr] = None
-    allow_conflicts: Optional[StrictBool] = None
+    patch: Optional[StrictStr] = Field(default=None, description="The patch to be applied. Must be compatible with git diff output. For example, Get Patch output. The patch must be provided as UTF-8 text, either directly or base64-encoded.")
+    allow_conflicts: Optional[StrictBool] = Field(default=None, description="If true, tolerate conflicts and add conflict markers where required.")
     __properties: ClassVar[List[str]] = ["patch", "allow_conflicts"]
 
     model_config = ConfigDict(

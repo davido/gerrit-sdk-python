@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,12 +27,12 @@ class GroupInput(BaseModel):
     """
     GroupInput
     """ # noqa: E501
-    name: Optional[StrictStr] = None
-    uuid: Optional[StrictStr] = None
-    description: Optional[StrictStr] = None
-    visible_to_all: Optional[StrictBool] = None
-    owner_id: Optional[StrictStr] = None
-    members: Optional[List[StrictStr]] = None
+    name: Optional[StrictStr] = Field(default=None, description="The name of the group (not encoded). + If set, must match the group name in the URL.")
+    uuid: Optional[StrictStr] = Field(default=None, description="The UUID of the group.")
+    description: Optional[StrictStr] = Field(default=None, description="The description of the group.")
+    visible_to_all: Optional[StrictBool] = Field(default=None, description="Whether the group is visible to all registered users. + false if not set.")
+    owner_id: Optional[StrictStr] = Field(default=None, description="The URL encoded ID of the owner group. + This can be a group UUID, a legacy numeric group ID or a unique group name. + If not set, the new group will be self-owned.")
+    members: Optional[List[StrictStr]] = Field(default=None, description="The initial members in a list of + account ids.")
     __properties: ClassVar[List[str]] = ["name", "uuid", "description", "visible_to_all", "owner_id", "members"]
 
     model_config = ConfigDict(

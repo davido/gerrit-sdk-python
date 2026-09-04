@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.change_info import ChangeInfo
 from typing import Optional, Set
@@ -28,8 +28,8 @@ class RebaseChainInfo(BaseModel):
     """
     RebaseChainInfo
     """ # noqa: E501
-    rebased_changes: Optional[List[ChangeInfo]] = None
-    contains_git_conflicts: Optional[StrictBool] = None
+    rebased_changes: Optional[List[ChangeInfo]] = Field(default=None, description="List of the unsubmitted ancestors, as ChangeInfo entities. Includes both rebased changes, and previously up-to-date ancestors. The list is ordered by ancestry, where the oldest ancestor is the first.")
+    contains_git_conflicts: Optional[StrictBool] = Field(default=None, description="Whether any of the rebased changes has conflicts due to rebasing.")
     __properties: ClassVar[List[str]] = ["rebased_changes", "contains_git_conflicts"]
 
     model_config = ConfigDict(

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,8 +27,8 @@ class IndexChangesInput(BaseModel):
     """
     IndexChangesInput
     """ # noqa: E501
-    changes: Optional[List[StrictStr]] = None
-    delete_missing: Optional[StrictBool] = None
+    changes: Optional[List[StrictStr]] = Field(default=None, description="List of change-ids. When delete_missing is true, each entry must be in project~changeNumber format.")
+    delete_missing: Optional[StrictBool] = Field(default=None, description="Delete changes which are missing in NoteDb from the index. This can be used to get rid of stale index entries. Possible values are true and false. By default set to false.")
     __properties: ClassVar[List[str]] = ["changes", "delete_missing"]
 
     model_config = ConfigDict(

@@ -27,7 +27,7 @@ class SuggestInfo(BaseModel):
     """
     SuggestInfo
     """ # noqa: E501
-    var_from: Optional[StrictInt] = Field(default=None, alias="from")
+    var_from: Optional[StrictInt] = Field(default=None, description="The number of characters that a user must have typed before suggestions are provided.", alias="from")
     __properties: ClassVar[List[str]] = ["from"]
 
     model_config = ConfigDict(

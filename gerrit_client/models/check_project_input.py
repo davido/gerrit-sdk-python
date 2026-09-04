@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.auto_closeable_changes_check_input import AutoCloseableChangesCheckInput
 from typing import Optional, Set
@@ -28,7 +28,7 @@ class CheckProjectInput(BaseModel):
     """
     CheckProjectInput
     """ # noqa: E501
-    auto_closeable_changes_check: Optional[AutoCloseableChangesCheckInput] = None
+    auto_closeable_changes_check: Optional[AutoCloseableChangesCheckInput] = Field(default=None, description="Parameters for the AutoCloseableChangesCheck as AutoCloseableChangesCheckInput entity.")
     __properties: ClassVar[List[str]] = ["auto_closeable_changes_check"]
 
     model_config = ConfigDict(

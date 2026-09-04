@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.notify_handling import NotifyHandling
 from gerrit_client.models.notify_info import NotifyInfo
@@ -29,18 +29,18 @@ class CherryPickInput(BaseModel):
     """
     CherryPickInput
     """ # noqa: E501
-    message: Optional[StrictStr] = None
-    destination: Optional[StrictStr] = None
-    base: Optional[StrictStr] = None
-    parent: Optional[StrictInt] = None
-    notify: Optional[NotifyHandling] = None
-    notify_details: Optional[Dict[str, NotifyInfo]] = None
-    keep_reviewers: Optional[StrictBool] = None
-    allow_conflicts: Optional[StrictBool] = None
-    topic: Optional[StrictStr] = None
-    allow_empty: Optional[StrictBool] = None
-    validation_options: Optional[Dict[str, StrictStr]] = None
-    committer_email: Optional[StrictStr] = None
+    message: Optional[StrictStr] = Field(default=None, description="Commit message for the cherry-pick change. If not set, the commit message of the cherry-picked commit is used.")
+    destination: Optional[StrictStr] = Field(default=None, description="Destination branch")
+    base: Optional[StrictStr] = Field(default=None, description="40-hex digit SHA-1 of the commit which will be the parent commit of the newly created change. If set, it must be a merged commit or a change revision on the destination branch.")
+    parent: Optional[StrictInt] = Field(default=None, description="Number of the parent relative to which the cherry-pick should be considered.")
+    notify: Optional[NotifyHandling] = Field(default=None, description="Notify handling that defines to whom email notifications should be sent after the cherry-pick. + Allowed values are NONE, OWNER, OWNER_REVIEWERS and ALL. + If not set, the default is ALL.")
+    notify_details: Optional[Dict[str, NotifyInfo]] = Field(default=None, description="Additional information about whom to notify about the update as a map of recipient type to NotifyInfo entity.")
+    keep_reviewers: Optional[StrictBool] = Field(default=None, description="If true, carries reviewers and ccs over from original change to newly created one.")
+    allow_conflicts: Optional[StrictBool] = Field(default=None, description="If true, the cherry-pick uses content merge and succeeds also if there are conflicts. If there are conflicts the file contents of the created change contain git conflict markers to indicate the conflicts.")
+    topic: Optional[StrictStr] = Field(default=None, description="The topic of the created cherry-picked change. If not set, the default depends on the source. If the source is a change with a topic, the resulting topic of the cherry-picked change will be {source_change_topic}-{destination_branch}.")
+    allow_empty: Optional[StrictBool] = Field(default=None, description="If true, the cherry-pick succeeds also if the created commit will be empty. If false, a cherry-pick that would create an empty commit fails without creating the commit.")
+    validation_options: Optional[Dict[str, StrictStr]] = Field(default=None, description="Map with key-value pairs that are forwarded as options to the commit validation listeners (e.g. can be used to skip certain validations). Which validation options are supported depends on the installed commit validation listeners.")
+    committer_email: Optional[StrictStr] = Field(default=None, description="Cherry-pick is committed using this email address. Only the registered emails of the calling user are considered valid. Defaults to source commit's committer email if it is a registered email of the calling user, else defaults to calling user's preferred email.")
     __properties: ClassVar[List[str]] = ["message", "destination", "base", "parent", "notify", "notify_details", "keep_reviewers", "allow_conflicts", "topic", "allow_empty", "validation_options", "committer_email"]
 
     model_config = ConfigDict(

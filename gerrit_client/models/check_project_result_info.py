@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.auto_closeable_changes_check_result import AutoCloseableChangesCheckResult
 from typing import Optional, Set
@@ -28,7 +28,7 @@ class CheckProjectResultInfo(BaseModel):
     """
     CheckProjectResultInfo
     """ # noqa: E501
-    auto_closeable_changes_check_result: Optional[AutoCloseableChangesCheckResult] = None
+    auto_closeable_changes_check_result: Optional[AutoCloseableChangesCheckResult] = Field(default=None, description="Results for the AutoCloseableChangesCheck as AutoCloseableChangesCheckResult entity.")
     __properties: ClassVar[List[str]] = ["auto_closeable_changes_check_result"]
 
     model_config = ConfigDict(

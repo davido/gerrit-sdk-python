@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,13 +27,13 @@ class ParentInfo(BaseModel):
     """
     ParentInfo
     """ # noqa: E501
-    branch_name: Optional[StrictStr] = None
-    commit_id: Optional[StrictStr] = None
-    is_merged_in_target_branch: Optional[StrictBool] = None
-    change_id: Optional[StrictStr] = None
-    change_number: Optional[StrictInt] = None
-    patch_set_number: Optional[StrictInt] = None
-    change_status: Optional[StrictStr] = None
+    branch_name: Optional[StrictStr] = Field(default=None, description="Name of the target branch into which the parent commit is merged.")
+    commit_id: Optional[StrictStr] = Field(default=None, description="The commit SHA-1 of the parent commit, or null if the current commit is root.")
+    is_merged_in_target_branch: Optional[StrictBool] = Field(default=None, description="Set to true if the parent commit is merged into the target branch.")
+    change_id: Optional[StrictStr] = Field(default=None, description="If the parent commit is a patch-set of another gerrit change, this field will hold the change ID of the parent change. Otherwise, will be null.")
+    change_number: Optional[StrictInt] = Field(default=None, description="If the parent commit is a patch-set of another gerrit change, this field will hold the change number of the parent change. Otherwise, will be null.")
+    patch_set_number: Optional[StrictInt] = Field(default=None, description="If the parent commit is a patch-set of another gerrit change, this field will hold the patch-set number of the parent change. Otherwise, will be null.")
+    change_status: Optional[StrictStr] = Field(default=None, description="If the parent commit is a patch-set of another gerrit change, this field will hold the change status of the parent change. Otherwise, will be null.")
     __properties: ClassVar[List[str]] = ["branch_name", "commit_id", "is_merged_in_target_branch", "change_id", "change_number", "patch_set_number", "change_status"]
 
     model_config = ConfigDict(

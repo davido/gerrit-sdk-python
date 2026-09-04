@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.change_info import ChangeInfo
 from gerrit_client.models.comment_info import CommentInfo
@@ -29,8 +29,8 @@ class DeletedDraftCommentInfo(BaseModel):
     """
     DeletedDraftCommentInfo
     """ # noqa: E501
-    change: Optional[ChangeInfo] = None
-    deleted: Optional[List[CommentInfo]] = None
+    change: Optional[ChangeInfo] = Field(default=None, description="ChangeInfo entity describing the change on which one or more comments was deleted. Populated with no change list options.")
+    deleted: Optional[List[CommentInfo]] = Field(default=None, description="List of CommentInfo entities for each comment that was deleted.")
     __properties: ClassVar[List[str]] = ["change", "deleted"]
 
     model_config = ConfigDict(

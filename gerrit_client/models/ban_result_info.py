@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,9 +27,9 @@ class BanResultInfo(BaseModel):
     """
     BanResultInfo
     """ # noqa: E501
-    newly_banned: Optional[List[StrictStr]] = None
-    already_banned: Optional[List[StrictStr]] = None
-    ignored: Optional[List[StrictStr]] = None
+    newly_banned: Optional[List[StrictStr]] = Field(default=None, description="List of newly banned commits.")
+    already_banned: Optional[List[StrictStr]] = Field(default=None, description="List of commits that were already banned.")
+    ignored: Optional[List[StrictStr]] = Field(default=None, description="List of object IDs that were ignored.")
     __properties: ClassVar[List[str]] = ["newly_banned", "already_banned", "ignored"]
 
     model_config = ConfigDict(

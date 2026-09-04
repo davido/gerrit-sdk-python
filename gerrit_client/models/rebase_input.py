@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,12 +27,12 @@ class RebaseInput(BaseModel):
     """
     RebaseInput
     """ # noqa: E501
-    base: Optional[StrictStr] = None
-    strategy: Optional[StrictStr] = None
-    allow_conflicts: Optional[StrictBool] = None
-    on_behalf_of_uploader: Optional[StrictBool] = None
-    validation_options: Optional[Dict[str, StrictStr]] = None
-    committer_email: Optional[StrictStr] = None
+    base: Optional[StrictStr] = Field(default=None, description="The new parent revision. This can be a ref or a SHA-1 to a concrete patchset. + Alternatively, a change number can be specified, in which case the current patch set is inferred.")
+    strategy: Optional[StrictStr] = Field(default=None, description="The strategy of the merge, can be recursive, resolve, simple-two-way-in-core, ours or theirs, default will use project settings.")
+    allow_conflicts: Optional[StrictBool] = Field(default=None, description="If true, the rebase also succeeds if there are conflicts. + If there are conflicts the file contents of the rebased patch set contain git conflict markers to indicate the conflicts.")
+    on_behalf_of_uploader: Optional[StrictBool] = Field(default=None, description="If true, the rebase is done on behalf of the uploader. + This means the uploader of the current patch set will also be the uploader of the rebased patch set. The calling user will be recorded as the real user. + Rebasing on behalf of the uploader is only supported for trivial rebases.")
+    validation_options: Optional[Dict[str, StrictStr]] = Field(default=None, description="Map with key-value pairs that are forwarded as options to the commit validation listeners (e.g. can be used to skip certain validations). Which validation options are supported depends on the installed commit validation listeners.")
+    committer_email: Optional[StrictStr] = Field(default=None, description="Rebase is committed using this email address. Only the registered emails of the calling user or uploader (when on_behalf_of_uploader is true) are considered valid. This option is not supported when rebasing a chain.")
     __properties: ClassVar[List[str]] = ["base", "strategy", "allow_conflicts", "on_behalf_of_uploader", "validation_options", "committer_email"]
 
     model_config = ConfigDict(

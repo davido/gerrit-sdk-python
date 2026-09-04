@@ -28,9 +28,7 @@ from gerrit_client.models.diff_preferences_info import DiffPreferencesInfo
 from gerrit_client.models.edit_preferences_info import EditPreferencesInfo
 from gerrit_client.models.experiment_info import ExperimentInfo
 from gerrit_client.models.general_preferences_info import GeneralPreferencesInfo
-from gerrit_client.models.get_config_server_caches200_response import GetConfigServerCaches200Response
 from gerrit_client.models.get_config_server_indexes200_response_inner import GetConfigServerIndexes200ResponseInner
-from gerrit_client.models.get_config_server_version200_response import GetConfigServerVersion200Response
 from gerrit_client.models.index_changes_input import IndexChangesInput
 from gerrit_client.models.label_definition_info import LabelDefinitionInfo
 from gerrit_client.models.menu_entry import MenuEntry
@@ -336,7 +334,7 @@ class ConfigApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetConfigServerCaches200Response:
+    ) -> object:
         """List Caches
 
         Lists the caches of the server. Caches defined by plugins are included.
@@ -377,7 +375,7 @@ class ConfigApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetConfigServerCaches200Response",
+            '200': "object",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -407,7 +405,7 @@ class ConfigApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetConfigServerCaches200Response]:
+    ) -> ApiResponse[object]:
         """List Caches
 
         Lists the caches of the server. Caches defined by plugins are included.
@@ -448,7 +446,7 @@ class ConfigApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetConfigServerCaches200Response",
+            '200': "object",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -519,7 +517,7 @@ class ConfigApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetConfigServerCaches200Response",
+            '200': "object",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5733,7 +5731,7 @@ class ConfigApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetConfigServerVersion200Response:
+    ) -> object:
         """Get version
 
         Returns the version of the Gerrit server.
@@ -5771,7 +5769,7 @@ class ConfigApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetConfigServerVersion200Response",
+            '200': "object",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5800,7 +5798,7 @@ class ConfigApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetConfigServerVersion200Response]:
+    ) -> ApiResponse[object]:
         """Get version
 
         Returns the version of the Gerrit server.
@@ -5838,7 +5836,7 @@ class ConfigApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetConfigServerVersion200Response",
+            '200': "object",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5905,7 +5903,7 @@ class ConfigApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetConfigServerVersion200Response",
+            '200': "object",
         }
         response_data = self.api_client.call_api(
             *_param,

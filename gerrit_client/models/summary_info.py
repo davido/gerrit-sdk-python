@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.jvm_summary_info import JvmSummaryInfo
 from gerrit_client.models.mem_summary_info import MemSummaryInfo
@@ -31,10 +31,10 @@ class SummaryInfo(BaseModel):
     """
     SummaryInfo
     """ # noqa: E501
-    task_summary: Optional[TaskSummaryInfo] = None
-    mem_summary: Optional[MemSummaryInfo] = None
-    thread_summary: Optional[ThreadSummaryInfo] = None
-    jvm_summary: Optional[JvmSummaryInfo] = None
+    task_summary: Optional[TaskSummaryInfo] = Field(default=None, description="Summary about current tasks as a TaskSummaryInfo entity.")
+    mem_summary: Optional[MemSummaryInfo] = Field(default=None, description="Summary about current memory usage as a MemSummaryInfo entity.")
+    thread_summary: Optional[ThreadSummaryInfo] = Field(default=None, description="Summary about current threads as a ThreadSummaryInfo entity.")
+    jvm_summary: Optional[JvmSummaryInfo] = Field(default=None, description="Summary about the JVM JvmSummaryInfo entity. Only set if the jvm option was set.")
     __properties: ClassVar[List[str]] = ["task_summary", "mem_summary", "thread_summary", "jvm_summary"]
 
     model_config = ConfigDict(

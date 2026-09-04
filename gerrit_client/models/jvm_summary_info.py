@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,16 +27,16 @@ class JvmSummaryInfo(BaseModel):
     """
     JvmSummaryInfo
     """ # noqa: E501
-    vm_vendor: Optional[StrictStr] = None
-    vm_name: Optional[StrictStr] = None
-    vm_version: Optional[StrictStr] = None
-    os_name: Optional[StrictStr] = None
-    os_version: Optional[StrictStr] = None
-    os_arch: Optional[StrictStr] = None
-    user: Optional[StrictStr] = None
-    host: Optional[StrictStr] = None
-    current_working_directory: Optional[StrictStr] = None
-    site: Optional[StrictStr] = None
+    vm_vendor: Optional[StrictStr] = Field(default=None, description="The vendor of the virtual machine.")
+    vm_name: Optional[StrictStr] = Field(default=None, description="The name of the virtual machine.")
+    vm_version: Optional[StrictStr] = Field(default=None, description="The version of the virtual machine.")
+    os_name: Optional[StrictStr] = Field(default=None, description="The name of the operating system.")
+    os_version: Optional[StrictStr] = Field(default=None, description="The version of the operating system.")
+    os_arch: Optional[StrictStr] = Field(default=None, description="The architecture of the operating system.")
+    user: Optional[StrictStr] = Field(default=None, description="The user that is running Gerrit.")
+    host: Optional[StrictStr] = Field(default=None, description="The host on which Gerrit is running.")
+    current_working_directory: Optional[StrictStr] = Field(default=None, description="The current working directory.")
+    site: Optional[StrictStr] = Field(default=None, description="The path to the review site.")
     __properties: ClassVar[List[str]] = ["vm_vendor", "vm_name", "vm_version", "os_name", "os_version", "os_arch", "user", "host", "current_working_directory", "site"]
 
     model_config = ConfigDict(

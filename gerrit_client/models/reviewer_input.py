@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.notify_handling import NotifyHandling
 from gerrit_client.models.notify_info import NotifyInfo
@@ -30,12 +30,12 @@ class ReviewerInput(BaseModel):
     """
     ReviewerInput
     """ # noqa: E501
-    reviewer: Optional[StrictStr] = None
-    confirmed: Optional[StrictBool] = None
-    state: Optional[ReviewerState] = None
-    notify: Optional[NotifyHandling] = None
-    notify_details: Optional[Dict[str, NotifyInfo]] = None
-    on_behalf_of: Optional[StrictStr] = None
+    reviewer: Optional[StrictStr] = Field(default=None, description="The ID of one account that should be added/removed as reviewer or the ID of one internal group for which all members should be added as reviewers. + If an ID identifies both an account and a group, only the account is added as reviewer to the change.")
+    confirmed: Optional[StrictBool] = Field(default=None, description="Whether adding the reviewer is confirmed. + The Gerrit server may be configured to require a confirmation when adding a group as reviewer that has many members.")
+    state: Optional[ReviewerState] = Field(default=None, description="Add reviewer in this state. Possible reviewer states are REVIEWER, CC and REMOVED. If not given, defaults to REVIEWER.")
+    notify: Optional[NotifyHandling] = Field(default=None, description="Notify handling that defines to whom email notifications should be sent after the reviewer is added. + Allowed values are NONE, OWNER, OWNER_REVIEWERS and ALL. + If not set, the default is ALL.")
+    notify_details: Optional[Dict[str, NotifyInfo]] = Field(default=None, description="Additional information about whom to notify about the update as a map of recipient type to NotifyInfo entity.")
+    on_behalf_of: Optional[StrictStr] = Field(default=None, description="\\{account-id\\} the reviewer should be added on behalf of. To use this option the caller must have been granted RUN_AS permission. + If not set, the default is the caller.")
     __properties: ClassVar[List[str]] = ["reviewer", "confirmed", "state", "notify", "notify_details", "on_behalf_of"]
 
     model_config = ConfigDict(

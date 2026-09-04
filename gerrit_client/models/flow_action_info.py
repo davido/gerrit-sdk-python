@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,8 +27,8 @@ class FlowActionInfo(BaseModel):
     """
     FlowActionInfo
     """ # noqa: E501
-    name: Optional[StrictStr] = None
-    parameters: Optional[List[StrictStr]] = None
+    name: Optional[StrictStr] = Field(default=None, description="The name of the action. Which actions are supported depends on the flow service implementation.")
+    parameters: Optional[List[StrictStr]] = Field(default=None, description="Parameters for the action as list of strings. Which parameters are supported and their format depends on the flow service implementation.")
     __properties: ClassVar[List[str]] = ["name", "parameters"]
 
     model_config = ConfigDict(

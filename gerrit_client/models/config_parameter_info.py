@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.project_config_entry_type import ProjectConfigEntryType
 from typing import Optional, Set
@@ -28,17 +28,17 @@ class ConfigParameterInfo(BaseModel):
     """
     ConfigParameterInfo
     """ # noqa: E501
-    display_name: Optional[StrictStr] = None
-    description: Optional[StrictStr] = None
-    warning: Optional[StrictStr] = None
-    type: Optional[ProjectConfigEntryType] = None
-    value: Optional[StrictStr] = None
-    editable: Optional[StrictBool] = None
-    inheritable: Optional[StrictBool] = None
-    configured_value: Optional[StrictStr] = None
-    inherited_value: Optional[StrictStr] = None
-    permitted_values: Optional[List[StrictStr]] = None
-    values: Optional[List[StrictStr]] = None
+    display_name: Optional[StrictStr] = Field(default=None, description="The display name of the configuration parameter.")
+    description: Optional[StrictStr] = Field(default=None, description="The description of the configuration parameter.")
+    warning: Optional[StrictStr] = Field(default=None, description="Warning message for the configuration parameter.")
+    type: Optional[ProjectConfigEntryType] = Field(default=None, description="The type of the configuration parameter. Can be STRING, INT, LONG, BOOLEAN, LIST or ARRAY.")
+    value: Optional[StrictStr] = Field(default=None, description="The value of the configuration parameter as string. If the parameter is inheritable this is the effective value which is deduced from configured_value and inherited_value.")
+    editable: Optional[StrictBool] = Field(default=None, description="Whether the value is editable.")
+    inheritable: Optional[StrictBool] = Field(default=None, description="Whether the configuration parameter can be inherited.")
+    configured_value: Optional[StrictStr] = Field(default=None, description="The value of the configuration parameter that is configured on this project, only set if inheritable is true.")
+    inherited_value: Optional[StrictStr] = Field(default=None, description="The inherited value of the configuration parameter, only set if inheritable is true.")
+    permitted_values: Optional[List[StrictStr]] = Field(default=None, description="The list of permitted values. Only set if the type is LIST.")
+    values: Optional[List[StrictStr]] = Field(default=None, description="The list of values. Only set if the type is ARRAY.")
     __properties: ClassVar[List[str]] = ["display_name", "description", "warning", "type", "value", "editable", "inheritable", "configured_value", "inherited_value", "permitted_values", "values"]
 
     model_config = ConfigDict(

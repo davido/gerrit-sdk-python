@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,13 +27,13 @@ class ChangeConfigInfo(BaseModel):
     """
     ChangeConfigInfo
     """ # noqa: E501
-    allow_blame: Optional[StrictBool] = None
-    disable_private_changes: Optional[StrictBool] = None
-    update_delay: Optional[StrictInt] = None
-    submit_whole_topic: Optional[StrictBool] = None
-    mergeability_computation_behavior: Optional[StrictStr] = None
-    conflicts_predicate_enabled: Optional[StrictBool] = None
-    allow_markdown_base64_images_in_comments: Optional[StrictBool] = None
+    allow_blame: Optional[StrictBool] = Field(default=None, description="Whether blame on side by side diff is allowed.")
+    disable_private_changes: Optional[StrictBool] = Field(default=None, description="Returns true if private changes are disabled.")
+    update_delay: Optional[StrictInt] = Field(default=None, description="How often in seconds the web interface should poll for updates to the currently open change.")
+    submit_whole_topic: Optional[StrictBool] = Field(default=None, description="A configuration if the whole topic is submitted.")
+    mergeability_computation_behavior: Optional[StrictStr] = Field(default=None, description="Value of the configuration parameter that controls whether the mergeability bit in ChangeInfo will never be set and if the bit is indexed.")
+    conflicts_predicate_enabled: Optional[StrictBool] = Field(default=None, description="Are conflicts enabled?.")
+    allow_markdown_base64_images_in_comments: Optional[StrictBool] = Field(default=None, description="Are markdown base64 images in comments allowed?.")
     __properties: ClassVar[List[str]] = ["allow_blame", "disable_private_changes", "update_delay", "submit_whole_topic", "mergeability_computation_behavior", "conflicts_predicate_enabled", "allow_markdown_base64_images_in_comments"]
 
     model_config = ConfigDict(

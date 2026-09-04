@@ -166,14 +166,9 @@ __all__ = [
     "GarbageCollectInput",
     "GeneralPreferencesInfo",
     "GerritInfo",
-    "GetConfigServerCaches200Response",
     "GetConfigServerIndexes200ResponseInner",
     "GetConfigServerIndexes200ResponseInnerVersionsValue",
-    "GetConfigServerVersion200Response",
-    "GetConfigServerVersion200ResponseOneOf",
-    "GetGroupsDefaultResponse",
     "GetMetaFileInfo",
-    "GetProjectsDefaultResponse",
     "GitBasicAuthPolicy",
     "GitPerson",
     "GpgKeyInfo",
@@ -474,14 +469,9 @@ from gerrit_client.models.flow_stage_state import FlowStageState as FlowStageSta
 from gerrit_client.models.garbage_collect_input import GarbageCollectInput as GarbageCollectInput
 from gerrit_client.models.general_preferences_info import GeneralPreferencesInfo as GeneralPreferencesInfo
 from gerrit_client.models.gerrit_info import GerritInfo as GerritInfo
-from gerrit_client.models.get_config_server_caches200_response import GetConfigServerCaches200Response as GetConfigServerCaches200Response
 from gerrit_client.models.get_config_server_indexes200_response_inner import GetConfigServerIndexes200ResponseInner as GetConfigServerIndexes200ResponseInner
 from gerrit_client.models.get_config_server_indexes200_response_inner_versions_value import GetConfigServerIndexes200ResponseInnerVersionsValue as GetConfigServerIndexes200ResponseInnerVersionsValue
-from gerrit_client.models.get_config_server_version200_response import GetConfigServerVersion200Response as GetConfigServerVersion200Response
-from gerrit_client.models.get_config_server_version200_response_one_of import GetConfigServerVersion200ResponseOneOf as GetConfigServerVersion200ResponseOneOf
-from gerrit_client.models.get_groups_default_response import GetGroupsDefaultResponse as GetGroupsDefaultResponse
 from gerrit_client.models.get_meta_file_info import GetMetaFileInfo as GetMetaFileInfo
-from gerrit_client.models.get_projects_default_response import GetProjectsDefaultResponse as GetProjectsDefaultResponse
 from gerrit_client.models.git_basic_auth_policy import GitBasicAuthPolicy as GitBasicAuthPolicy
 from gerrit_client.models.git_person import GitPerson as GitPerson
 from gerrit_client.models.gpg_key_info import GpgKeyInfo as GpgKeyInfo

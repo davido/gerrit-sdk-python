@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.gpg_key_info_status import GpgKeyInfoStatus
 from typing import Optional, Set
@@ -28,12 +28,12 @@ class GpgKeyInfo(BaseModel):
     """
     GpgKeyInfo
     """ # noqa: E501
-    id: Optional[StrictStr] = None
-    fingerprint: Optional[StrictStr] = None
-    user_ids: Optional[List[StrictStr]] = None
-    key: Optional[StrictStr] = None
-    status: Optional[GpgKeyInfoStatus] = None
-    problems: Optional[List[StrictStr]] = None
+    id: Optional[StrictStr] = Field(default=None, description="The 8-char hex GPG key ID.")
+    fingerprint: Optional[StrictStr] = Field(default=None, description="The 40-char (plus spaces) hex GPG key fingerprint.")
+    user_ids: Optional[List[StrictStr]] = Field(default=None, description="OpenPGP User IDs,role=external,window=_blank associated with the public key.")
+    key: Optional[StrictStr] = Field(default=None, description="ASCII armored public key material.")
+    status: Optional[GpgKeyInfoStatus] = Field(default=None, description="The result of server-side checks on the key; one of BAD, OK, or TRUSTED. BAD keys have serious problems and should not be used. If a key is OK, inspecting only that key found no problems, but the system does not fully trust the key's origin.")
+    problems: Optional[List[StrictStr]] = Field(default=None, description="A list of human-readable problem strings found in the course of checking whether the key is valid and trusted.")
     __properties: ClassVar[List[str]] = ["id", "fingerprint", "user_ids", "key", "status", "problems"]
 
     model_config = ConfigDict(

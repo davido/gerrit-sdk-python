@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,10 +27,10 @@ class MergeInput(BaseModel):
     """
     MergeInput
     """ # noqa: E501
-    source: Optional[StrictStr] = None
-    source_branch: Optional[StrictStr] = None
-    strategy: Optional[StrictStr] = None
-    allow_conflicts: Optional[StrictBool] = None
+    source: Optional[StrictStr] = Field(default=None, description="The source to merge from, e.g. a complete or abbreviated commit SHA-1, a complete reference name, a short reference name under refs/heads, refs/tags, or refs/remotes namespace, etc.")
+    source_branch: Optional[StrictStr] = Field(default=None, description="A branch from which source is reachable. If specified, source is checked for visibility and reachability against only this branch. This speeds up the operation, especially for large repos with many branches.")
+    strategy: Optional[StrictStr] = Field(default=None, description="The strategy of the merge, can be recursive, resolve, simple-two-way-in-core, ours or theirs, default will use project settings.")
+    allow_conflicts: Optional[StrictBool] = Field(default=None, description="If true, creating the merge succeeds also if there are conflicts. + If there are conflicts the file contents of the created change contain git conflict markers to indicate the conflicts.")
     __properties: ClassVar[List[str]] = ["source", "source_branch", "strategy", "allow_conflicts"]
 
     model_config = ConfigDict(

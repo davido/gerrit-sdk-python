@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.permission_info import PermissionInfo
 from typing import Optional, Set
@@ -28,7 +28,7 @@ class AccessSectionInfo(BaseModel):
     """
     AccessSectionInfo
     """ # noqa: E501
-    permissions: Optional[Dict[str, PermissionInfo]] = None
+    permissions: Optional[Dict[str, PermissionInfo]] = Field(default=None, description="The permissions assigned on the ref of this access section as a map that maps the permission names to PermissionInfo entities.")
     __properties: ClassVar[List[str]] = ["permissions"]
 
     model_config = ConfigDict(

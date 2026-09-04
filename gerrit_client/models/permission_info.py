@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.permission_rule_info import PermissionRuleInfo
 from typing import Optional, Set
@@ -28,9 +28,9 @@ class PermissionInfo(BaseModel):
     """
     PermissionInfo
     """ # noqa: E501
-    label: Optional[StrictStr] = None
-    exclusive: Optional[StrictBool] = None
-    rules: Optional[Dict[str, PermissionRuleInfo]] = None
+    label: Optional[StrictStr] = Field(default=None, description="The name of the label. Not set if it's not a label permission.")
+    exclusive: Optional[StrictBool] = Field(default=None, description="Whether this permission is assigned exclusively.")
+    rules: Optional[Dict[str, PermissionRuleInfo]] = Field(default=None, description="The rules assigned for this permission as a map that maps the UUIDs of the groups for which the permission are assigned to PermissionRuleInfo entities.")
     __properties: ClassVar[List[str]] = ["label", "exclusive", "rules"]
 
     model_config = ConfigDict(

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,12 +27,12 @@ class PluginInfo(BaseModel):
     """
     PluginInfo
     """ # noqa: E501
-    id: Optional[StrictStr] = None
-    version: Optional[StrictStr] = None
-    api_version: Optional[StrictStr] = None
-    index_url: Optional[StrictStr] = None
-    filename: Optional[StrictStr] = None
-    disabled: Optional[StrictBool] = None
+    id: Optional[StrictStr] = Field(default=None, description="The ID of the plugin.")
+    version: Optional[StrictStr] = Field(default=None, description="The version of the plugin.")
+    api_version: Optional[StrictStr] = Field(default=None, description="The version of the Gerrit Api used by the plugin.")
+    index_url: Optional[StrictStr] = Field(default=None, description="URL of the plugin's default page.")
+    filename: Optional[StrictStr] = Field(default=None, description="The plugin's filename.")
+    disabled: Optional[StrictBool] = Field(default=None, description="Whether the plugin is disabled.")
     __properties: ClassVar[List[str]] = ["id", "version", "api_version", "index_url", "filename", "disabled"]
 
     model_config = ConfigDict(

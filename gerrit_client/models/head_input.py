@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +27,7 @@ class HeadInput(BaseModel):
     """
     HeadInput
     """ # noqa: E501
-    ref: Optional[StrictStr] = None
+    ref: Optional[StrictStr] = Field(default=None, description="The ref to which HEAD should be set, the refs/heads prefix can be omitted.")
     __properties: ClassVar[List[str]] = ["ref"]
 
     model_config = ConfigDict(

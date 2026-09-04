@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.account_info import AccountInfo
 from typing import Optional, Set
@@ -28,10 +28,10 @@ class AttentionSetInfo(BaseModel):
     """
     AttentionSetInfo
     """ # noqa: E501
-    account: Optional[AccountInfo] = None
-    last_update: Optional[StrictStr] = None
-    reason: Optional[StrictStr] = None
-    reason_account: Optional[AccountInfo] = None
+    account: Optional[AccountInfo] = Field(default=None, description="AccountInfo entity.")
+    last_update: Optional[StrictStr] = Field(default=None, description="The timestamp of the last update.")
+    reason: Optional[StrictStr] = Field(default=None, description="The reason for adding or removing the user. If the update was caused by another user, that account is represented by account ID in reason as <GERRIT_ACCOUNT_18419> and the corresponding AccountInfo can be found in reason_account field.")
+    reason_account: Optional[AccountInfo] = Field(default=None, description="AccountInfo of the user who caused the update.")
     __properties: ClassVar[List[str]] = ["account", "last_update", "reason", "reason_account"]
 
     model_config = ConfigDict(

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.related_change_and_commit_info import RelatedChangeAndCommitInfo
 from typing import Optional, Set
@@ -28,7 +28,7 @@ class RelatedChangesInfo(BaseModel):
     """
     RelatedChangesInfo
     """ # noqa: E501
-    changes: Optional[List[RelatedChangeAndCommitInfo]] = None
+    changes: Optional[List[RelatedChangeAndCommitInfo]] = Field(default=None, description="A list of RelatedChangeAndCommitInfo entities describing the related changes. Sorted by git commit order, newest to oldest. Empty if there are no related changes.")
     __properties: ClassVar[List[str]] = ["changes"]
 
     model_config = ConfigDict(

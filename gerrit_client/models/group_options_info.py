@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +27,7 @@ class GroupOptionsInfo(BaseModel):
     """
     GroupOptionsInfo
     """ # noqa: E501
-    visible_to_all: Optional[StrictBool] = None
+    visible_to_all: Optional[StrictBool] = Field(default=None, description="Whether the group is visible to all registered users.")
     __properties: ClassVar[List[str]] = ["visible_to_all"]
 
     model_config = ConfigDict(

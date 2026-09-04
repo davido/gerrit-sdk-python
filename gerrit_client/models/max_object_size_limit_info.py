@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,9 +27,9 @@ class MaxObjectSizeLimitInfo(BaseModel):
     """
     MaxObjectSizeLimitInfo
     """ # noqa: E501
-    value: Optional[StrictStr] = None
-    configured_value: Optional[StrictStr] = None
-    summary: Optional[StrictStr] = None
+    value: Optional[StrictStr] = Field(default=None, description="The effective value in bytes of the max object size limit. + Not set if there is no limit for the object size.")
+    configured_value: Optional[StrictStr] = Field(default=None, description="The max object size limit that is configured on the project as a formatted string. + Not set if there is no limit for the object size configured on project level.")
+    summary: Optional[StrictStr] = Field(default=None, description="A string describing whether the value was inherited or overridden from the parent project or global config. + Not set if not inherited or overridden.")
     __properties: ClassVar[List[str]] = ["value", "configured_value", "summary"]
 
     model_config = ConfigDict(

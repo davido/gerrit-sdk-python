@@ -42,64 +42,64 @@ class ChangeInfo(BaseModel):
     """
     ChangeInfo
     """ # noqa: E501
-    id: Optional[StrictStr] = None
-    triplet_id: Optional[StrictStr] = None
-    project: Optional[StrictStr] = None
-    branch: Optional[StrictStr] = None
-    full_branch: Optional[StrictStr] = None
-    topic: Optional[StrictStr] = None
-    attention_set: Optional[Dict[str, AttentionSetInfo]] = None
-    removed_from_attention_set: Optional[Dict[str, AttentionSetInfo]] = None
-    custom_keyed_values: Optional[Dict[str, StrictStr]] = None
-    hashtags: Optional[List[StrictStr]] = None
-    change_id: Optional[StrictStr] = None
-    subject: Optional[StrictStr] = None
-    status: Optional[ChangeStatus] = None
-    created: Optional[StrictStr] = None
-    updated: Optional[StrictStr] = None
-    submitted: Optional[StrictStr] = None
-    submitter: Optional[AccountInfo] = None
-    starred: Optional[StrictBool] = None
+    id: Optional[StrictStr] = Field(default=None, description="The ID of the change. The format is \"'<project>\\~<_number>'\". 'project' and '_number' are URL encoded. The callers must not rely on the format.")
+    triplet_id: Optional[StrictStr] = Field(default=None, description="The ID of the change in the format \"'<project>\\~<branch>~<Change-Id>'\", where 'project' and 'branch' are URL encoded. For 'branch' the refs/heads/ prefix is omitted.")
+    project: Optional[StrictStr] = Field(default=None, description="The name of the project.")
+    branch: Optional[StrictStr] = Field(default=None, description="The name of the target branch. + The refs/heads/ prefix is omitted.")
+    full_branch: Optional[StrictStr] = Field(default=None, description="The full name of the target branch. + Always starts with refs/.")
+    topic: Optional[StrictStr] = Field(default=None, description="The topic to which this change belongs.")
+    attention_set: Optional[Dict[str, AttentionSetInfo]] = Field(default=None, description="The map that maps account IDs to AttentionSetInfo of that account. Those are all accounts that are currently in the attention set.")
+    removed_from_attention_set: Optional[Dict[str, AttentionSetInfo]] = Field(default=None, description="The map that maps account IDs to AttentionSetInfo of that account. Those are all accounts that were in the attention set but were removed. The AttentionSetInfo is the latest and most recent removal of the account from the attention set.")
+    custom_keyed_values: Optional[Dict[str, StrictStr]] = Field(default=None, description="A map that maps custom keys to custom values that are tied to a specific change, both in the form of strings. Only set if custom keyed values are requested.")
+    hashtags: Optional[List[StrictStr]] = Field(default=None, description="List of hashtags that are set on the change.")
+    change_id: Optional[StrictStr] = Field(default=None, description="The Change-Id of the change.")
+    subject: Optional[StrictStr] = Field(default=None, description="The subject of the change (header line of the commit message).")
+    status: Optional[ChangeStatus] = Field(default=None, description="The status of the change (NEW, MERGED, ABANDONED).")
+    created: Optional[StrictStr] = Field(default=None, description="The timestamp of when the change was created.")
+    updated: Optional[StrictStr] = Field(default=None, description="The timestamp of when the change was last updated.")
+    submitted: Optional[StrictStr] = Field(default=None, description="The timestamp of when the change was submitted.")
+    submitter: Optional[AccountInfo] = Field(default=None, description="The user who submitted the change, as an AccountInfo entity.")
+    starred: Optional[StrictBool] = Field(default=None, description="Whether the calling user has starred this change. Only set if requested.")
     stars: Optional[List[StrictStr]] = None
-    reviewed: Optional[StrictBool] = None
-    submit_type: Optional[SubmitType] = None
-    mergeable: Optional[StrictBool] = None
-    submittable: Optional[StrictBool] = None
-    insertions: Optional[StrictInt] = None
-    deletions: Optional[StrictInt] = None
-    total_comment_count: Optional[StrictInt] = None
-    unresolved_comment_count: Optional[StrictInt] = None
-    is_private: Optional[StrictBool] = None
-    work_in_progress: Optional[StrictBool] = None
-    has_review_started: Optional[StrictBool] = None
-    revert_of: Optional[StrictInt] = None
-    submission_id: Optional[StrictStr] = None
-    cherry_pick_of_change: Optional[StrictInt] = None
-    cherry_pick_of_patch_set: Optional[StrictInt] = None
-    meta_rev_id: Optional[StrictStr] = None
-    contains_git_conflicts: Optional[StrictBool] = None
-    number: Optional[StrictInt] = Field(default=None, alias="_number")
-    virtual_id_number: Optional[StrictInt] = None
-    owner: Optional[AccountInfo] = None
-    actions: Optional[Dict[str, ActionInfo]] = None
-    labels: Optional[Dict[str, LabelInfo]] = None
-    permitted_labels: Optional[Dict[str, List[StrictStr]]] = None
-    removable_labels: Optional[Dict[str, Dict[str, List[AccountInfo]]]] = None
-    removable_reviewers: Optional[List[AccountInfo]] = None
-    reviewers: Optional[Dict[str, List[AccountInfo]]] = None
-    pending_reviewers: Optional[Dict[str, List[AccountInfo]]] = None
-    reviewer_updates: Optional[List[ReviewerUpdateInfo]] = None
-    messages: Optional[List[ChangeMessageInfo]] = None
-    current_revision_number: Optional[StrictInt] = None
-    current_revision: Optional[StrictStr] = None
-    revisions: Optional[Dict[str, RevisionInfo]] = None
-    more_changes: Optional[StrictBool] = Field(default=None, alias="_more_changes")
-    problems: Optional[List[ProblemInfo]] = None
+    reviewed: Optional[StrictBool] = Field(default=None, description="Whether the change was reviewed by the calling user. Only set if reviewed is requested.")
+    submit_type: Optional[SubmitType] = Field(default=None, description="The submit type of the change. + Not set for merged changes.")
+    mergeable: Optional[StrictBool] = Field(default=None, description="Whether the change is mergeable. + Only set for open changes if change.mergeabilityComputationBehavior is API_REF_UPDATED_AND_CHANGE_REINDEX.")
+    submittable: Optional[StrictBool] = Field(default=None, description="Whether the change has been approved by the project submit rules. + Only set if requested.")
+    insertions: Optional[StrictInt] = Field(default=None, description="Number of inserted lines.")
+    deletions: Optional[StrictInt] = Field(default=None, description="Number of deleted lines.")
+    total_comment_count: Optional[StrictInt] = Field(default=None, description="Total number of inline comments across all patch sets.")
+    unresolved_comment_count: Optional[StrictInt] = Field(default=None, description="Number of unresolved inline comment threads across all patch sets.")
+    is_private: Optional[StrictBool] = Field(default=None, description="When present, change is marked as private.")
+    work_in_progress: Optional[StrictBool] = Field(default=None, description="When present, change is marked as Work In Progress.")
+    has_review_started: Optional[StrictBool] = Field(default=None, description="When present, change has been marked Ready at some point in time.")
+    revert_of: Optional[StrictInt] = Field(default=None, description="The change number of the change that this change reverts.")
+    submission_id: Optional[StrictStr] = Field(default=None, description="ID of the submission of this change. Only set if the status is MERGED. This ID is equal to the change number of the change that triggered the submission. If the change that triggered the submission also has a topic, it will be \"<id>-<topic>\" of the change that triggered the submission.")
+    cherry_pick_of_change: Optional[StrictInt] = Field(default=None, description="The change number of the change that this change was cherry-picked from. Only set if the cherry-pick has been done through the Gerrit REST API (and not if a cherry-picked commit was pushed).")
+    cherry_pick_of_patch_set: Optional[StrictInt] = Field(default=None, description="The patchset number of the change that this change was cherry-picked from. Only set if the cherry-pick has been done through the Gerrit REST API (and not if a cherry-picked commit was pushed).")
+    meta_rev_id: Optional[StrictStr] = Field(default=None, description="The SHA-1 of the NoteDb meta ref.")
+    contains_git_conflicts: Optional[StrictBool] = Field(default=None, description="Whether the change contains conflicts. + If true, some of the file contents of the change contain git conflict markers to indicate the conflicts. + Only set if this change info is returned in response to a request that creates a new change or patch set and conflicts are allowed.")
+    number: Optional[StrictInt] = Field(default=None, description="The change number. (The underscore is just a relict of a prior attempt to deprecate the change number.)", alias="_number")
+    virtual_id_number: Optional[StrictInt] = Field(default=None, description="The virtual id number is globally unique. For local changes, it is equal to the _number attribute. For imported changes, the original _number is processed through a function designed to prevent conflicts with local change numbers.")
+    owner: Optional[AccountInfo] = Field(default=None, description="The owner of the change as an AccountInfo entity.")
+    actions: Optional[Dict[str, ActionInfo]] = Field(default=None, description="Actions the caller might be able to perform on this revision. The information is a map of view name to ActionInfo entities.")
+    labels: Optional[Dict[str, LabelInfo]] = Field(default=None, description="The labels of the change as a map that maps the label names to LabelInfo entries. + Only set if labels or detailed labels are requested.")
+    permitted_labels: Optional[Dict[str, List[StrictStr]]] = Field(default=None, description="A map of the permitted labels that maps a label name to the list of values that the current user can vote on. + Only set if detailed labels are requested.")
+    removable_labels: Optional[Dict[str, Dict[str, List[AccountInfo]]]] = Field(default=None, description="A map of the removable labels that maps a label name to the map of values and reviewers ( AccountInfo entities) that are allowed to be removed from the change. + Only set if labels or detailed labels are requested.")
+    removable_reviewers: Optional[List[AccountInfo]] = Field(default=None, description="The reviewers that can be removed by the calling user as a list of AccountInfo entities. + Only set if labels or detailed labels are requested.")
+    reviewers: Optional[Dict[str, List[AccountInfo]]] = Field(default=None, description="The reviewers as a map that maps a reviewer state to a list of AccountInfo entities. Possible reviewer states are REVIEWER, CC. + REVIEWER: Users with at least one non-zero vote on the change. + CC: Users that were added to the change, but have not voted.")
+    pending_reviewers: Optional[Dict[str, List[AccountInfo]]] = Field(default=None, description="Updates to reviewers that have been made while the change was in the WIP state. Only present on WIP changes and only if there are pending reviewer updates to report. These are reviewers who have not yet been notified about being added to or removed from the change.")
+    reviewer_updates: Optional[List[ReviewerUpdateInfo]] = Field(default=None, description="Updates to reviewers set for the change as ReviewerUpdateInfo entities. Only set if reviewer updates are requested.")
+    messages: Optional[List[ChangeMessageInfo]] = Field(default=None, description="Messages associated with the change as a list of ChangeMessageInfo entities. + Only set if messages are requested.")
+    current_revision_number: Optional[StrictInt] = Field(default=None, description="The number of the current patch set of this change. +")
+    current_revision: Optional[StrictStr] = Field(default=None, description="The commit ID of the current patch set of this change. + Only set if the current revision is requested or if all revisions are requested.")
+    revisions: Optional[Dict[str, RevisionInfo]] = Field(default=None, description="All patch sets of this change as a map that maps the commit ID of the patch set to a RevisionInfo entity. + Only set if the current revision is requested (in which case it will only contain a key for the current revision) or if all revisions are requested.")
+    more_changes: Optional[StrictBool] = Field(default=None, description="Whether the query would deliver more results if not limited. + Only set on the last change that is returned.", alias="_more_changes")
+    problems: Optional[List[ProblemInfo]] = Field(default=None, description="A list of ProblemInfo entities describing potential problems with this change. Only set if CHECK is set.")
     plugins: Optional[List[PluginDefinedInfo]] = None
-    tracking_ids: Optional[List[TrackingIdInfo]] = None
-    requirements: Optional[List[LegacySubmitRequirementInfo]] = None
-    submit_records: Optional[List[SubmitRecordInfo]] = None
-    submit_requirements: Optional[List[SubmitRequirementResultInfo]] = None
+    tracking_ids: Optional[List[TrackingIdInfo]] = Field(default=None, description="A list of TrackingIdInfo entities describing references to external tracking systems. Only set if tracking ids are requested.")
+    requirements: Optional[List[LegacySubmitRequirementInfo]] = Field(default=None, description="List of the requirements to be met before this change can be submitted. This field is deprecated in favour of submit_requirements. Only set if SUBMIT_REQUIREMENTS is requested.")
+    submit_records: Optional[List[SubmitRecordInfo]] = Field(default=None, description="List of the SubmitRecordInfo containing the submit records for the change at the latest patchset. This field is deprecated in favour of submit_requirements. Only set if SUBMIT_REQUIREMENTS is requested.")
+    submit_requirements: Optional[List[SubmitRequirementResultInfo]] = Field(default=None, description="List of the SubmitRequirementResultInfo containing the evaluated submit requirements for the change. Only set if SUBMIT_REQUIREMENTS is requested.")
     __properties: ClassVar[List[str]] = ["id", "triplet_id", "project", "branch", "full_branch", "topic", "attention_set", "removed_from_attention_set", "custom_keyed_values", "hashtags", "change_id", "subject", "status", "created", "updated", "submitted", "submitter", "starred", "stars", "reviewed", "submit_type", "mergeable", "submittable", "insertions", "deletions", "total_comment_count", "unresolved_comment_count", "is_private", "work_in_progress", "has_review_started", "revert_of", "submission_id", "cherry_pick_of_change", "cherry_pick_of_patch_set", "meta_rev_id", "contains_git_conflicts", "_number", "virtual_id_number", "owner", "actions", "labels", "permitted_labels", "removable_labels", "removable_reviewers", "reviewers", "pending_reviewers", "reviewer_updates", "messages", "current_revision_number", "current_revision", "revisions", "_more_changes", "problems", "plugins", "tracking_ids", "requirements", "submit_records", "submit_requirements"]
 
     model_config = ConfigDict(

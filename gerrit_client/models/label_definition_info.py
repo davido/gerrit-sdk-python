@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,17 +27,17 @@ class LabelDefinitionInfo(BaseModel):
     """
     LabelDefinitionInfo
     """ # noqa: E501
-    name: Optional[StrictStr] = None
-    description: Optional[StrictStr] = None
-    project_name: Optional[StrictStr] = None
-    function: Optional[StrictStr] = None
-    values: Optional[Dict[str, StrictStr]] = None
-    default_value: Optional[StrictInt] = None
-    branches: Optional[List[StrictStr]] = None
-    can_override: Optional[StrictBool] = None
-    copy_condition: Optional[StrictStr] = None
-    allow_post_submit: Optional[StrictBool] = None
-    ignore_self_approval: Optional[StrictBool] = None
+    name: Optional[StrictStr] = Field(default=None, description="The name of the label.")
+    description: Optional[StrictStr] = Field(default=None, description="The description of the label.")
+    project_name: Optional[StrictStr] = Field(default=None, description="The name of the project in which this label is defined. Not set for globally defined labels.")
+    function: Optional[StrictStr] = Field(default=None, description="The function of the label (can be MaxWithBlock, AnyWithBlock, MaxNoBlock, NoBlock, NoOp and PatchSetLock.")
+    values: Optional[Dict[str, StrictStr]] = Field(default=None, description="The values of the label as a map of label value to value description. The label values are formatted strings, e.g. \"+1\" instead of \"1\", \" 0\" instead of \"0\".")
+    default_value: Optional[StrictInt] = Field(default=None, description="The default value of the label (as integer).")
+    branches: Optional[List[StrictStr]] = Field(default=None, description="A list of branches for which the label applies. A branch can be a ref, a ref pattern or a regular expression. If not set, the label applies for all branches.")
+    can_override: Optional[StrictBool] = Field(default=None, description="Whether this label can be overridden by child projects.")
+    copy_condition: Optional[StrictStr] = Field(default=None, description="See copyCondition.")
+    allow_post_submit: Optional[StrictBool] = Field(default=None, description="Whether allowPostSubmit is set on the label.")
+    ignore_self_approval: Optional[StrictBool] = Field(default=None, description="Whether ignoreSelfApproval is set on the label.")
     __properties: ClassVar[List[str]] = ["name", "description", "project_name", "function", "values", "default_value", "branches", "can_override", "copy_condition", "allow_post_submit", "ignore_self_approval"]
 
     model_config = ConfigDict(

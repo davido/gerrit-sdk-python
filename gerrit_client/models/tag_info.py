@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.git_person import GitPerson
 from gerrit_client.models.web_link_info import WebLinkInfo
@@ -29,14 +29,14 @@ class TagInfo(BaseModel):
     """
     TagInfo
     """ # noqa: E501
-    object: Optional[StrictStr] = None
-    message: Optional[StrictStr] = None
-    tagger: Optional[GitPerson] = None
-    created: Optional[StrictStr] = None
-    web_links: Optional[List[WebLinkInfo]] = None
-    ref: Optional[StrictStr] = None
-    revision: Optional[StrictStr] = None
-    can_delete: Optional[StrictBool] = None
+    object: Optional[StrictStr] = Field(default=None, description="The revision of the object to which the tag points.")
+    message: Optional[StrictStr] = Field(default=None, description="The tag message. For signed tags, includes the signature.")
+    tagger: Optional[GitPerson] = Field(default=None, description="The tagger as a GitPersonInfo entity.")
+    created: Optional[StrictStr] = Field(default=None, description="The timestamp of when the tag was created. For annotated and signed tags, this is the timestamp of the tag object and is the same as the date field in the tagger. For lightweight tags, it is the commit timestamp of the commit to which the tag points, when the object is a commit.")
+    web_links: Optional[List[WebLinkInfo]] = Field(default=None, description="Links to the tag in external sites as a list of WebLinkInfo entries.")
+    ref: Optional[StrictStr] = Field(default=None, description="The ref of the tag.")
+    revision: Optional[StrictStr] = Field(default=None, description="For lightweight tags, the revision of the commit to which the tag points. For annotated tags, the revision of the tag object.")
+    can_delete: Optional[StrictBool] = Field(default=None, description="Whether the calling user can delete this tag.")
     __properties: ClassVar[List[str]] = ["object", "message", "tagger", "created", "web_links", "ref", "revision", "can_delete"]
 
     model_config = ConfigDict(

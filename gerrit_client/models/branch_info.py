@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.action_info import ActionInfo
 from gerrit_client.models.web_link_info import WebLinkInfo
@@ -30,10 +30,10 @@ class BranchInfo(BaseModel):
     BranchInfo
     """ # noqa: E501
     actions: Optional[Dict[str, ActionInfo]] = None
-    web_links: Optional[List[WebLinkInfo]] = None
-    ref: Optional[StrictStr] = None
-    revision: Optional[StrictStr] = None
-    can_delete: Optional[StrictBool] = None
+    web_links: Optional[List[WebLinkInfo]] = Field(default=None, description="Links to the branch in external sites as a list of WebLinkInfo entries.")
+    ref: Optional[StrictStr] = Field(default=None, description="The ref of the branch.")
+    revision: Optional[StrictStr] = Field(default=None, description="The revision to which the branch points.")
+    can_delete: Optional[StrictBool] = Field(default=None, description="Whether the calling user can delete this branch.")
     __properties: ClassVar[List[str]] = ["actions", "web_links", "ref", "revision", "can_delete"]
 
     model_config = ConfigDict(

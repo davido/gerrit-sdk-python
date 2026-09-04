@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.submit_requirement_expression_info_status import SubmitRequirementExpressionInfoStatus
 from typing import Optional, Set
@@ -28,13 +28,13 @@ class SubmitRequirementExpressionInfo(BaseModel):
     """
     SubmitRequirementExpressionInfo
     """ # noqa: E501
-    expression: Optional[StrictStr] = None
-    fulfilled: Optional[StrictBool] = None
-    status: Optional[SubmitRequirementExpressionInfoStatus] = None
-    passing_atoms: Optional[List[StrictStr]] = None
-    failing_atoms: Optional[List[StrictStr]] = None
-    atom_explanations: Optional[Dict[str, StrictStr]] = None
-    error_message: Optional[StrictStr] = None
+    expression: Optional[StrictStr] = Field(default=None, description="The submit requirement expression as a string, for example branch:refs/heads/foo and label:verified=+1.")
+    fulfilled: Optional[StrictBool] = Field(default=None, description="True if the submit requirement is fulfilled for the change.")
+    status: Optional[SubmitRequirementExpressionInfoStatus] = Field(default=None, description="A string containing the status of evaluating the expression which can be one of the following: + * PASS - expression was evaluated and result is true. + * FAIL - expression was evaluated and result is false. + * ERROR - an error occurred while evaluating the expression.")
+    passing_atoms: Optional[List[StrictStr]] = Field(default=None, description="A list of passing atoms as strings. For the above expression, passing_atoms can contain [\"branch:refs/heads/foo\"] if the branch predicate is fulfilled for the change.")
+    failing_atoms: Optional[List[StrictStr]] = Field(default=None, description="A list of failing atoms. This is similar to passing_atoms except that it contains the list of predicates that are not fulfilled for the change.")
+    atom_explanations: Optional[Dict[str, StrictStr]] = Field(default=None, description="A map of atoms (as strings) to strings explaining the result. This field only contains atoms for which the explanation is available.")
+    error_message: Optional[StrictStr] = Field(default=None, description="If the submit requirement fails during evaluation, this string will contain an error message describing why it failed.")
     __properties: ClassVar[List[str]] = ["expression", "fulfilled", "status", "passing_atoms", "failing_atoms", "atom_explanations", "error_message"]
 
     model_config = ConfigDict(

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +27,7 @@ class FlowActionTypeInfo(BaseModel):
     """
     FlowActionTypeInfo
     """ # noqa: E501
-    name: Optional[StrictStr] = None
+    name: Optional[StrictStr] = Field(default=None, description="The name of the action.")
     parameters_placeholder: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["name", "parameters_placeholder"]
 

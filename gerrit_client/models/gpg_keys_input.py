@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,8 +27,8 @@ class GpgKeysInput(BaseModel):
     """
     GpgKeysInput
     """ # noqa: E501
-    add: Optional[List[StrictStr]] = None
-    delete: Optional[List[StrictStr]] = None
+    add: Optional[List[StrictStr]] = Field(default=None, description="List of ASCII armored public key strings to add.")
+    delete: Optional[List[StrictStr]] = Field(default=None, description="List of \\{gpg-key-id\\}s to delete.")
     __properties: ClassVar[List[str]] = ["add", "delete"]
 
     model_config = ConfigDict(

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.git_person import GitPerson
 from typing import Optional, Set
@@ -28,10 +28,10 @@ class ReflogEntryInfo(BaseModel):
     """
     ReflogEntryInfo
     """ # noqa: E501
-    old_id: Optional[StrictStr] = None
-    new_id: Optional[StrictStr] = None
-    who: Optional[GitPerson] = None
-    comment: Optional[StrictStr] = None
+    old_id: Optional[StrictStr] = Field(default=None, description="The old commit ID.")
+    new_id: Optional[StrictStr] = Field(default=None, description="The new commit ID.")
+    who: Optional[GitPerson] = Field(default=None, description="The user performing the change as a GitPersonInfo entity.")
+    comment: Optional[StrictStr] = Field(default=None, description="Comment of the reflog entry.")
     __properties: ClassVar[List[str]] = ["old_id", "new_id", "who", "comment"]
 
     model_config = ConfigDict(

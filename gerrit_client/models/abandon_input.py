@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.notify_handling import NotifyHandling
 from gerrit_client.models.notify_info import NotifyInfo
@@ -29,9 +29,9 @@ class AbandonInput(BaseModel):
     """
     AbandonInput
     """ # noqa: E501
-    message: Optional[StrictStr] = None
-    notify: Optional[NotifyHandling] = None
-    notify_details: Optional[Dict[str, NotifyInfo]] = None
+    message: Optional[StrictStr] = Field(default=None, description="Message to be added as review comment to the change when abandoning the change.")
+    notify: Optional[NotifyHandling] = Field(default=None, description="Notify handling that defines to whom email notifications should be sent after the change is abandoned. + Allowed values are NONE, OWNER, OWNER_REVIEWERS and ALL. + If not set, the default is ALL.")
+    notify_details: Optional[Dict[str, NotifyInfo]] = Field(default=None, description="Additional information about whom to notify about the update as a map of recipient type to NotifyInfo entity.")
     __properties: ClassVar[List[str]] = ["message", "notify", "notify_details"]
 
     model_config = ConfigDict(

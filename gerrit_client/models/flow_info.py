@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.account_info import AccountInfo
 from gerrit_client.models.flow_stage_info import FlowStageInfo
@@ -29,11 +29,11 @@ class FlowInfo(BaseModel):
     """
     FlowInfo
     """ # noqa: E501
-    uuid: Optional[StrictStr] = None
-    owner: Optional[AccountInfo] = None
-    created: Optional[StrictStr] = None
-    stages: Optional[List[FlowStageInfo]] = None
-    last_evaluated: Optional[StrictStr] = None
+    uuid: Optional[StrictStr] = Field(default=None, description="The universally unique identifier that identifies the flow.")
+    owner: Optional[AccountInfo] = Field(default=None, description="The owner of the flow as an AccountInfo entity.")
+    created: Optional[StrictStr] = Field(default=None, description="The timestamp of when the flow was created.")
+    stages: Optional[List[FlowStageInfo]] = Field(default=None, description="The stages of this flow as a list of FlowStageInfo entities (sorted by execution order).")
+    last_evaluated: Optional[StrictStr] = Field(default=None, description="The timestamp of when the flow was last evaluated. Not set if the flow has not been evaluated yet.")
     __properties: ClassVar[List[str]] = ["uuid", "owner", "created", "stages", "last_evaluated"]
 
     model_config = ConfigDict(

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.account_info import AccountInfo
 from gerrit_client.models.approval_info import ApprovalInfo
@@ -29,17 +29,17 @@ class LabelInfo(BaseModel):
     """
     LabelInfo
     """ # noqa: E501
-    approved: Optional[AccountInfo] = None
-    rejected: Optional[AccountInfo] = None
-    recommended: Optional[AccountInfo] = None
-    disliked: Optional[AccountInfo] = None
-    all: Optional[List[ApprovalInfo]] = None
-    values: Optional[Dict[str, StrictStr]] = None
-    description: Optional[StrictStr] = None
-    value: Optional[StrictInt] = None
-    default_value: Optional[StrictInt] = None
-    optional: Optional[StrictBool] = None
-    blocking: Optional[StrictBool] = None
+    approved: Optional[AccountInfo] = Field(default=None, description="One user who approved this label on the change (voted the maximum value) as an AccountInfo entity.")
+    rejected: Optional[AccountInfo] = Field(default=None, description="One user who rejected this label on the change (voted the minimum value) as an AccountInfo entity.")
+    recommended: Optional[AccountInfo] = Field(default=None, description="One user who recommended this label on the change (voted positively, but not the maximum value) as an AccountInfo entity.")
+    disliked: Optional[AccountInfo] = Field(default=None, description="One user who disliked this label on the change (voted negatively, but not the minimum value) as an AccountInfo entity.")
+    all: Optional[List[ApprovalInfo]] = Field(default=None, description="List of all approvals for this label as a list of ApprovalInfo entities. Items in this list may not represent actual votes cast by users; if a user votes on any label, a corresponding ApprovalInfo will appear in this list for all labels.")
+    values: Optional[Dict[str, StrictStr]] = Field(default=None, description="A map of all values that are allowed for this label. The map maps the values (\"-2\", \"-1\", \" 0\", \"+1\", \"+2\") to the value descriptions.")
+    description: Optional[StrictStr] = Field(default=None, description="The description of the label.")
+    value: Optional[StrictInt] = Field(default=None, description="The voting value of the user who recommended/disliked this label on the change if it is not \"+1\"/\"-1\".")
+    default_value: Optional[StrictInt] = Field(default=None, description="The default voting value for the label. This value may be outside the range specified in permitted_labels.")
+    optional: Optional[StrictBool] = Field(default=None, description="Whether the label is optional. Optional means the label may be set, but it's neither necessary for submission nor does it block submission if set.")
+    blocking: Optional[StrictBool] = Field(default=None, description="If true, the label blocks submit operation. If not set, the default is false.")
     __properties: ClassVar[List[str]] = ["approved", "rejected", "recommended", "disliked", "all", "values", "description", "value", "default_value", "optional", "blocking"]
 
     model_config = ConfigDict(

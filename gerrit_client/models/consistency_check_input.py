@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,9 +27,9 @@ class ConsistencyCheckInput(BaseModel):
     """
     ConsistencyCheckInput
     """ # noqa: E501
-    check_accounts: Optional[Dict[str, Any]] = None
-    check_account_external_ids: Optional[Dict[str, Any]] = None
-    check_groups: Optional[Dict[str, Any]] = None
+    check_accounts: Optional[Dict[str, Any]] = Field(default=None, description="Input for the account consistency check as CheckAccountsInput entity.")
+    check_account_external_ids: Optional[Dict[str, Any]] = Field(default=None, description="Input for the account external ID consistency check as CheckAccountExternalIdsInput entity.")
+    check_groups: Optional[Dict[str, Any]] = Field(default=None, description="Input for the group consistency check as CheckGroupsInput entity.")
     __properties: ClassVar[List[str]] = ["check_accounts", "check_account_external_ids", "check_groups"]
 
     model_config = ConfigDict(

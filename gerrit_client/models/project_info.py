@@ -30,15 +30,15 @@ class ProjectInfo(BaseModel):
     """
     ProjectInfo
     """ # noqa: E501
-    id: Optional[StrictStr] = None
-    name: Optional[StrictStr] = None
-    parent: Optional[StrictStr] = None
-    description: Optional[StrictStr] = None
-    state: Optional[ProjectState] = None
-    branches: Optional[Dict[str, StrictStr]] = None
-    web_links: Optional[List[WebLinkInfo]] = None
-    labels: Optional[Dict[str, LabelTypeInfo]] = None
-    more_projects: Optional[StrictBool] = Field(default=None, alias="_more_projects")
+    id: Optional[StrictStr] = Field(default=None, description="The URL encoded project name.")
+    name: Optional[StrictStr] = Field(default=None, description="The name of the project.")
+    parent: Optional[StrictStr] = Field(default=None, description="The name of the parent project. + ?-<n> if the parent project is not visible (<n> is a number which is increased for each non-visible project).")
+    description: Optional[StrictStr] = Field(default=None, description="The description of the project.")
+    state: Optional[ProjectState] = Field(default=None, description="ACTIVE, READ_ONLY or HIDDEN.")
+    branches: Optional[Dict[str, StrictStr]] = Field(default=None, description="Map of branch names to HEAD revisions.")
+    web_links: Optional[List[WebLinkInfo]] = Field(default=None, description="Links to the project in external sites as a list of WebLinkInfo entries.")
+    labels: Optional[Dict[str, LabelTypeInfo]] = Field(default=None, description="Map of label names to LabelTypeInfo entries. This field is filled for Create Project and Get Project calls.")
+    more_projects: Optional[StrictBool] = Field(default=None, description="Whether the query would deliver more results if not limited. + Only set on the last project that is returned.", alias="_more_projects")
     __properties: ClassVar[List[str]] = ["id", "name", "parent", "description", "state", "branches", "web_links", "labels", "_more_projects"]
 
     model_config = ConfigDict(

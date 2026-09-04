@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,9 +27,9 @@ class FetchInfo(BaseModel):
     """
     FetchInfo
     """ # noqa: E501
-    url: Optional[StrictStr] = None
-    ref: Optional[StrictStr] = None
-    commands: Optional[Dict[str, StrictStr]] = None
+    url: Optional[StrictStr] = Field(default=None, description="The URL of the project.")
+    ref: Optional[StrictStr] = Field(default=None, description="The ref of the patch set.")
+    commands: Optional[Dict[str, StrictStr]] = Field(default=None, description="The download commands for this patch set as a map that maps the command names to the commands. + Only set if download commands are requested.")
     __properties: ClassVar[List[str]] = ["url", "ref", "commands"]
 
     model_config = ConfigDict(

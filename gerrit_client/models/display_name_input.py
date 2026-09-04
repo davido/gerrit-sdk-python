@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +27,7 @@ class DisplayNameInput(BaseModel):
     """
     DisplayNameInput
     """ # noqa: E501
-    display_name: Optional[StrictStr] = None
+    display_name: Optional[StrictStr] = Field(default=None, description="The new display name of the account.")
     __properties: ClassVar[List[str]] = ["display_name"]
 
     model_config = ConfigDict(

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,9 +27,9 @@ class EmailInput(BaseModel):
     """
     EmailInput
     """ # noqa: E501
-    email: Optional[StrictStr] = None
-    preferred: Optional[StrictBool] = None
-    no_confirmation: Optional[StrictBool] = None
+    email: Optional[StrictStr] = Field(default=None, description="The email address. If provided, must match the email address from the URL.")
+    preferred: Optional[StrictBool] = Field(default=None, description="Whether the new email address should become the preferred email address of the user (only supported if no_confirmation is set or if the authentication type is DEVELOPMENT_BECOME_ANY_ACCOUNT).")
+    no_confirmation: Optional[StrictBool] = Field(default=None, description="Whether the email address should be added without confirmation. In this case no verification email is sent to the user. + Only Gerrit administrators are allowed to add email addresses without confirmation.")
     __properties: ClassVar[List[str]] = ["email", "preferred", "no_confirmation"]
 
     model_config = ConfigDict(

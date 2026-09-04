@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,9 +27,9 @@ class EvaluateChangeQueryExpressionResultInfo(BaseModel):
     """
     EvaluateChangeQueryExpressionResultInfo
     """ # noqa: E501
-    status: Optional[StrictBool] = None
-    passing_atoms: Optional[List[StrictStr]] = None
-    failing_atoms: Optional[List[StrictStr]] = None
+    status: Optional[StrictBool] = Field(default=None, description="Whether the change matches the change query expression.")
+    passing_atoms: Optional[List[StrictStr]] = Field(default=None, description="List of passing leaf atoms (atoms that match the change).")
+    failing_atoms: Optional[List[StrictStr]] = Field(default=None, description="List of failing leaf atoms (atoms that do not match the change).")
     atom_explanations: Optional[Dict[str, StrictStr]] = None
     __properties: ClassVar[List[str]] = ["status", "passing_atoms", "failing_atoms", "atom_explanations"]
 

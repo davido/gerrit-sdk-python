@@ -28,8 +28,8 @@ class ReviewerInfo(BaseModel):
     """
     ReviewerInfo
     """ # noqa: E501
-    approvals: Optional[Dict[str, StrictStr]] = None
-    account_id: Optional[StrictInt] = Field(default=None, alias="_account_id")
+    approvals: Optional[Dict[str, StrictStr]] = Field(default=None, description="The approvals of the reviewer as a map that maps the label names to the approval values (\"-2\", \"-1\", \"0\", \"+1\", \"+2\").")
+    account_id: Optional[StrictInt] = Field(default=None, description="This field is inherited from AccountInfo but is optional here if an unregistered reviewer was added by email. See add-reviewer for details.", alias="_account_id")
     name: Optional[StrictStr] = None
     display_name: Optional[StrictStr] = None
     email: Optional[StrictStr] = None

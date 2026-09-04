@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.account_info import AccountInfo
 from gerrit_client.models.reviewer_state import ReviewerState
@@ -29,11 +29,11 @@ class ReviewerUpdateInfo(BaseModel):
     """
     ReviewerUpdateInfo
     """ # noqa: E501
-    updated: Optional[StrictStr] = None
-    updated_by: Optional[AccountInfo] = None
-    real_updated_by: Optional[AccountInfo] = None
-    reviewer: Optional[AccountInfo] = None
-    state: Optional[ReviewerState] = None
+    updated: Optional[StrictStr] = Field(default=None, description="Timestamp of the update.")
+    updated_by: Optional[AccountInfo] = Field(default=None, description="The account which modified state of the reviewer in question as AccountInfo entity.")
+    real_updated_by: Optional[AccountInfo] = Field(default=None, description="The account which actually modified the state of the reviewer in question as AccountInfo entity. This will be different from updated_by in case of impersonation. For example, if Alice impersonates Bob and changes the state of a reviewer, updated_by will be Bob and real_updated_by will be Alice.")
+    reviewer: Optional[AccountInfo] = Field(default=None, description="The reviewer added or removed from the change as an AccountInfo entity. For reviewers by email the AccountInfo doesn't contain an account ID but only the email and optionally a name.")
+    state: Optional[ReviewerState] = Field(default=None, description="The reviewer state, one of REVIEWER, CC or REMOVED.")
     __properties: ClassVar[List[str]] = ["updated", "updated_by", "real_updated_by", "reviewer", "state"]
 
     model_config = ConfigDict(

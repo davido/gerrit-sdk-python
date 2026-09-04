@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,12 +27,12 @@ class SshKeyInfo(BaseModel):
     """
     SshKeyInfo
     """ # noqa: E501
-    seq: Optional[StrictInt] = None
-    ssh_public_key: Optional[StrictStr] = None
-    encoded_key: Optional[StrictStr] = None
-    algorithm: Optional[StrictStr] = None
-    comment: Optional[StrictStr] = None
-    valid: Optional[StrictBool] = None
+    seq: Optional[StrictInt] = Field(default=None, description="The sequence number of the SSH key.")
+    ssh_public_key: Optional[StrictStr] = Field(default=None, description="The complete public SSH key.")
+    encoded_key: Optional[StrictStr] = Field(default=None, description="The encoded key.")
+    algorithm: Optional[StrictStr] = Field(default=None, description="The algorithm of the SSH key.")
+    comment: Optional[StrictStr] = Field(default=None, description="The comment of the SSH key.")
+    valid: Optional[StrictBool] = Field(default=None, description="Whether the SSH key is valid.")
     __properties: ClassVar[List[str]] = ["seq", "ssh_public_key", "encoded_key", "algorithm", "comment", "valid"]
 
     model_config = ConfigDict(

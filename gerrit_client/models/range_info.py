@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,8 +27,8 @@ class RangeInfo(BaseModel):
     """
     RangeInfo
     """ # noqa: E501
-    start: Optional[StrictInt] = None
-    end: Optional[StrictInt] = None
+    start: Optional[StrictInt] = Field(default=None, description="First index.")
+    end: Optional[StrictInt] = Field(default=None, description="Last index.")
     __properties: ClassVar[List[str]] = ["start", "end"]
 
     model_config = ConfigDict(

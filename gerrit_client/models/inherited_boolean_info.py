@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.inheritable_boolean import InheritableBoolean
 from typing import Optional, Set
@@ -28,9 +28,9 @@ class InheritedBooleanInfo(BaseModel):
     """
     InheritedBooleanInfo
     """ # noqa: E501
-    value: Optional[StrictBool] = None
-    configured_value: Optional[InheritableBoolean] = None
-    inherited_value: Optional[StrictBool] = None
+    value: Optional[StrictBool] = Field(default=None, description="The effective boolean value.")
+    configured_value: Optional[InheritableBoolean] = Field(default=None, description="The configured value, can be TRUE, FALSE or INHERIT.")
+    inherited_value: Optional[StrictBool] = Field(default=None, description="The boolean value inherited from the parent. + Not set if there is no parent.")
     __properties: ClassVar[List[str]] = ["value", "configured_value", "inherited_value"]
 
     model_config = ConfigDict(

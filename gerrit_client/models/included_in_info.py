@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,9 +27,9 @@ class IncludedInInfo(BaseModel):
     """
     IncludedInInfo
     """ # noqa: E501
-    branches: Optional[List[StrictStr]] = None
-    tags: Optional[List[StrictStr]] = None
-    external: Optional[Dict[str, List[StrictStr]]] = None
+    branches: Optional[List[StrictStr]] = Field(default=None, description="The list of branches this change was merged into. Each branch is listed without the 'refs/head/' prefix.")
+    tags: Optional[List[StrictStr]] = Field(default=None, description="The list of tags this change was tagged with. Each tag is listed without the 'refs/tags/' prefix.")
+    external: Optional[Dict[str, List[StrictStr]]] = Field(default=None, description="A map that maps a name to a list of external systems that include this change, e.g. a list of servers on which this change is deployed.")
     __properties: ClassVar[List[str]] = ["branches", "tags", "external"]
 
     model_config = ConfigDict(

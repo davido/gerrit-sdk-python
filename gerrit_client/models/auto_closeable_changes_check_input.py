@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,10 +27,10 @@ class AutoCloseableChangesCheckInput(BaseModel):
     """
     AutoCloseableChangesCheckInput
     """ # noqa: E501
-    fix: Optional[StrictBool] = None
-    branch: Optional[StrictStr] = None
-    skip_commits: Optional[StrictInt] = None
-    max_commits: Optional[StrictInt] = None
+    fix: Optional[StrictBool] = Field(default=None, description="Whether auto-closeable changes should be closed automatically.")
+    branch: Optional[StrictStr] = Field(default=None, description="The branch for which the AutoCloseableChangesCheck should be performed. The 'refs/heads/' prefix for the branch name can be omitted.")
+    skip_commits: Optional[StrictInt] = Field(default=None, description="Number of commits that should be skipped when walking the commits of the branch.")
+    max_commits: Optional[StrictInt] = Field(default=None, description="Maximum number of commits to walk. If not specified this defaults to 10,000 commits. 10,000 is also the maximum that can be set. Auto-closing changes is an expensive operation and the more commits are walked the slower it gets. This is why you should avoid walking too many commits.")
     __properties: ClassVar[List[str]] = ["fix", "branch", "skip_commits", "max_commits"]
 
     model_config = ConfigDict(

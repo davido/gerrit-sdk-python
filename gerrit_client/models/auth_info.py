@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.account_field_name import AccountFieldName
 from gerrit_client.models.agreement_info import AgreementInfo
@@ -32,18 +32,18 @@ class AuthInfo(BaseModel):
     AuthInfo
     """ # noqa: E501
     auth_type: Optional[AuthType] = None
-    use_contributor_agreements: Optional[StrictBool] = None
-    contributor_agreements: Optional[List[AgreementInfo]] = None
-    editable_account_fields: Optional[List[AccountFieldName]] = None
-    login_url: Optional[StrictStr] = None
-    login_text: Optional[StrictStr] = None
-    switch_account_url: Optional[StrictStr] = None
-    register_url: Optional[StrictStr] = None
-    register_text: Optional[StrictStr] = None
-    edit_full_name_url: Optional[StrictStr] = None
-    http_password_url: Optional[StrictStr] = None
-    git_basic_auth_policy: Optional[GitBasicAuthPolicy] = None
-    max_token_lifetime: Optional[StrictInt] = None
+    use_contributor_agreements: Optional[StrictBool] = Field(default=None, description="Whether contributor agreements are required.")
+    contributor_agreements: Optional[List[AgreementInfo]] = Field(default=None, description="List of contributor agreements as ContributorAgreementInfo entities.")
+    editable_account_fields: Optional[List[AccountFieldName]] = Field(default=None, description="List of account fields that are editable. Possible values are FULL_NAME, USER_NAME and REGISTER_NEW_EMAIL.")
+    login_url: Optional[StrictStr] = Field(default=None, description="The login URL. Only set if authentication type is HTTP or HTTP_LDAP.")
+    login_text: Optional[StrictStr] = Field(default=None, description="The login text. Only set if authentication type is HTTP or HTTP_LDAP.")
+    switch_account_url: Optional[StrictStr] = Field(default=None, description="The URL to switch accounts.")
+    register_url: Optional[StrictStr] = Field(default=None, description="The register URL. Only set if authentication type is LDAP, LDAP_BIND or CUSTOM_EXTENSION.")
+    register_text: Optional[StrictStr] = Field(default=None, description="The register text. Only set if authentication type is LDAP, LDAP_BIND or CUSTOM_EXTENSION.")
+    edit_full_name_url: Optional[StrictStr] = Field(default=None, description="The URL to edit the full name. Only set if authentication type is LDAP, LDAP_BIND or CUSTOM_EXTENSION.")
+    http_password_url: Optional[StrictStr] = Field(default=None, description="The URL to obtain an HTTP password. Only set if authentication type is CUSTOM_EXTENSION.")
+    git_basic_auth_policy: Optional[GitBasicAuthPolicy] = Field(default=None, description="The policy to authenticate Git over HTTP and REST API requests when authentication type is LDAP, LDAP_BIND or OAUTH. Can be HTTP, LDAP, HTTP_LDAP or OAUTH.")
+    max_token_lifetime: Optional[StrictInt] = Field(default=None, description="The maximum lifetime of authentication tokens.")
     __properties: ClassVar[List[str]] = ["auth_type", "use_contributor_agreements", "contributor_agreements", "editable_account_fields", "login_url", "login_text", "switch_account_url", "register_url", "register_text", "edit_full_name_url", "http_password_url", "git_basic_auth_policy", "max_token_lifetime"]
 
     model_config = ConfigDict(

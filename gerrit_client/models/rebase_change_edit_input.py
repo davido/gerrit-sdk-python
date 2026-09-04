@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +27,7 @@ class RebaseChangeEditInput(BaseModel):
     """
     RebaseChangeEditInput
     """ # noqa: E501
-    allow_conflicts: Optional[StrictBool] = None
+    allow_conflicts: Optional[StrictBool] = Field(default=None, description="If true, the rebase also succeeds if there are conflicts. + If there are conflicts the file contents of the rebased patch set contain git conflict markers to indicate the conflicts.")
     __properties: ClassVar[List[str]] = ["allow_conflicts"]
 
     model_config = ConfigDict(

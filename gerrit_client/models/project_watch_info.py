@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,14 +27,14 @@ class ProjectWatchInfo(BaseModel):
     """
     ProjectWatchInfo
     """ # noqa: E501
-    project: Optional[StrictStr] = None
-    filter: Optional[StrictStr] = None
-    problem: Optional[StrictStr] = None
-    notify_new_changes: Optional[StrictBool] = None
-    notify_new_patch_sets: Optional[StrictBool] = None
-    notify_all_comments: Optional[StrictBool] = None
-    notify_submitted_changes: Optional[StrictBool] = None
-    notify_abandoned_changes: Optional[StrictBool] = None
+    project: Optional[StrictStr] = Field(default=None, description="The name of the project.")
+    filter: Optional[StrictStr] = Field(default=None, description="A filter string to be applied to the project.")
+    problem: Optional[StrictStr] = Field(default=None, description="An error message when project is for example hidden or deleted.")
+    notify_new_changes: Optional[StrictBool] = Field(default=None, description="Notify on new changes.")
+    notify_new_patch_sets: Optional[StrictBool] = Field(default=None, description="Notify on new patch sets.")
+    notify_all_comments: Optional[StrictBool] = Field(default=None, description="Notify on comments.")
+    notify_submitted_changes: Optional[StrictBool] = Field(default=None, description="Notify on submitted changes.")
+    notify_abandoned_changes: Optional[StrictBool] = Field(default=None, description="Notify on abandoned changes.")
     __properties: ClassVar[List[str]] = ["project", "filter", "problem", "notify_new_changes", "notify_new_patch_sets", "notify_all_comments", "notify_submitted_changes", "notify_abandoned_changes"]
 
     model_config = ConfigDict(

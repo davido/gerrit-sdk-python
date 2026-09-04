@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,14 +29,14 @@ class GerritInfo(BaseModel):
     """ # noqa: E501
     all_projects: Optional[StrictStr] = None
     all_users: Optional[StrictStr] = None
-    doc_search: Optional[StrictBool] = None
-    doc_url: Optional[StrictStr] = None
-    edit_gpg_keys: Optional[StrictBool] = None
-    report_bug_url: Optional[StrictStr] = None
+    doc_search: Optional[StrictBool] = Field(default=None, description="Whether documentation search is available.")
+    doc_url: Optional[StrictStr] = Field(default=None, description="Custom base URL where Gerrit server documentation is located. (Documentation may still be available at /Documentation relative to the Gerrit base path even if this value is unset.)")
+    edit_gpg_keys: Optional[StrictBool] = Field(default=None, description="Whether to enable the web UI for editing GPG keys.")
+    report_bug_url: Optional[StrictStr] = Field(default=None, description="URL to report bugs.")
     primary_weblink_name: Optional[StrictStr] = None
-    instance_id: Optional[StrictStr] = None
-    default_branch: Optional[StrictStr] = None
-    project_state_predicate_enabled: Optional[StrictBool] = None
+    instance_id: Optional[StrictStr] = Field(default=None, description="Short identifier for this Gerrit installation.")
+    default_branch: Optional[StrictStr] = Field(default=None, description="Name of the default branch to use on the project creation.")
+    project_state_predicate_enabled: Optional[StrictBool] = Field(default=None, description="Whether the instance supports filtering projects by state.")
     __properties: ClassVar[List[str]] = ["all_projects", "all_users", "doc_search", "doc_url", "edit_gpg_keys", "report_bug_url", "primary_weblink_name", "instance_id", "default_branch", "project_state_predicate_enabled"]
 
     model_config = ConfigDict(

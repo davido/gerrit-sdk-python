@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,9 +27,9 @@ class AccessCheckInfo(BaseModel):
     """
     AccessCheckInfo
     """ # noqa: E501
-    message: Optional[StrictStr] = None
-    status: Optional[StrictInt] = None
-    debug_logs: Optional[List[StrictStr]] = None
+    message: Optional[StrictStr] = Field(default=None, description="A clarifying message if status is not 200.")
+    status: Optional[StrictInt] = Field(default=None, description="The HTTP status code for the access. 200 means success and 403 means denied.")
+    debug_logs: Optional[List[StrictStr]] = Field(default=None, description="Debug logs that may help to understand why a permission is denied or allowed.")
     __properties: ClassVar[List[str]] = ["message", "status", "debug_logs"]
 
     model_config = ConfigDict(

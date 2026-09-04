@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,10 +27,10 @@ class WebLinkInfo(BaseModel):
     """
     WebLinkInfo
     """ # noqa: E501
-    name: Optional[StrictStr] = None
-    tooltip: Optional[StrictStr] = None
-    image_url: Optional[StrictStr] = None
-    url: Optional[StrictStr] = None
+    name: Optional[StrictStr] = Field(default=None, description="The text to be linkified.")
+    tooltip: Optional[StrictStr] = Field(default=None, description="Tooltip to show when hovering over the link. Using \"Open in $NAME_OF_EXTERNAL_TOOL\" is a good option here.")
+    image_url: Optional[StrictStr] = Field(default=None, description="URL to the icon of the link.")
+    url: Optional[StrictStr] = Field(default=None, description="The link URL.")
     __properties: ClassVar[List[str]] = ["name", "tooltip", "image_url", "url"]
 
     model_config = ConfigDict(

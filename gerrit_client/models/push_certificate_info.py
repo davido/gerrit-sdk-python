@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.gpg_key_info import GpgKeyInfo
 from typing import Optional, Set
@@ -28,8 +28,8 @@ class PushCertificateInfo(BaseModel):
     """
     PushCertificateInfo
     """ # noqa: E501
-    certificate: Optional[StrictStr] = None
-    key: Optional[GpgKeyInfo] = None
+    certificate: Optional[StrictStr] = Field(default=None, description="Signed certificate payload and GPG signature block.")
+    key: Optional[GpgKeyInfo] = Field(default=None, description="Information about the key that signed the push, along with any problems found while checking the signature or the key itself, as a GpgKeyInfo entity.")
     __properties: ClassVar[List[str]] = ["certificate", "key"]
 
     model_config = ConfigDict(

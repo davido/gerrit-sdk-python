@@ -28,15 +28,15 @@ class RelatedChangeAndCommitInfo(BaseModel):
     """
     RelatedChangeAndCommitInfo
     """ # noqa: E501
-    project: Optional[StrictStr] = None
-    change_id: Optional[StrictStr] = None
-    commit: Optional[CommitInfo] = None
-    change_number: Optional[StrictInt] = Field(default=None, alias="_change_number")
-    revision_number: Optional[StrictInt] = Field(default=None, alias="_revision_number")
-    current_revision_number: Optional[StrictInt] = Field(default=None, alias="_current_revision_number")
-    status: Optional[StrictStr] = None
-    submittable: Optional[StrictBool] = None
-    work_in_progress: Optional[StrictBool] = None
+    project: Optional[StrictStr] = Field(default=None, description="The project of the change or commit.")
+    change_id: Optional[StrictStr] = Field(default=None, description="The Change-Id of the change.")
+    commit: Optional[CommitInfo] = Field(default=None, description="The commit as a CommitInfo entity.")
+    change_number: Optional[StrictInt] = Field(default=None, description="The change number.", alias="_change_number")
+    revision_number: Optional[StrictInt] = Field(default=None, description="The revision number.", alias="_revision_number")
+    current_revision_number: Optional[StrictInt] = Field(default=None, description="The current revision number.", alias="_current_revision_number")
+    status: Optional[StrictStr] = Field(default=None, description="The status of the change. The status of the change is one of (NEW, MERGED, ABANDONED).")
+    submittable: Optional[StrictBool] = Field(default=None, description="Boolean indicating whether the change is submittable. + Only populated if requested.")
+    work_in_progress: Optional[StrictBool] = Field(default=None, description="Boolean indicating whether the change is work in progress.")
     __properties: ClassVar[List[str]] = ["project", "change_id", "commit", "_change_number", "_revision_number", "_current_revision_number", "status", "submittable", "work_in_progress"]
 
     model_config = ConfigDict(

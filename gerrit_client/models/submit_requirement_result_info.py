@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.submit_requirement_expression_info import SubmitRequirementExpressionInfo
 from gerrit_client.models.submit_requirement_result_info_status import SubmitRequirementResultInfoStatus
@@ -29,13 +29,13 @@ class SubmitRequirementResultInfo(BaseModel):
     """
     SubmitRequirementResultInfo
     """ # noqa: E501
-    name: Optional[StrictStr] = None
-    description: Optional[StrictStr] = None
-    status: Optional[SubmitRequirementResultInfoStatus] = None
-    is_legacy: Optional[StrictBool] = None
-    applicability_expression_result: Optional[SubmitRequirementExpressionInfo] = None
-    submittability_expression_result: Optional[SubmitRequirementExpressionInfo] = None
-    override_expression_result: Optional[SubmitRequirementExpressionInfo] = None
+    name: Optional[StrictStr] = Field(default=None, description="The submit requirement name.")
+    description: Optional[StrictStr] = Field(default=None, description="Description of the submit requirement.")
+    status: Optional[SubmitRequirementResultInfoStatus] = Field(default=None, description="Status describing the result of evaluating the submit requirement. The status is one of (SATISFIED, UNSATISFIED, OVERRIDDEN, NOT_APPLICABLE, ERROR, FORCED, TIMEOUT).")
+    is_legacy: Optional[StrictBool] = Field(default=None, description="If true, this submit requirement result was created from a legacy SubmitRecord. Otherwise, it was created by evaluating a submit requirement.")
+    applicability_expression_result: Optional[SubmitRequirementExpressionInfo] = Field(default=None, description="A SubmitRequirementExpressionInfo containing the result of evaluating the applicability expression. Not set if the submit requirement did not define an applicability expression. Note that fields expression, passing_atoms and failing_atoms are always omitted for the applicability_expression_result.")
+    submittability_expression_result: Optional[SubmitRequirementExpressionInfo] = Field(default=None, description="A SubmitRequirementExpressionInfo containing the result of evaluating the submittability expression. + If the submit requirement does not apply, the status field of the result will be set to NOT_EVALUATED.")
+    override_expression_result: Optional[SubmitRequirementExpressionInfo] = Field(default=None, description="A SubmitRequirementExpressionInfo containing the result of evaluating the override expression. + Not set if the submit requirement did not define an override expression. If the submit requirement does not apply, the status field of the result will be set to NOT_EVALUATED.")
     __properties: ClassVar[List[str]] = ["name", "description", "status", "is_legacy", "applicability_expression_result", "submittability_expression_result", "override_expression_result"]
 
     model_config = ConfigDict(

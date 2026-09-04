@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.git_person import GitPerson
 from gerrit_client.models.web_link_info import WebLinkInfo
@@ -29,14 +29,14 @@ class CommitInfo(BaseModel):
     """
     CommitInfo
     """ # noqa: E501
-    commit: Optional[StrictStr] = None
-    parents: Optional[List[CommitInfo]] = None
-    author: Optional[GitPerson] = None
-    committer: Optional[GitPerson] = None
-    subject: Optional[StrictStr] = None
-    message: Optional[StrictStr] = None
-    web_links: Optional[List[WebLinkInfo]] = None
-    resolve_conflicts_web_links: Optional[List[WebLinkInfo]] = None
+    commit: Optional[StrictStr] = Field(default=None, description="The commit ID. Not set if included in a RevisionInfo entity that is contained in a map which has the commit ID as key.")
+    parents: Optional[List[CommitInfo]] = Field(default=None, description="The parent commits of this commit as a list of CommitInfo entities. In each parent only the commit and subject fields are populated.")
+    author: Optional[GitPerson] = Field(default=None, description="The author of the commit as a GitPersonInfo entity.")
+    committer: Optional[GitPerson] = Field(default=None, description="The committer of the commit as a GitPersonInfo entity.")
+    subject: Optional[StrictStr] = Field(default=None, description="The subject of the commit (header line of the commit message).")
+    message: Optional[StrictStr] = Field(default=None, description="The commit message.")
+    web_links: Optional[List[WebLinkInfo]] = Field(default=None, description="Links to the patch set in external sites as a list of WebLinkInfo entities.")
+    resolve_conflicts_web_links: Optional[List[WebLinkInfo]] = Field(default=None, description="Links to the commit in external sites for resolving conflicts as a list of WebLinkInfo entities.")
     __properties: ClassVar[List[str]] = ["commit", "parents", "author", "committer", "subject", "message", "web_links", "resolve_conflicts_web_links"]
 
     model_config = ConfigDict(

@@ -27,8 +27,8 @@ class IndexProjectInput(BaseModel):
     """
     IndexProjectInput
     """ # noqa: E501
-    index_children: Optional[StrictBool] = None
-    var_async: Optional[StrictBool] = Field(default=None, alias="async")
+    index_children: Optional[StrictBool] = Field(default=None, description="If children should be indexed recursively.")
+    var_async: Optional[StrictBool] = Field(default=None, description="If projects should be indexed asynchronously.", alias="async")
     __properties: ClassVar[List[str]] = ["index_children", "async"]
 
     model_config = ConfigDict(

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,8 +27,8 @@ class HitRatioInfo(BaseModel):
     """
     HitRatioInfo
     """ # noqa: E501
-    mem: Optional[StrictInt] = None
-    disk: Optional[StrictInt] = None
+    mem: Optional[StrictInt] = Field(default=None, description="Hit ratio for cache entries that are held in memory (0 \\<= value \\<= 100).")
+    disk: Optional[StrictInt] = Field(default=None, description="Hit ratio for cache entries that are held on disk (0 \\<= value \\<= 100). Only set for disk caches.")
     __properties: ClassVar[List[str]] = ["mem", "disk"]
 
     model_config = ConfigDict(

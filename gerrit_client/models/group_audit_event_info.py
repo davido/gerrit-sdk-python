@@ -29,9 +29,9 @@ class GroupAuditEventInfo(BaseModel):
     """
     GroupAuditEventInfo
     """ # noqa: E501
-    type: Optional[Type] = None
-    user: Optional[AccountInfo] = None
-    var_date: Optional[StrictStr] = Field(default=None, alias="date")
+    type: Optional[Type] = Field(default=None, description="The event type, can be: ADD_USER, REMOVE_USER, ADD_GROUP or REMOVE_GROUP. ADD_USER: A user was added as member to the group. REMOVE_USER: A user member was removed from the group. ADD_GROUP: A group was included as member in the group. REMOVE_GROUP: An included group was removed from the group.")
+    user: Optional[AccountInfo] = Field(default=None, description="The user that did the add/remove as detailed AccountInfo entity.")
+    var_date: Optional[StrictStr] = Field(default=None, description="The timestamp of the event.", alias="date")
     __properties: ClassVar[List[str]] = ["type", "user", "date"]
 
     model_config = ConfigDict(

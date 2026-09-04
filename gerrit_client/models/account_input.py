@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.auth_token_input import AuthTokenInput
 from typing import Optional, Set
@@ -28,14 +28,14 @@ class AccountInput(BaseModel):
     """
     AccountInput
     """ # noqa: E501
-    username: Optional[StrictStr] = None
-    name: Optional[StrictStr] = None
-    display_name: Optional[StrictStr] = None
-    email: Optional[StrictStr] = None
-    ssh_key: Optional[StrictStr] = None
-    http_password: Optional[StrictStr] = None
-    tokens: Optional[List[AuthTokenInput]] = None
-    groups: Optional[List[StrictStr]] = None
+    username: Optional[StrictStr] = Field(default=None, description="The user name. If provided, must match the user name from the URL.")
+    name: Optional[StrictStr] = Field(default=None, description="The full name of the user.")
+    display_name: Optional[StrictStr] = Field(default=None, description="The display name of the user.")
+    email: Optional[StrictStr] = Field(default=None, description="The email address of the user.")
+    ssh_key: Optional[StrictStr] = Field(default=None, description="The public SSH key of the user.")
+    http_password: Optional[StrictStr] = Field(default=None, description="The HTTP password of the user. (deprecated)")
+    tokens: Optional[List[AuthTokenInput]] = Field(default=None, description="A list of tokens in the form of AuthTokenInputs to assign to the user.")
+    groups: Optional[List[StrictStr]] = Field(default=None, description="A list of group IDs that identify the groups to which the user should be added.")
     __properties: ClassVar[List[str]] = ["username", "name", "display_name", "email", "ssh_key", "http_password", "tokens", "groups"]
 
     model_config = ConfigDict(

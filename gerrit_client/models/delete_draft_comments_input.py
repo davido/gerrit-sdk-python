@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +27,7 @@ class DeleteDraftCommentsInput(BaseModel):
     """
     DeleteDraftCommentsInput
     """ # noqa: E501
-    query: Optional[StrictStr] = None
+    query: Optional[StrictStr] = Field(default=None, description="A change query limiting results to changes matching this query; has:draft is implied and not necessary to list explicitly. If not set, matches all changes with drafts.")
     __properties: ClassVar[List[str]] = ["query"]
 
     model_config = ConfigDict(

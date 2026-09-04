@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.state import State
 from typing import Optional, Set
@@ -28,14 +28,14 @@ class TaskInfo(BaseModel):
     """
     TaskInfo
     """ # noqa: E501
-    id: Optional[StrictStr] = None
-    state: Optional[State] = None
-    start_time: Optional[StrictStr] = None
-    delay: Optional[StrictInt] = None
-    command: Optional[StrictStr] = None
-    remote_name: Optional[StrictStr] = None
-    project_name: Optional[StrictStr] = None
-    queue_name: Optional[StrictStr] = None
+    id: Optional[StrictStr] = Field(default=None, description="The ID of the task.")
+    state: Optional[State] = Field(default=None, description="The state of the task, can be DONE, CANCELLED, RUNNING, READY, SLEEPING and OTHER.")
+    start_time: Optional[StrictStr] = Field(default=None, description="The start time of the task.")
+    delay: Optional[StrictInt] = Field(default=None, description="The remaining delay of the task.")
+    command: Optional[StrictStr] = Field(default=None, description="The command of the task.")
+    remote_name: Optional[StrictStr] = Field(default=None, description="The remote name. May only be set for tasks that are associated with a project.")
+    project_name: Optional[StrictStr] = Field(default=None, description="The project the task is associated with.")
+    queue_name: Optional[StrictStr] = Field(default=None, description="The work queue the task is associated with.")
     __properties: ClassVar[List[str]] = ["id", "state", "start_time", "delay", "command", "remote_name", "project_name", "queue_name"]
 
     model_config = ConfigDict(

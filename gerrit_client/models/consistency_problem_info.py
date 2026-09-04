@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.consistency_problem_info_status import ConsistencyProblemInfoStatus
 from typing import Optional, Set
@@ -28,8 +28,8 @@ class ConsistencyProblemInfo(BaseModel):
     """
     ConsistencyProblemInfo
     """ # noqa: E501
-    status: Optional[ConsistencyProblemInfoStatus] = None
-    message: Optional[StrictStr] = None
+    status: Optional[ConsistencyProblemInfoStatus] = Field(default=None, description="The status of the consistency problem. + Possible values are FATAL, ERROR and WARNING.")
+    message: Optional[StrictStr] = Field(default=None, description="Message describing the consistency problem.")
     __properties: ClassVar[List[str]] = ["status", "message"]
 
     model_config = ConfigDict(

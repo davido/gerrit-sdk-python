@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.range_info import RangeInfo
 from typing import Optional, Set
@@ -28,11 +28,11 @@ class BlameInfo(BaseModel):
     """
     BlameInfo
     """ # noqa: E501
-    author: Optional[StrictStr] = None
-    id: Optional[StrictStr] = None
-    time: Optional[StrictInt] = None
-    commit_msg: Optional[StrictStr] = None
-    ranges: Optional[List[RangeInfo]] = None
+    author: Optional[StrictStr] = Field(default=None, description="The author of the commit.")
+    id: Optional[StrictStr] = Field(default=None, description="The id of the commit.")
+    time: Optional[StrictInt] = Field(default=None, description="Commit time.")
+    commit_msg: Optional[StrictStr] = Field(default=None, description="The commit message.")
+    ranges: Optional[List[RangeInfo]] = Field(default=None, description="The blame row coordinates as RangeInfo entities.")
     __properties: ClassVar[List[str]] = ["author", "id", "time", "commit_msg", "ranges"]
 
     model_config = ConfigDict(

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,8 +27,8 @@ class HttpPasswordInput(BaseModel):
     """
     HttpPasswordInput
     """ # noqa: E501
-    http_password: Optional[StrictStr] = None
-    generate: Optional[StrictBool] = None
+    http_password: Optional[StrictStr] = Field(default=None, description="The new HTTP password. Only Gerrit administrators may set the HTTP password directly. + If empty or not set and generate is false or not set, the HTTP password is deleted.")
+    generate: Optional[StrictBool] = Field(default=None, description="Whether a new HTTP password should be generated")
     __properties: ClassVar[List[str]] = ["http_password", "generate"]
 
     model_config = ConfigDict(

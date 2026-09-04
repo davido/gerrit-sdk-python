@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.commit_info import CommitInfo
 from gerrit_client.models.common_file_info import CommonFileInfo
@@ -30,13 +30,13 @@ class EditInfo(BaseModel):
     """
     EditInfo
     """ # noqa: E501
-    commit: Optional[CommitInfo] = None
-    base_patch_set_number: Optional[StrictInt] = None
-    base_revision: Optional[StrictStr] = None
-    ref: Optional[StrictStr] = None
-    fetch: Optional[Dict[str, FetchInfo]] = None
-    files: Optional[Dict[str, CommonFileInfo]] = None
-    contains_git_conflicts: Optional[StrictBool] = None
+    commit: Optional[CommitInfo] = Field(default=None, description="The commit of change edit as CommitInfo entity.")
+    base_patch_set_number: Optional[StrictInt] = Field(default=None, description="The patch set number of the patch set the change edit is based on.")
+    base_revision: Optional[StrictStr] = Field(default=None, description="The revision of the patch set the change edit is based on.")
+    ref: Optional[StrictStr] = Field(default=None, description="The ref of the change edit.")
+    fetch: Optional[Dict[str, FetchInfo]] = Field(default=None, description="Information about how to fetch this patch set. The fetch information is provided as a map that maps the protocol name (\"git\", \"http\", \"ssh\") to FetchInfo entities.")
+    files: Optional[Dict[str, CommonFileInfo]] = Field(default=None, description="The files of the change edit as a map that maps the file names to FileInfo entities.")
+    contains_git_conflicts: Optional[StrictBool] = Field(default=None, description="Whether the change edit contains conflicts. + If true, some of the file contents of the change edit contain git conflict markers to indicate the conflicts. + Only set if this edit info is returned in response to a request that rebases the change edit and conflicts are allowed.")
     __properties: ClassVar[List[str]] = ["commit", "base_patch_set_number", "base_revision", "ref", "fetch", "files", "contains_git_conflicts"]
 
     model_config = ConfigDict(

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.submit_type import SubmitType
 from typing import Optional, Set
@@ -28,9 +28,9 @@ class SubmitTypeInfo(BaseModel):
     """
     SubmitTypeInfo
     """ # noqa: E501
-    value: Optional[SubmitType] = None
-    configured_value: Optional[SubmitType] = None
-    inherited_value: Optional[SubmitType] = None
+    value: Optional[SubmitType] = Field(default=None, description="The effective submit type value. Never INHERIT.")
+    configured_value: Optional[SubmitType] = Field(default=None, description="The configured value, can be one of the submit types, or INHERIT to inherit from the parent project.")
+    inherited_value: Optional[SubmitType] = Field(default=None, description="The effective value that would be inherited from the parent. Never INHERIT.")
     __properties: ClassVar[List[str]] = ["value", "configured_value", "inherited_value"]
 
     model_config = ConfigDict(

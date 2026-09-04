@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,9 +27,9 @@ class MoveInput(BaseModel):
     """
     MoveInput
     """ # noqa: E501
-    message: Optional[StrictStr] = None
-    destination_branch: Optional[StrictStr] = None
-    keep_all_votes: Optional[StrictBool] = None
+    message: Optional[StrictStr] = Field(default=None, description="A message to be posted in this change's comments")
+    destination_branch: Optional[StrictStr] = Field(default=None, description="Destination branch")
+    keep_all_votes: Optional[StrictBool] = Field(default=None, description="By default, only veto votes that are blocking the change from submission are moved to the destination branch. Using this option is only allowed for administrators, because it can affect the submission behaviour of the change (depending on the label access configuration and submissions rules).")
     __properties: ClassVar[List[str]] = ["message", "destination_branch", "keep_all_votes"]
 
     model_config = ConfigDict(

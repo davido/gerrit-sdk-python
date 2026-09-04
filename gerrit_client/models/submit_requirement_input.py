@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,12 +27,12 @@ class SubmitRequirementInput(BaseModel):
     """
     SubmitRequirementInput
     """ # noqa: E501
-    name: Optional[StrictStr] = None
-    description: Optional[StrictStr] = None
-    applicability_expression: Optional[StrictStr] = None
-    submittability_expression: Optional[StrictStr] = None
-    override_expression: Optional[StrictStr] = None
-    allow_override_in_child_projects: Optional[StrictBool] = None
+    name: Optional[StrictStr] = Field(default=None, description="The submit requirement name.")
+    description: Optional[StrictStr] = Field(default=None, description="Description of the submit requirement.")
+    applicability_expression: Optional[StrictStr] = Field(default=None, description="Query expression that can be evaluated on any change. If evaluated to true on a change, the submit requirement is then applicable for this change. If not specified, the submit requirement is applicable for all changes.")
+    submittability_expression: Optional[StrictStr] = Field(default=None, description="Query expression that can be evaluated on any change. If evaluated to true on a change, the submit requirement is fulfilled and not blocking change submission.")
+    override_expression: Optional[StrictStr] = Field(default=None, description="Query expression that can be evaluated on any change. If evaluated to true on a change, the submit requirement is overridden and not blocking change submission.")
+    allow_override_in_child_projects: Optional[StrictBool] = Field(default=None, description="Whether this submit requirement can be overridden in child projects. Default is true.")
     __properties: ClassVar[List[str]] = ["name", "description", "applicability_expression", "submittability_expression", "override_expression", "allow_override_in_child_projects"]
 
     model_config = ConfigDict(

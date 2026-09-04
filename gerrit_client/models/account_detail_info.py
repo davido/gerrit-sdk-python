@@ -28,7 +28,7 @@ class AccountDetailInfo(BaseModel):
     """
     AccountDetailInfo
     """ # noqa: E501
-    registered_on: Optional[StrictStr] = None
+    registered_on: Optional[StrictStr] = Field(default=None, description="The timestamp of when the account was registered.")
     account_id: Optional[StrictInt] = Field(default=None, alias="_account_id")
     name: Optional[StrictStr] = None
     display_name: Optional[StrictStr] = None

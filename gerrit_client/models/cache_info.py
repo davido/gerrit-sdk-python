@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.cache_type import CacheType
 from gerrit_client.models.entries_info import EntriesInfo
@@ -30,11 +30,11 @@ class CacheInfo(BaseModel):
     """
     CacheInfo
     """ # noqa: E501
-    name: Optional[StrictStr] = None
-    type: Optional[CacheType] = None
-    entries: Optional[EntriesInfo] = None
-    average_get: Optional[StrictStr] = None
-    hit_ratio: Optional[HitRatioInfo] = None
+    name: Optional[StrictStr] = Field(default=None, description="The cache name. If the cache is defined by a plugin the cache name includes the plugin name: \"<plugin-name>-<cache-name>\".")
+    type: Optional[CacheType] = Field(default=None, description="The type of the cache (MEM: in memory cache, DISK: disk cache).")
+    entries: Optional[EntriesInfo] = Field(default=None, description="Information about the entries in the cache as a EntriesInfo entity.")
+    average_get: Optional[StrictStr] = Field(default=None, description="The average duration of getting one entry from the cache. The value is returned with a standard time unit abbreviation (ns: nanoseconds, us: microseconds, ms: milliseconds, s: seconds).")
+    hit_ratio: Optional[HitRatioInfo] = Field(default=None, description="Information about the hit ratio as a HitRatioInfo entity.")
     __properties: ClassVar[List[str]] = ["name", "type", "entries", "average_get", "hit_ratio"]
 
     model_config = ConfigDict(

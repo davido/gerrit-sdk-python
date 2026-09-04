@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,9 +27,9 @@ class AuthTokenInput(BaseModel):
     """
     AuthTokenInput
     """ # noqa: E501
-    id: Optional[StrictStr] = None
-    token: Optional[StrictStr] = None
-    lifetime: Optional[StrictStr] = None
+    id: Optional[StrictStr] = Field(default=None, description="Must be the same as the id used in the URL.")
+    token: Optional[StrictStr] = Field(default=None, description="The new token. Only Gerrit administrators may set the token directly.")
+    lifetime: Optional[StrictStr] = Field(default=None, description="Lifetime of the token. After the given duration the token will be invalid.")
     __properties: ClassVar[List[str]] = ["id", "token", "lifetime"]
 
     model_config = ConfigDict(

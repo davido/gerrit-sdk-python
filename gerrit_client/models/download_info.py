@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.download_scheme_info import DownloadSchemeInfo
 from typing import Optional, Set
@@ -28,8 +28,8 @@ class DownloadInfo(BaseModel):
     """
     DownloadInfo
     """ # noqa: E501
-    schemes: Optional[Dict[str, DownloadSchemeInfo]] = None
-    archives: Optional[List[StrictStr]] = None
+    schemes: Optional[Dict[str, DownloadSchemeInfo]] = Field(default=None, description="The supported download schemes as a map which maps the scheme name to a of DownloadSchemeInfo entity.")
+    archives: Optional[List[StrictStr]] = Field(default=None, description="List of supported archive formats. Possible values are tgz, tar, tbz2 and txz.")
     __properties: ClassVar[List[str]] = ["schemes", "archives"]
 
     model_config = ConfigDict(

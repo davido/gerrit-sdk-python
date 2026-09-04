@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.flow_expression_info import FlowExpressionInfo
 from gerrit_client.models.flow_stage_state import FlowStageState
@@ -29,9 +29,9 @@ class FlowStageInfo(BaseModel):
     """
     FlowStageInfo
     """ # noqa: E501
-    expression: Optional[FlowExpressionInfo] = None
-    state: Optional[FlowStageState] = None
-    message: Optional[StrictStr] = None
+    expression: Optional[FlowExpressionInfo] = Field(default=None, description="The expression defining the condition and the action of this stage as a FlowExpressionInfo entity.")
+    state: Optional[FlowStageState] = Field(default=None, description="The state for this stage. Can be PENDING (the condition of the stage is not satisfied yet or the action has not been executed yet), DONE (the condition of the stage is satisfied and the action has been executed), FAILED (the stage has a non-recoverable error, e.g.")
+    message: Optional[StrictStr] = Field(default=None, description="Optional message for the stage.")
     __properties: ClassVar[List[str]] = ["expression", "state", "message"]
 
     model_config = ConfigDict(

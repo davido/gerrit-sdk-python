@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.notify_handling import NotifyHandling
 from gerrit_client.models.notify_info import NotifyInfo
@@ -29,11 +29,11 @@ class DeleteVoteInput(BaseModel):
     """
     DeleteVoteInput
     """ # noqa: E501
-    label: Optional[StrictStr] = None
-    notify: Optional[NotifyHandling] = None
-    notify_details: Optional[Dict[str, NotifyInfo]] = None
-    ignore_automatic_attention_set_rules: Optional[StrictBool] = None
-    reason: Optional[StrictStr] = None
+    label: Optional[StrictStr] = Field(default=None, description="The label for which the vote should be deleted. + If set, must match the label in the URL.")
+    notify: Optional[NotifyHandling] = Field(default=None, description="Notify handling that defines to whom email notifications should be sent after the vote is deleted. + Allowed values are NONE, OWNER, OWNER_REVIEWERS and ALL. + If not set, the default is ALL.")
+    notify_details: Optional[Dict[str, NotifyInfo]] = Field(default=None, description="Additional information about whom to notify about the update as a map of recipient type to NotifyInfo entity.")
+    ignore_automatic_attention_set_rules: Optional[StrictBool] = Field(default=None, description="If set to true, ignore all automatic attention set rules described in the attention set. When not set, the default is false.")
+    reason: Optional[StrictStr] = Field(default=None, description="The reason why this vote is deleted. Will + go into the change message.")
     __properties: ClassVar[List[str]] = ["label", "notify", "notify_details", "ignore_automatic_attention_set_rules", "reason"]
 
     model_config = ConfigDict(

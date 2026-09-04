@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.change_type import ChangeType
 from gerrit_client.models.content_entry import ContentEntry
@@ -33,15 +33,15 @@ class DiffInfo(BaseModel):
     """
     DiffInfo
     """ # noqa: E501
-    meta_a: Optional[FileMeta] = None
-    meta_b: Optional[FileMeta] = None
-    intraline_status: Optional[IntraLineStatus] = None
-    change_type: Optional[ChangeType] = None
-    diff_header: Optional[List[StrictStr]] = None
-    content: Optional[List[ContentEntry]] = None
-    web_links: Optional[List[DiffWebLinkInfo]] = None
-    edit_web_links: Optional[List[WebLinkInfo]] = None
-    binary: Optional[StrictBool] = None
+    meta_a: Optional[FileMeta] = Field(default=None, description="Meta information about the file on side A as a DiffFileMetaInfo entity.")
+    meta_b: Optional[FileMeta] = Field(default=None, description="Meta information about the file on side B as a DiffFileMetaInfo entity.")
+    intraline_status: Optional[IntraLineStatus] = Field(default=None, description="Intraline status (OK, ERROR, TIMEOUT).")
+    change_type: Optional[ChangeType] = Field(default=None, description="The type of change (ADDED, MODIFIED, DELETED, RENAMED COPIED, REWRITE).")
+    diff_header: Optional[List[StrictStr]] = Field(default=None, description="A list of strings representing the patch set diff header.")
+    content: Optional[List[ContentEntry]] = Field(default=None, description="The content differences in the file as a list of DiffContent entities.")
+    web_links: Optional[List[DiffWebLinkInfo]] = Field(default=None, description="Links to the file diff in external sites as a list of DiffWebLinkInfo entries.")
+    edit_web_links: Optional[List[WebLinkInfo]] = Field(default=None, description="Links to edit the file in external sites as a list of WebLinkInfo entries.")
+    binary: Optional[StrictBool] = Field(default=None, description="Whether the file is binary.")
     __properties: ClassVar[List[str]] = ["meta_a", "meta_b", "intraline_status", "change_type", "diff_header", "content", "web_links", "edit_web_links", "binary"]
 
     model_config = ConfigDict(

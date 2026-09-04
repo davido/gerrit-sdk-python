@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.account_input import AccountInput
 from gerrit_client.models.merge_input import MergeInput
@@ -29,12 +29,12 @@ class MergePatchSetInput(BaseModel):
     """
     MergePatchSetInput
     """ # noqa: E501
-    subject: Optional[StrictStr] = None
-    inherit_parent: Optional[StrictBool] = None
-    base_change: Optional[StrictStr] = None
-    merge: Optional[MergeInput] = None
-    author: Optional[AccountInput] = None
-    validation_options: Optional[Dict[str, StrictStr]] = None
+    subject: Optional[StrictStr] = Field(default=None, description="The new subject for the change, if not specified, will reuse the current patch set's subject")
+    inherit_parent: Optional[StrictBool] = Field(default=None, description="Use the current patch set's first parent as the merge tip when set to true.")
+    base_change: Optional[StrictStr] = Field(default=None, description="A \\{change-id\\} that identifies a change. When inherit_parent is false, the merge tip will be the current patch set of the base_change if it's set. Otherwise, the current branch tip of the destination branch will be used.")
+    merge: Optional[MergeInput] = Field(default=None, description="The detail of the source commit for merge as a MergeInput entity.")
+    author: Optional[AccountInput] = Field(default=None, description="The author of the commit to create. Must be an AccountInput entity with at least the name and email fields set. The caller needs \"Forge Author\" permission when using this field. This field does not affect the owner or the committer of the change, which will continue to use the identity of the caller.")
+    validation_options: Optional[Dict[str, StrictStr]] = Field(default=None, description="Map with key-value pairs that are forwarded as options to the commit validation listeners (e.g. can be used to skip certain validations). Which validation options are supported depends on the installed commit validation listeners.")
     __properties: ClassVar[List[str]] = ["subject", "inherit_parent", "base_change", "merge", "author", "validation_options"]
 
     model_config = ConfigDict(

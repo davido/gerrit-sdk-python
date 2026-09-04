@@ -29,18 +29,18 @@ class GroupInfo(BaseModel):
     """
     GroupInfo
     """ # noqa: E501
-    url: Optional[StrictStr] = None
-    options: Optional[GroupOptionsInfo] = None
-    description: Optional[StrictStr] = None
-    group_id: Optional[StrictInt] = None
-    owner: Optional[StrictStr] = None
-    owner_id: Optional[StrictStr] = None
-    created_on: Optional[StrictStr] = None
-    more_groups: Optional[StrictBool] = Field(default=None, alias="_more_groups")
-    members: Optional[List[AccountInfo]] = None
-    includes: Optional[List[GroupInfo]] = None
-    id: Optional[StrictStr] = None
-    name: Optional[StrictStr] = None
+    url: Optional[StrictStr] = Field(default=None, description="URL to information about the group. Typically a URL to a web page that permits users to apply to join the group, or manage their membership.")
+    options: Optional[GroupOptionsInfo] = Field(default=None, description="Options of the group")
+    description: Optional[StrictStr] = Field(default=None, description="The description of the group.")
+    group_id: Optional[StrictInt] = Field(default=None, description="The numeric ID of the group.")
+    owner: Optional[StrictStr] = Field(default=None, description="The name of the owner group.")
+    owner_id: Optional[StrictStr] = Field(default=None, description="The URL encoded UUID of the owner group.")
+    created_on: Optional[StrictStr] = Field(default=None, description="The timestamp of when the group was created.")
+    more_groups: Optional[StrictBool] = Field(default=None, description="Whether the query would deliver more results if not limited. + Only set on the last group that is returned by a group query.", alias="_more_groups")
+    members: Optional[List[AccountInfo]] = Field(default=None, description="A list of AccountInfo entities describing the direct members. + Only set if members are requested.")
+    includes: Optional[List[GroupInfo]] = Field(default=None, description="A list of GroupInfo entities describing the direct subgroups. + Only set if subgroups are requested.")
+    id: Optional[StrictStr] = Field(default=None, description="The URL encoded UUID of the group.")
+    name: Optional[StrictStr] = Field(default=None, description="The name of the group. + For external groups the group name is missing if there is no group backend that can resolve the group UUID. E.g. this can happen when a plugin that provided a group backend was uninstalled.")
     __properties: ClassVar[List[str]] = ["url", "options", "description", "group_id", "owner", "owner_id", "created_on", "_more_groups", "members", "includes", "id", "name"]
 
     model_config = ConfigDict(

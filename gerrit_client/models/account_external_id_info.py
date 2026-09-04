@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,10 +27,10 @@ class AccountExternalIdInfo(BaseModel):
     """
     AccountExternalIdInfo
     """ # noqa: E501
-    identity: Optional[StrictStr] = None
-    email_address: Optional[StrictStr] = None
-    trusted: Optional[StrictBool] = None
-    can_delete: Optional[StrictBool] = None
+    identity: Optional[StrictStr] = Field(default=None, description="The account external id.")
+    email_address: Optional[StrictStr] = Field(default=None, description="The email address for the external id.")
+    trusted: Optional[StrictBool] = Field(default=None, description="Whether the external id is trusted.")
+    can_delete: Optional[StrictBool] = Field(default=None, description="Whether the external id can be deleted by the calling user.")
     __properties: ClassVar[List[str]] = ["identity", "email_address", "trusted", "can_delete"]
 
     model_config = ConfigDict(

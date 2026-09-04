@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.schema_migrate_label_functions_to_submit_requirement_status import SchemaMigrateLabelFunctionsToSubmitRequirementStatus
 from typing import Optional, Set
@@ -28,7 +28,7 @@ class MigrateLabelsInfo(BaseModel):
     """
     MigrateLabelsInfo
     """ # noqa: E501
-    status: Optional[SchemaMigrateLabelFunctionsToSubmitRequirementStatus] = None
+    status: Optional[SchemaMigrateLabelFunctionsToSubmitRequirementStatus] = Field(default=None, description="The status of the migration. Takes one of the following values: MIGRATED, HAS_PROLOG, PREVIOUSLY_MIGRATED, NO_CHANGE")
     __properties: ClassVar[List[str]] = ["status"]
 
     model_config = ConfigDict(

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.submit_type import SubmitType
 from typing import Optional, Set
@@ -28,13 +28,13 @@ class MergeableInfo(BaseModel):
     """
     MergeableInfo
     """ # noqa: E501
-    submit_type: Optional[SubmitType] = None
-    strategy: Optional[StrictStr] = None
-    mergeable: Optional[StrictBool] = None
-    commit_merged: Optional[StrictBool] = None
-    content_merged: Optional[StrictBool] = None
-    conflicts: Optional[List[StrictStr]] = None
-    mergeable_into: Optional[List[StrictStr]] = None
+    submit_type: Optional[SubmitType] = Field(default=None, description="Submit type used for this change, can be MERGE_IF_NECESSARY, FAST_FORWARD_ONLY, REBASE_IF_NECESSARY, REBASE_ALWAYS, MERGE_ALWAYS or CHERRY_PICK.")
+    strategy: Optional[StrictStr] = Field(default=None, description="The strategy of the merge, can be recursive, resolve, simple-two-way-in-core, ours or theirs.")
+    mergeable: Optional[StrictBool] = Field(default=None, description="true if this change is cleanly mergeable or already merged, false otherwise")
+    commit_merged: Optional[StrictBool] = Field(default=None, description="true if this change is already merged, false otherwise")
+    content_merged: Optional[StrictBool] = Field(default=None, description="true if the content of this change is already merged, false otherwise")
+    conflicts: Optional[List[StrictStr]] = Field(default=None, description="A list of paths with conflicts")
+    mergeable_into: Optional[List[StrictStr]] = Field(default=None, description="A list of other branch names where this change could merge cleanly")
     __properties: ClassVar[List[str]] = ["submit_type", "strategy", "mergeable", "commit_merged", "content_merged", "conflicts", "mergeable_into"]
 
     model_config = ConfigDict(

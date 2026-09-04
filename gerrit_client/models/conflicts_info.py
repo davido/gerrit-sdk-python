@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.no_merge_base_reason import NoMergeBaseReason
 from typing import Optional, Set
@@ -28,12 +28,12 @@ class ConflictsInfo(BaseModel):
     """
     ConflictsInfo
     """ # noqa: E501
-    base: Optional[StrictStr] = None
-    ours: Optional[StrictStr] = None
-    theirs: Optional[StrictStr] = None
-    merge_strategy: Optional[StrictStr] = None
-    no_base_reason: Optional[NoMergeBaseReason] = None
-    contains_conflicts: Optional[StrictBool] = None
+    base: Optional[StrictStr] = Field(default=None, description="The SHA1 of the commit that was used as the base commit for the Git merge that created the revision. + A base is not set if: + - the merged commits do not have a common ancestor (in this case no_base_reason is NO_COMMON_ANCESTOR).")
+    ours: Optional[StrictStr] = Field(default=None, description="The SHA1 of the commit that was used as \"ours\" for the Git merge that created the revision. + - For merge commits that are created by the Create Change REST endpoint \"ours\" is the SHA1 of the change's target branch (the branch that is specified as branch in the ChangeInput).")
+    theirs: Optional[StrictStr] = Field(default=None, description="The SHA1 of the commit that was used as \"theirs\" for the Git merge that created the revision.")
+    merge_strategy: Optional[StrictStr] = Field(default=None, description="The merge strategy was used for the Git merge that created the revision. + Possible values: resolve, recursive, simple-two-way-in-core, ours and theirs.")
+    no_base_reason: Optional[NoMergeBaseReason] = Field(default=None, description="Reason why base is not set. + Only set if base is not set. + Possible values are: + - NO_COMMON_ANCESTOR: The merged commits do not have a common ancestor. + - COMPUTED_BASE: The merged commits have multiple merge bases (happens for criss-cross-merges) and the base was computed.")
+    contains_conflicts: Optional[StrictBool] = Field(default=None, description="Whether any of the files in the revision has a conflict due to merging \"ours\" and \"theirs\". + If \"true\" at least one of the files in the revision has a conflict and contains Git conflict markers. The conflicts occurred while performing a merge between \"ours\" and \"theirs\".")
     __properties: ClassVar[List[str]] = ["base", "ours", "theirs", "merge_strategy", "no_base_reason", "contains_conflicts"]
 
     model_config = ConfigDict(

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.notify_handling import NotifyHandling
 from gerrit_client.models.notify_info import NotifyInfo
@@ -29,10 +29,10 @@ class CommitMessageInput(BaseModel):
     """
     CommitMessageInput
     """ # noqa: E501
-    message: Optional[StrictStr] = None
-    notify: Optional[NotifyHandling] = None
-    notify_details: Optional[Dict[str, NotifyInfo]] = None
-    committer_email: Optional[StrictStr] = None
+    message: Optional[StrictStr] = Field(default=None, description="New commit message.")
+    notify: Optional[NotifyHandling] = Field(default=None, description="Notify handling that defines to whom email notifications should be sent after the commit message was updated. + Allowed values are NONE, OWNER, OWNER_REVIEWERS and ALL. + If not set, the default is OWNER for WIP changes and ALL otherwise.")
+    notify_details: Optional[Dict[str, NotifyInfo]] = Field(default=None, description="Additional information about whom to notify about the update as a map of recipient type to NotifyInfo entity.")
+    committer_email: Optional[StrictStr] = Field(default=None, description="New message is committed using this email address. Only the registered emails of the calling user are considered valid.")
     __properties: ClassVar[List[str]] = ["message", "notify", "notify_details", "committer_email"]
 
     model_config = ConfigDict(

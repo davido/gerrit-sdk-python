@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.action import Action
 from typing import Optional, Set
@@ -28,10 +28,10 @@ class PermissionRuleInfo(BaseModel):
     """
     PermissionRuleInfo
     """ # noqa: E501
-    action: Optional[Action] = None
-    force: Optional[StrictBool] = None
-    min: Optional[StrictInt] = None
-    max: Optional[StrictInt] = None
+    action: Optional[Action] = Field(default=None, description="The action of this rule. For normal permissions this can be ALLOW, DENY or BLOCK. Special values for global capabilities are INTERACTIVE and BATCH.")
+    force: Optional[StrictBool] = Field(default=None, description="Whether the force flag is set.")
+    min: Optional[StrictInt] = Field(default=None, description="The min value of the permission range.")
+    max: Optional[StrictInt] = Field(default=None, description="The max value of the permission range.")
     __properties: ClassVar[List[str]] = ["action", "force", "min", "max"]
 
     model_config = ConfigDict(

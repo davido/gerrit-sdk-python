@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,9 +27,9 @@ class ThreadSummaryInfo(BaseModel):
     """
     ThreadSummaryInfo
     """ # noqa: E501
-    cpus: Optional[StrictInt] = None
-    threads: Optional[StrictInt] = None
-    counts: Optional[Dict[str, Dict[str, StrictInt]]] = None
+    cpus: Optional[StrictInt] = Field(default=None, description="The number of available processors.")
+    threads: Optional[StrictInt] = Field(default=None, description="The total number of current threads.")
+    counts: Optional[Dict[str, Dict[str, StrictInt]]] = Field(default=None, description="Detailed thread counts as a map that maps a thread kind to a map that maps a thread state to the thread count.")
     __properties: ClassVar[List[str]] = ["cpus", "threads", "counts"]
 
     model_config = ConfigDict(

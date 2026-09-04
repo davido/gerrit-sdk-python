@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,8 +27,8 @@ class HashtagsInput(BaseModel):
     """
     HashtagsInput
     """ # noqa: E501
-    add: Optional[List[StrictStr]] = None
-    remove: Optional[List[StrictStr]] = None
+    add: Optional[List[StrictStr]] = Field(default=None, description="The list of hashtags to be added to the change.")
+    remove: Optional[List[StrictStr]] = Field(default=None, description="The list of hashtags to be removed from the change.")
     __properties: ClassVar[List[str]] = ["add", "remove"]
 
     model_config = ConfigDict(

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,8 +27,8 @@ class GroupBaseInfo(BaseModel):
     """
     GroupBaseInfo
     """ # noqa: E501
-    id: Optional[StrictStr] = None
-    name: Optional[StrictStr] = None
+    id: Optional[StrictStr] = Field(default=None, description="The UUID of the group.")
+    name: Optional[StrictStr] = Field(default=None, description="The name of the group.")
     __properties: ClassVar[List[str]] = ["id", "name"]
 
     model_config = ConfigDict(

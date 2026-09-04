@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +27,7 @@ class UserConfigInfo(BaseModel):
     """
     UserConfigInfo
     """ # noqa: E501
-    anonymous_coward_name: Optional[StrictStr] = None
+    anonymous_coward_name: Optional[StrictStr] = Field(default=None, description="Username that is displayed in the Gerrit Web UI and in e-mail notifications if the full name of the user is not set.")
     __properties: ClassVar[List[str]] = ["anonymous_coward_name"]
 
     model_config = ConfigDict(

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,12 +27,12 @@ class MemSummaryInfo(BaseModel):
     """
     MemSummaryInfo
     """ # noqa: E501
-    total: Optional[StrictStr] = None
-    used: Optional[StrictStr] = None
-    free: Optional[StrictStr] = None
-    buffers: Optional[StrictStr] = None
-    max: Optional[StrictStr] = None
-    open_files: Optional[StrictInt] = None
+    total: Optional[StrictStr] = Field(default=None, description="The total size of the memory. The value is returned with a unit abbreviation (k: kilobytes, m: megabytes, g: gigabytes).")
+    used: Optional[StrictStr] = Field(default=None, description="The size of used memory. The value is returned with a unit abbreviation (k: kilobytes, m: megabytes, g: gigabytes).")
+    free: Optional[StrictStr] = Field(default=None, description="The size of free memory. The value is returned with a unit abbreviation (k: kilobytes, m: megabytes, g: gigabytes).")
+    buffers: Optional[StrictStr] = Field(default=None, description="The size of memory used for JGit buffers. The value is returned with a unit abbreviation (k: kilobytes, m: megabytes, g: gigabytes).")
+    max: Optional[StrictStr] = Field(default=None, description="The maximal memory size. The value is returned with a unit abbreviation (k: kilobytes, m: megabytes, g: gigabytes).")
+    open_files: Optional[StrictInt] = Field(default=None, description="The number of open files.")
     __properties: ClassVar[List[str]] = ["total", "used", "free", "buffers", "max", "open_files"]
 
     model_config = ConfigDict(

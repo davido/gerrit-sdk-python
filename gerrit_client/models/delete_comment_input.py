@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +27,7 @@ class DeleteCommentInput(BaseModel):
     """
     DeleteCommentInput
     """ # noqa: E501
-    reason: Optional[StrictStr] = None
+    reason: Optional[StrictStr] = Field(default=None, description="The reason why the comment should be deleted. + If set, the comment's message will be replaced with \"Comment removed by: name; Reason: reason\", or just \"Comment removed by: name.\" if not set.")
     __properties: ClassVar[List[str]] = ["reason"]
 
     model_config = ConfigDict(

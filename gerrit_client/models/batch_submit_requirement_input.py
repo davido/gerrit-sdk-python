@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.submit_requirement_input import SubmitRequirementInput
 from typing import Optional, Set
@@ -28,10 +28,10 @@ class BatchSubmitRequirementInput(BaseModel):
     """
     BatchSubmitRequirementInput
     """ # noqa: E501
-    commit_message: Optional[StrictStr] = None
-    delete: Optional[List[StrictStr]] = None
-    create: Optional[List[SubmitRequirementInput]] = None
-    update: Optional[Dict[str, SubmitRequirementInput]] = None
+    commit_message: Optional[StrictStr] = Field(default=None, description="Message that should be used to commit the submit requirements updates in the project.config file to the refs/meta/config branch.")
+    delete: Optional[List[StrictStr]] = Field(default=None, description="List of submit requirements that should be deleted.")
+    create: Optional[List[SubmitRequirementInput]] = Field(default=None, description="List of SubmitRequirementInput entities that describe submit requirements that should be created.")
+    update: Optional[Dict[str, SubmitRequirementInput]] = Field(default=None, description="Map of submit requirement names to SubmitRequirementInput entities that describe the updates that should be done for the submit requirements. The given inputs must set all properties (including those that are not being changed).")
     __properties: ClassVar[List[str]] = ["commit_message", "delete", "create", "update"]
 
     model_config = ConfigDict(

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,8 +28,8 @@ class FileContentInput(BaseModel):
     FileContentInput
     """ # noqa: E501
     content: Optional[Dict[str, Any]] = None
-    binary_content: Optional[StrictStr] = None
-    file_mode: Optional[StrictInt] = None
+    binary_content: Optional[StrictStr] = Field(default=None, description="The file content as a base-64 encoded data URI. If no content is provided, an empty is created or if an existing file is updated the file content is removed so that the file becomes empty. The content must be a SHA1 if the file mode is 160000 (gitlink).")
+    file_mode: Optional[StrictInt] = Field(default=None, description="The file mode in octal format. Supported values are 100644 (regular file), 100755 (executable file), 120000 (symlink) and 160000 (gitlink). If unset, new files are created with file mode 100644 (regular file) and for existing files the existing file mode is kept.")
     __properties: ClassVar[List[str]] = ["content", "binary_content", "file_mode"]
 
     model_config = ConfigDict(

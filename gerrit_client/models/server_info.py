@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.accounts_info import AccountsInfo
 from gerrit_client.models.auth_info import AuthInfo
@@ -38,22 +38,22 @@ class ServerInfo(BaseModel):
     """
     ServerInfo
     """ # noqa: E501
-    accounts: Optional[AccountsInfo] = None
-    auth: Optional[AuthInfo] = None
-    change: Optional[ChangeConfigInfo] = None
-    download: Optional[DownloadInfo] = None
-    gerrit: Optional[GerritInfo] = None
-    groups: Optional[GroupsInfo] = None
-    note_db_enabled: Optional[StrictBool] = None
-    plugin: Optional[PluginConfigInfo] = None
-    sshd: Optional[Dict[str, Any]] = None
-    suggest: Optional[SuggestInfo] = None
-    user: Optional[UserConfigInfo] = None
-    receive: Optional[ReceiveInfo] = None
-    default_theme: Optional[StrictStr] = None
-    submit_requirement_dashboard_columns: Optional[List[StrictStr]] = None
-    dashboard_show_all_labels: Optional[StrictBool] = None
-    metadata: Optional[List[MetadataInfo]] = None
+    accounts: Optional[AccountsInfo] = Field(default=None, description="Information about the configuration from the accounts section as AccountsConfigInfo entity.")
+    auth: Optional[AuthInfo] = Field(default=None, description="Information about the authentication configuration as AuthInfo entity.")
+    change: Optional[ChangeConfigInfo] = Field(default=None, description="Information about the configuration from the change section as ChangeConfigInfo entity.")
+    download: Optional[DownloadInfo] = Field(default=None, description="Information about the configured download options as DownloadInfo entity. information about Gerrit")
+    gerrit: Optional[GerritInfo] = Field(default=None, description="Information about the configuration from the gerrit section as GerritInfo entity.")
+    groups: Optional[GroupsInfo] = Field(default=None, description="Information about the configuration from the groups section as GroupsConfigInfo entity.")
+    note_db_enabled: Optional[StrictBool] = Field(default=None, description="Whether the NoteDb storage backend is fully enabled.")
+    plugin: Optional[PluginConfigInfo] = Field(default=None, description="Information about Gerrit extensions by plugins as PluginConfigInfo entity.")
+    sshd: Optional[Dict[str, Any]] = Field(default=None, description="Information about the configuration from the sshd section as SshdInfo entity. Not set if SSHD is disabled.")
+    suggest: Optional[SuggestInfo] = Field(default=None, description="Information about the configuration from the suggest section as SuggestInfo entity.")
+    user: Optional[UserConfigInfo] = Field(default=None, description="Information about the configuration from the user section as UserConfigInfo entity.")
+    receive: Optional[ReceiveInfo] = Field(default=None, description="Information about the receive-pack configuration as a ReceiveInfo entity.")
+    default_theme: Optional[StrictStr] = Field(default=None, description="URL to a default Gerrit UI theme plugin, if available. Located in /static/gerrit-theme.js by default.")
+    submit_requirement_dashboard_columns: Optional[List[StrictStr]] = Field(default=None, description="The list of submit requirement names that should be displayed as separate columns in the dashboard. If empty, the default is to display all submit requirements that are applicable for changes appearing in the dashboard.")
+    dashboard_show_all_labels: Optional[StrictBool] = Field(default=None, description="Whether to show all labels in the dashboard, even if they are not submit requirements.")
+    metadata: Optional[List[MetadataInfo]] = Field(default=None, description="Optional server metadata as a list of MetadataInfo entities. If and which metadata is provided depends on the Gerrit setup.")
     __properties: ClassVar[List[str]] = ["accounts", "auth", "change", "download", "gerrit", "groups", "note_db_enabled", "plugin", "sshd", "suggest", "user", "receive", "default_theme", "submit_requirement_dashboard_columns", "dashboard_show_all_labels", "metadata"]
 
     model_config = ConfigDict(

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.check_account_external_ids_result_info import CheckAccountExternalIdsResultInfo
 from gerrit_client.models.check_accounts_result_info import CheckAccountsResultInfo
@@ -30,9 +30,9 @@ class ConsistencyCheckInfo(BaseModel):
     """
     ConsistencyCheckInfo
     """ # noqa: E501
-    check_accounts_result: Optional[CheckAccountsResultInfo] = None
-    check_account_external_ids_result: Optional[CheckAccountExternalIdsResultInfo] = None
-    check_groups_result: Optional[CheckGroupsResultInfo] = None
+    check_accounts_result: Optional[CheckAccountsResultInfo] = Field(default=None, description="The result of running the account consistency check as a CheckAccountsResultInfo entity.")
+    check_account_external_ids_result: Optional[CheckAccountExternalIdsResultInfo] = Field(default=None, description="The result of running the account external ID consistency check as a CheckAccountExternalIdsResultInfo entity.")
+    check_groups_result: Optional[CheckGroupsResultInfo] = Field(default=None, description="The result of running the group consistency check as a CheckGroupsResultInfo entity.")
     __properties: ClassVar[List[str]] = ["check_accounts_result", "check_account_external_ids_result", "check_groups_result"]
 
     model_config = ConfigDict(

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,10 +27,10 @@ class EmailInfo(BaseModel):
     """
     EmailInfo
     """ # noqa: E501
-    email: Optional[StrictStr] = None
-    preferred: Optional[StrictBool] = None
+    email: Optional[StrictStr] = Field(default=None, description="The email address.")
+    preferred: Optional[StrictBool] = Field(default=None, description="Whether this is the preferred email address of the user.")
     avatar: Optional[StrictBool] = None
-    pending_confirmation: Optional[StrictBool] = None
+    pending_confirmation: Optional[StrictBool] = Field(default=None, description="Set true if the user must confirm control of the email address by following a verification link before Gerrit will permit use of this address.")
     __properties: ClassVar[List[str]] = ["email", "preferred", "avatar", "pending_confirmation"]
 
     model_config = ConfigDict(

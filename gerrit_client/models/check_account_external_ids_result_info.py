@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.consistency_problem_info import ConsistencyProblemInfo
 from typing import Optional, Set
@@ -28,7 +28,7 @@ class CheckAccountExternalIdsResultInfo(BaseModel):
     """
     CheckAccountExternalIdsResultInfo
     """ # noqa: E501
-    problems: Optional[List[ConsistencyProblemInfo]] = None
+    problems: Optional[List[ConsistencyProblemInfo]] = Field(default=None, description="A list of ConsistencyProblemInfo entities.")
     __properties: ClassVar[List[str]] = ["problems"]
 
     model_config = ConfigDict(

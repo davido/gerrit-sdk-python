@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.range import Range
 from typing import Optional, Set
@@ -28,9 +28,9 @@ class FixReplacementInfo(BaseModel):
     """
     FixReplacementInfo
     """ # noqa: E501
-    path: Optional[StrictStr] = None
-    range: Optional[Range] = None
-    replacement: Optional[StrictStr] = None
+    path: Optional[StrictStr] = Field(default=None, description="The path of the file which should be modified. Any file in the repository may be modified. The commit message can be modified via the magic file /COMMIT_MSG though only the part below the generated header of that magic file can be modified.")
+    range: Optional[Range] = Field(default=None, description="A CommentRange indicating which content of the file should be replaced. Lines in the file are assumed to be separated by the line feed character.")
+    replacement: Optional[StrictStr] = Field(default=None, description="The content which should be used instead of the current one.")
     __properties: ClassVar[List[str]] = ["path", "range", "replacement"]
 
     model_config = ConfigDict(

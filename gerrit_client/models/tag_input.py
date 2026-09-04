@@ -27,10 +27,10 @@ class TagInput(BaseModel):
     """
     TagInput
     """ # noqa: E501
-    ref: Optional[StrictStr] = None
-    revision: Optional[StrictStr] = None
-    message: Optional[StrictStr] = None
-    var_date: Optional[StrictStr] = Field(default=None, alias="date")
+    ref: Optional[StrictStr] = Field(default=None, description="The name of the tag. The leading refs/tags/ is optional.")
+    revision: Optional[StrictStr] = Field(default=None, description="The revision to which the tag should point. If not specified, the project's HEAD will be used.")
+    message: Optional[StrictStr] = Field(default=None, description="The tag message. When set, the tag will be created as an annotated tag.")
+    var_date: Optional[StrictStr] = Field(default=None, description="Creation timestamp for annotated tags. Must not be a date in the future.", alias="date")
     __properties: ClassVar[List[str]] = ["ref", "revision", "message", "date"]
 
     model_config = ConfigDict(

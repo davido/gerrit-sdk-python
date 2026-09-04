@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,12 +27,12 @@ class CommentLinkInput(BaseModel):
     """
     CommentLinkInput
     """ # noqa: E501
-    match: Optional[StrictStr] = None
-    link: Optional[StrictStr] = None
-    prefix: Optional[StrictStr] = None
-    suffix: Optional[StrictStr] = None
-    text: Optional[StrictStr] = None
-    enabled: Optional[StrictBool] = None
+    match: Optional[StrictStr] = Field(default=None, description="A JavaScript regular expression to match positions to be replaced with a hyperlink, as documented in commentlink.name.match.")
+    link: Optional[StrictStr] = Field(default=None, description="The URL to direct the user to whenever the regular expression is matched, as documented in commentlink.name.link.")
+    prefix: Optional[StrictStr] = Field(default=None, description="Text inserted before the link.")
+    suffix: Optional[StrictStr] = Field(default=None, description="Text inserted after the link.")
+    text: Optional[StrictStr] = Field(default=None, description="Text of the link.")
+    enabled: Optional[StrictBool] = Field(default=None, description="Whether the commentlink is enabled, as documented in commentlink.name.enabled. If not set the commentlink is enabled.")
     __properties: ClassVar[List[str]] = ["match", "link", "prefix", "suffix", "text", "enabled"]
 
     model_config = ConfigDict(

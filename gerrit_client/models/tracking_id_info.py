@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,8 +27,8 @@ class TrackingIdInfo(BaseModel):
     """
     TrackingIdInfo
     """ # noqa: E501
-    system: Optional[StrictStr] = None
-    id: Optional[StrictStr] = None
+    system: Optional[StrictStr] = Field(default=None, description="The name of the external tracking system.")
+    id: Optional[StrictStr] = Field(default=None, description="The tracking id.")
     __properties: ClassVar[List[str]] = ["system", "id"]
 
     model_config = ConfigDict(

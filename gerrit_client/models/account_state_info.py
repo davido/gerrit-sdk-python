@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.account_detail_info import AccountDetailInfo
 from gerrit_client.models.account_external_id_info import AccountExternalIdInfo
@@ -31,11 +31,11 @@ class AccountStateInfo(BaseModel):
     """
     AccountStateInfo
     """ # noqa: E501
-    account: Optional[AccountDetailInfo] = None
-    capabilities: Optional[Dict[str, Dict[str, Any]]] = None
-    groups: Optional[List[GroupInfo]] = None
-    external_ids: Optional[List[AccountExternalIdInfo]] = None
-    metadata: Optional[List[MetadataInfo]] = None
+    account: Optional[AccountDetailInfo] = Field(default=None, description="The account details as AccountDetailInfo entity.")
+    capabilities: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, description="The global capabilities of the account as a CapabilityInfo entity. Not set if the permission backend doesn't use default capabilities.")
+    groups: Optional[List[GroupInfo]] = Field(default=None, description="The groups that contain the account as a member as a list of GroupInfo entries.")
+    external_ids: Optional[List[AccountExternalIdInfo]] = Field(default=None, description="The external IDs of the account as a list of AccountExternalIdInfo entities.")
+    metadata: Optional[List[MetadataInfo]] = Field(default=None, description="Optional account metadata as a list of MetadataInfo entities. If and which metadata is provided depends on the Gerrit setup.")
     __properties: ClassVar[List[str]] = ["account", "capabilities", "groups", "external_ids", "metadata"]
 
     model_config = ConfigDict(

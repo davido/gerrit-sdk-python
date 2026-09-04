@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,9 +27,9 @@ class CommitMessageInfo(BaseModel):
     """
     CommitMessageInfo
     """ # noqa: E501
-    subject: Optional[StrictStr] = None
-    full_message: Optional[StrictStr] = None
-    footers: Optional[Dict[str, StrictStr]] = None
+    subject: Optional[StrictStr] = Field(default=None, description="The subject of the change (first line of the commit message).")
+    full_message: Optional[StrictStr] = Field(default=None, description="Full commit message of the change.")
+    footers: Optional[Dict[str, StrictStr]] = Field(default=None, description="The footers from the commit message as a map of key-value pairs. If there are multiple footers with the same key, only the last footer with that key is returned.")
     __properties: ClassVar[List[str]] = ["subject", "full_message", "footers"]
 
     model_config = ConfigDict(

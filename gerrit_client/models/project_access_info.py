@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.access_section_info import AccessSectionInfo
 from gerrit_client.models.group_info import GroupInfo
@@ -31,18 +31,18 @@ class ProjectAccessInfo(BaseModel):
     """
     ProjectAccessInfo
     """ # noqa: E501
-    revision: Optional[StrictStr] = None
-    inherits_from: Optional[ProjectInfo] = None
-    local: Optional[Dict[str, AccessSectionInfo]] = None
-    is_owner: Optional[StrictBool] = None
-    owner_of: Optional[List[StrictStr]] = None
-    can_upload: Optional[StrictBool] = None
-    can_add: Optional[StrictBool] = None
-    can_add_tags: Optional[StrictBool] = None
-    config_visible: Optional[StrictBool] = None
-    require_change_for_config_update: Optional[StrictBool] = None
-    groups: Optional[Dict[str, GroupInfo]] = None
-    config_web_links: Optional[List[WebLinkInfo]] = None
+    revision: Optional[StrictStr] = Field(default=None, description="The revision of the refs/meta/config branch from which the access rights were loaded.")
+    inherits_from: Optional[ProjectInfo] = Field(default=None, description="The parent project from which permissions are inherited as a ProjectInfo entity.")
+    local: Optional[Dict[str, AccessSectionInfo]] = Field(default=None, description="The local access rights of the project as a map that maps the refs to AccessSectionInfo entities.")
+    is_owner: Optional[StrictBool] = Field(default=None, description="Whether the calling user owns this project.")
+    owner_of: Optional[List[StrictStr]] = Field(default=None, description="The list of refs owned by the calling user.")
+    can_upload: Optional[StrictBool] = Field(default=None, description="Whether the calling user can upload to any ref.")
+    can_add: Optional[StrictBool] = Field(default=None, description="Whether the calling user can add any ref.")
+    can_add_tags: Optional[StrictBool] = Field(default=None, description="Whether the calling user can add any tag ref.")
+    config_visible: Optional[StrictBool] = Field(default=None, description="Whether the calling user can see the refs/meta/config branch of the project.")
+    require_change_for_config_update: Optional[StrictBool] = Field(default=None, description="Whether the calling user must create a change for updating project config. If true, all API requests which directly update project config are rejected.")
+    groups: Optional[Dict[str, GroupInfo]] = Field(default=None, description="A map of group UUID to GroupInfo objects, with names and URLs for the group UUIDs used in the local map. This will include names for groups that might be invisible to the caller.")
+    config_web_links: Optional[List[WebLinkInfo]] = Field(default=None, description="Links to the history of the configuration file governing this project's access rights as list of WebLinkInfo entities.")
     __properties: ClassVar[List[str]] = ["revision", "inherits_from", "local", "is_owner", "owner_of", "can_upload", "can_add", "can_add_tags", "config_visible", "require_change_for_config_update", "groups", "config_web_links"]
 
     model_config = ConfigDict(

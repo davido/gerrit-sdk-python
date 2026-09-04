@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.access_section_info import AccessSectionInfo
 from typing import Optional, Set
@@ -28,10 +28,10 @@ class ProjectAccessInput(BaseModel):
     """
     ProjectAccessInput
     """ # noqa: E501
-    remove: Optional[Dict[str, AccessSectionInfo]] = None
-    add: Optional[Dict[str, AccessSectionInfo]] = None
-    parent: Optional[StrictStr] = None
-    message: Optional[StrictStr] = None
+    remove: Optional[Dict[str, AccessSectionInfo]] = Field(default=None, description="A map of deductions to be applied to the project access, mapping refs to AccessSectionInfo entities.")
+    add: Optional[Dict[str, AccessSectionInfo]] = Field(default=None, description="A map of additions to be applied to the project access, mapping refs to AccessSectionInfo entities.")
+    parent: Optional[StrictStr] = Field(default=None, description="A new parent for the project to inherit from. Changing the parent project requires administrative privileges.")
+    message: Optional[StrictStr] = Field(default=None, description="A commit message for this change.")
     __properties: ClassVar[List[str]] = ["remove", "add", "parent", "message"]
 
     model_config = ConfigDict(
