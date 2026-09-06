@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.menu_item import MenuItem
 from typing import Optional, Set
@@ -28,8 +28,8 @@ class MenuEntry(BaseModel):
     """
     MenuEntry
     """ # noqa: E501
-    name: Optional[StrictStr] = None
-    items: Optional[List[MenuItem]] = None
+    name: Optional[StrictStr] = Field(default=None, description="Name of the top menu entry.")
+    items: Optional[List[MenuItem]] = Field(default=None, description="List of menu items.")
     __properties: ClassVar[List[str]] = ["name", "items"]
 
     model_config = ConfigDict(

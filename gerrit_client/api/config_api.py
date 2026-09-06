@@ -8399,7 +8399,7 @@ class ConfigApi:
     ) -> object:
         """Reindex an Index Version
 
-        This endpoint allows to trigger background reindexing of an index version. It is also supported to specify whether to reuse existing up-to-date (non-stale) index documents and whether to notifyListeners or not.
+        This endpoint allows to trigger background reindexing of an index version. It is also supported to specify whether to reuse existing up-to-date (non-stale) index documents and whether to notifyListeners or not. The options are provided in the request body as a ReindexIndexVersion.Input entity.
 
         :param index_id: (required)
         :type index_id: str
@@ -8474,7 +8474,7 @@ class ConfigApi:
     ) -> ApiResponse[object]:
         """Reindex an Index Version
 
-        This endpoint allows to trigger background reindexing of an index version. It is also supported to specify whether to reuse existing up-to-date (non-stale) index documents and whether to notifyListeners or not.
+        This endpoint allows to trigger background reindexing of an index version. It is also supported to specify whether to reuse existing up-to-date (non-stale) index documents and whether to notifyListeners or not. The options are provided in the request body as a ReindexIndexVersion.Input entity.
 
         :param index_id: (required)
         :type index_id: str
@@ -8549,7 +8549,7 @@ class ConfigApi:
     ) -> RESTResponseType:
         """Reindex an Index Version
 
-        This endpoint allows to trigger background reindexing of an index version. It is also supported to specify whether to reuse existing up-to-date (non-stale) index documents and whether to notifyListeners or not.
+        This endpoint allows to trigger background reindexing of an index version. It is also supported to specify whether to reuse existing up-to-date (non-stale) index documents and whether to notifyListeners or not. The options are provided in the request body as a ReindexIndexVersion.Input entity.
 
         :param index_id: (required)
         :type index_id: str
@@ -8704,7 +8704,7 @@ class ConfigApi:
     ) -> object:
         """Create Snapshot of one Index Version
 
-        This creates a snapshot of one index version of the specified index.
+        This creates a snapshot of one index version of the specified index. The snapshot id may be provided in the request body as a SnapshotIndexVersion.Input entity.
 
         :param index_id: (required)
         :type index_id: str
@@ -8779,7 +8779,7 @@ class ConfigApi:
     ) -> ApiResponse[object]:
         """Create Snapshot of one Index Version
 
-        This creates a snapshot of one index version of the specified index.
+        This creates a snapshot of one index version of the specified index. The snapshot id may be provided in the request body as a SnapshotIndexVersion.Input entity.
 
         :param index_id: (required)
         :type index_id: str
@@ -8854,7 +8854,7 @@ class ConfigApi:
     ) -> RESTResponseType:
         """Create Snapshot of one Index Version
 
-        This creates a snapshot of one index version of the specified index.
+        This creates a snapshot of one index version of the specified index. The snapshot id may be provided in the request body as a SnapshotIndexVersion.Input entity.
 
         :param index_id: (required)
         :type index_id: str
@@ -9800,6 +9800,7 @@ class ConfigApi:
     ) -> object:
         """Create Snapshot of All Indexes
 
+        This creates a snapshot of all write index versions. The snapshot id may be provided in the request body as a SnapshotIndexes.Input entity.
 
         :param snapshot_indexes_input:
         :type snapshot_indexes_input: SnapshotIndexesInput
@@ -9866,6 +9867,7 @@ class ConfigApi:
     ) -> ApiResponse[object]:
         """Create Snapshot of All Indexes
 
+        This creates a snapshot of all write index versions. The snapshot id may be provided in the request body as a SnapshotIndexes.Input entity.
 
         :param snapshot_indexes_input:
         :type snapshot_indexes_input: SnapshotIndexesInput
@@ -9932,6 +9934,7 @@ class ConfigApi:
     ) -> RESTResponseType:
         """Create Snapshot of All Indexes
 
+        This creates a snapshot of all write index versions. The snapshot id may be provided in the request body as a SnapshotIndexes.Input entity.
 
         :param snapshot_indexes_input:
         :type snapshot_indexes_input: SnapshotIndexesInput

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,8 +27,8 @@ class InstallPluginInput(BaseModel):
     """
     InstallPluginInput
     """ # noqa: E501
-    url: Optional[StrictStr] = None
-    raw: Optional[Dict[str, Any]] = None
+    url: Optional[StrictStr] = Field(default=None, description="URL to the plugin jar.")
+    raw: Optional[Dict[str, Any]] = Field(default=None, description="The raw plugin content (the plugin jar) uploaded in the request body, as an alternative to url.")
     __properties: ClassVar[List[str]] = ["url", "raw"]
 
     model_config = ConfigDict(

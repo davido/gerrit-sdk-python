@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +27,7 @@ class InputWithCommitMessage(BaseModel):
     """
     InputWithCommitMessage
     """ # noqa: E501
-    commit_message: Optional[StrictStr] = None
+    commit_message: Optional[StrictStr] = Field(default=None, description="The commit message to use.")
     __properties: ClassVar[List[str]] = ["commit_message"]
 
     model_config = ConfigDict(

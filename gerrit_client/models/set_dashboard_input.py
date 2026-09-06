@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,8 +27,8 @@ class SetDashboardInput(BaseModel):
     """
     SetDashboardInput
     """ # noqa: E501
-    id: Optional[StrictStr] = None
-    commit_message: Optional[StrictStr] = None
+    id: Optional[StrictStr] = Field(default=None, description="URL encoded ID of a dashboard to which this dashboard should link to.")
+    commit_message: Optional[StrictStr] = Field(default=None, description="Message that should be used to commit the change of the dashboard.")
     __properties: ClassVar[List[str]] = ["id", "commit_message"]
 
     model_config = ConfigDict(

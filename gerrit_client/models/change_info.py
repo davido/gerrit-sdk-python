@@ -60,7 +60,7 @@ class ChangeInfo(BaseModel):
     submitted: Optional[StrictStr] = Field(default=None, description="The timestamp of when the change was submitted.")
     submitter: Optional[AccountInfo] = Field(default=None, description="The user who submitted the change, as an AccountInfo entity.")
     starred: Optional[StrictBool] = Field(default=None, description="Whether the calling user has starred this change. Only set if requested.")
-    stars: Optional[List[StrictStr]] = None
+    stars: Optional[List[StrictStr]] = Field(default=None, description="List of star labels that are applied by the calling user to this change.")
     reviewed: Optional[StrictBool] = Field(default=None, description="Whether the change was reviewed by the calling user. Only set if reviewed is requested.")
     submit_type: Optional[SubmitType] = Field(default=None, description="The submit type of the change. + Not set for merged changes.")
     mergeable: Optional[StrictBool] = Field(default=None, description="Whether the change is mergeable. + Only set for open changes if change.mergeabilityComputationBehavior is API_REF_UPDATED_AND_CHANGE_REINDEX.")

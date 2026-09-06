@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.filters import Filters
 from typing import Optional, Set
@@ -28,8 +28,8 @@ class TestSubmitRuleInput(BaseModel):
     """
     TestSubmitRuleInput
     """ # noqa: E501
-    rule: Optional[StrictStr] = None
-    filters: Optional[Filters] = None
+    rule: Optional[StrictStr] = Field(default=None, description="Prolog code to execute instead of the code in refs/meta/config.")
+    filters: Optional[Filters] = Field(default=None, description="When RUN filter rules in the parent projects are called to post-process the results of the project specific rule. This behavior matches how the rule will execute if installed. + If SKIP the parent filters are not called, allowing the test to return results from the input rule.")
     __properties: ClassVar[List[str]] = ["rule", "filters"]
 
     model_config = ConfigDict(

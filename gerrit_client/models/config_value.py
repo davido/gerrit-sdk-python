@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,8 +27,8 @@ class ConfigValue(BaseModel):
     """
     ConfigValue
     """ # noqa: E501
-    value: Optional[StrictStr] = None
-    values: Optional[List[StrictStr]] = None
+    value: Optional[StrictStr] = Field(default=None, description="The new single value for the configuration parameter.")
+    values: Optional[List[StrictStr]] = Field(default=None, description="The new list of values for a multi-valued configuration parameter.")
     __properties: ClassVar[List[str]] = ["value", "values"]
 
     model_config = ConfigDict(

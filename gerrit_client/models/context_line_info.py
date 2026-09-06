@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,8 +27,8 @@ class ContextLineInfo(BaseModel):
     """
     ContextLineInfo
     """ # noqa: E501
-    line_number: Optional[StrictInt] = None
-    context_line: Optional[StrictStr] = None
+    line_number: Optional[StrictInt] = Field(default=None, description="The line number of the source line.")
+    context_line: Optional[StrictStr] = Field(default=None, description="The text of the context line.")
     __properties: ClassVar[List[str]] = ["line_number", "context_line"]
 
     model_config = ConfigDict(

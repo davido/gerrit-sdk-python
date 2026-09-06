@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,8 +27,8 @@ class ReindexIndexVersionInput(BaseModel):
     """
     ReindexIndexVersionInput
     """ # noqa: E501
-    reuse: Optional[StrictBool] = None
-    notify_listeners: Optional[StrictBool] = None
+    reuse: Optional[StrictBool] = Field(default=None, description="Whether existing documents may be reused instead of being recomputed while reindexing.")
+    notify_listeners: Optional[StrictBool] = Field(default=None, description="Whether index listeners should be notified about the reindex progress.")
     __properties: ClassVar[List[str]] = ["reuse", "notify_listeners"]
 
     model_config = ConfigDict(

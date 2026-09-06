@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.account_default_display_name import AccountDefaultDisplayName
 from gerrit_client.models.account_visibility import AccountVisibility
@@ -29,8 +29,8 @@ class AccountsInfo(BaseModel):
     """
     AccountsInfo
     """ # noqa: E501
-    visibility: Optional[AccountVisibility] = None
-    default_display_name: Optional[AccountDefaultDisplayName] = None
+    visibility: Optional[AccountVisibility] = Field(default=None, description="Visibility setting for accounts.")
+    default_display_name: Optional[AccountDefaultDisplayName] = Field(default=None, description="The default strategy for choosing the display name in the UI, see also gerrit.config.")
     __properties: ClassVar[List[str]] = ["visibility", "default_display_name"]
 
     model_config = ConfigDict(

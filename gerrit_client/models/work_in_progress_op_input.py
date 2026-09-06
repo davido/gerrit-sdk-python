@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.notify_handling import NotifyHandling
 from typing import Optional, Set
@@ -28,8 +28,8 @@ class WorkInProgressOpInput(BaseModel):
     """
     WorkInProgressOpInput
     """ # noqa: E501
-    notify: Optional[NotifyHandling] = None
-    message: Optional[StrictStr] = None
+    notify: Optional[NotifyHandling] = Field(default=None, description="Notify handling that defines to whom email notifications should be sent after the change is set to WorkInProgress/ReadyForReview. Allowed values are NONE, OWNER, OWNER_REVIEWERS and ALL.")
+    message: Optional[StrictStr] = Field(default=None, description="Message to be added as a review comment to the change being set WorkInProgress/ReadyForReview.")
     __properties: ClassVar[List[str]] = ["notify", "message"]
 
     model_config = ConfigDict(

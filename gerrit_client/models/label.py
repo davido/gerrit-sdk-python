@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.account_info import AccountInfo
 from gerrit_client.models.label_status import LabelStatus
@@ -29,9 +29,9 @@ class Label(BaseModel):
     """
     Label
     """ # noqa: E501
-    label: Optional[StrictStr] = None
-    status: Optional[LabelStatus] = None
-    applied_by: Optional[AccountInfo] = None
+    label: Optional[StrictStr] = Field(default=None, description="The name of the label.")
+    status: Optional[LabelStatus] = Field(default=None, description="The status of the label, one of OK, REJECT, NEED, MAY or IMPOSSIBLE.")
+    applied_by: Optional[AccountInfo] = Field(default=None, description="The AccountInfo of the user that applied the vote to the label.")
     __properties: ClassVar[List[str]] = ["label", "status", "applied_by"]
 
     model_config = ConfigDict(

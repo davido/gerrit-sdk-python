@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +27,7 @@ class GroupsInfo(BaseModel):
     """
     GroupsInfo
     """ # noqa: E501
-    enable_delete_group: Optional[StrictBool] = None
+    enable_delete_group: Optional[StrictBool] = Field(default=None, description="gerrit.config.")
     __properties: ClassVar[List[str]] = ["enable_delete_group"]
 
     model_config = ConfigDict(

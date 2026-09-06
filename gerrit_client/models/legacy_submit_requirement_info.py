@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,9 +27,9 @@ class LegacySubmitRequirementInfo(BaseModel):
     """
     LegacySubmitRequirementInfo
     """ # noqa: E501
-    status: Optional[StrictStr] = None
-    fallback_text: Optional[StrictStr] = None
-    type: Optional[StrictStr] = None
+    status: Optional[StrictStr] = Field(default=None, description="The status of the submit requirement, for example OK or NOT_READY.")
+    fallback_text: Optional[StrictStr] = Field(default=None, description="A human readable description of the submit requirement.")
+    type: Optional[StrictStr] = Field(default=None, description="The type of the submit requirement.")
     __properties: ClassVar[List[str]] = ["status", "fallback_text", "type"]
 
     model_config = ConfigDict(

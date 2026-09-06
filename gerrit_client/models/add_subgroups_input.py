@@ -27,8 +27,8 @@ class AddSubgroupsInput(BaseModel):
     """
     AddSubgroupsInput
     """ # noqa: E501
-    one_group: Optional[StrictStr] = Field(default=None, alias="_one_group")
-    groups: Optional[List[StrictStr]] = None
+    one_group: Optional[StrictStr] = Field(default=None, description="The id of one group that should be included or deleted.", alias="_one_group")
+    groups: Optional[List[StrictStr]] = Field(default=None, description="A list of group ids that identify the groups that should be included or deleted.")
     __properties: ClassVar[List[str]] = ["_one_group", "groups"]
 
     model_config = ConfigDict(

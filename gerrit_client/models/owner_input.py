@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +27,7 @@ class OwnerInput(BaseModel):
     """
     OwnerInput
     """ # noqa: E501
-    owner: Optional[StrictStr] = None
+    owner: Optional[StrictStr] = Field(default=None, description="The id of the group that should own this group.")
     __properties: ClassVar[List[str]] = ["owner"]
 
     model_config = ConfigDict(

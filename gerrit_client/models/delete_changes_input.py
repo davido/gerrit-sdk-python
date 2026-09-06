@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +27,7 @@ class DeleteChangesInput(BaseModel):
     """
     DeleteChangesInput
     """ # noqa: E501
-    changes: Optional[List[StrictStr]] = None
+    changes: Optional[List[StrictStr]] = Field(default=None, description="A list of changes (Change-Id or Change-Number) that identify the changes that should be deleted.")
     __properties: ClassVar[List[str]] = ["changes"]
 
     model_config = ConfigDict(

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +27,7 @@ class DeleteTagsInput(BaseModel):
     """
     DeleteTagsInput
     """ # noqa: E501
-    tags: Optional[List[StrictStr]] = None
+    tags: Optional[List[StrictStr]] = Field(default=None, description="A list of tag names that identify the tags that should be deleted.")
     __properties: ClassVar[List[str]] = ["tags"]
 
     model_config = ConfigDict(

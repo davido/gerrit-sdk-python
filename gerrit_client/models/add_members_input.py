@@ -27,8 +27,8 @@ class AddMembersInput(BaseModel):
     """
     AddMembersInput
     """ # noqa: E501
-    one_member: Optional[StrictStr] = Field(default=None, alias="_one_member")
-    members: Optional[List[StrictStr]] = None
+    one_member: Optional[StrictStr] = Field(default=None, description="The id of one account that should be added or deleted.", alias="_one_member")
+    members: Optional[List[StrictStr]] = Field(default=None, description="A list of account ids that identify the accounts that should be added or deleted.")
     __properties: ClassVar[List[str]] = ["_one_member", "members"]
 
     model_config = ConfigDict(

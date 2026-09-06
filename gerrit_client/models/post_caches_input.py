@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.operation import Operation
 from typing import Optional, Set
@@ -28,8 +28,8 @@ class PostCachesInput(BaseModel):
     """
     PostCachesInput
     """ # noqa: E501
-    operation: Optional[Operation] = None
-    caches: Optional[List[StrictStr]] = None
+    operation: Optional[Operation] = Field(default=None, description="The cache operation that should be executed: FLUSH_ALL: Flushes all caches, except the web_sessions cache. FLUSH: Flushes the specified caches.")
+    caches: Optional[List[StrictStr]] = Field(default=None, description="A list of cache names. This list defines the caches on which the specified operation should be executed. Whether this list must be specified depends on the operation being executed.")
     __properties: ClassVar[List[str]] = ["operation", "caches"]
 
     model_config = ConfigDict(

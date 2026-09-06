@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +27,7 @@ class StatusInput(BaseModel):
     """
     StatusInput
     """ # noqa: E501
-    status: Optional[StrictStr] = None
+    status: Optional[StrictStr] = Field(default=None, description="The new status of the account. + If not set or if set to an empty string, the account status is deleted.")
     __properties: ClassVar[List[str]] = ["status"]
 
     model_config = ConfigDict(

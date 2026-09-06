@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.diff_web_link_info import DiffWebLinkInfo
 from typing import Optional, Set
@@ -28,7 +28,7 @@ class GetMetaFileInfo(BaseModel):
     """
     GetMetaFileInfo
     """ # noqa: E501
-    web_links: Optional[List[DiffWebLinkInfo]] = None
+    web_links: Optional[List[DiffWebLinkInfo]] = Field(default=None, description="Links to the file in external sites as a list of DiffWebLinkInfo entities.")
     __properties: ClassVar[List[str]] = ["web_links"]
 
     model_config = ConfigDict(
