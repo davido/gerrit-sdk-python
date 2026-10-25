@@ -37,7 +37,7 @@ class GerritInfo(BaseModel):
     instance_id: Optional[StrictStr] = Field(default=None, description="Short identifier for this Gerrit installation.")
     default_branch: Optional[StrictStr] = Field(default=None, description="Name of the default branch to use on the project creation.")
     project_state_predicate_enabled: Optional[StrictBool] = Field(default=None, description="Whether the instance supports filtering projects by state.")
-    submit_commit_url: Optional[StrictStr] = None
+    submit_commit_url: Optional[StrictStr] = Field(default=None, description="URL used to link commit hashes in submit messages.")
     __properties: ClassVar[List[str]] = ["all_projects", "all_users", "doc_search", "doc_url", "edit_gpg_keys", "report_bug_url", "primary_weblink_name", "instance_id", "default_branch", "project_state_predicate_enabled", "submit_commit_url"]
 
     model_config = ConfigDict(
