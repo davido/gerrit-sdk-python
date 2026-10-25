@@ -33,6 +33,7 @@ class ApprovalInfo(BaseModel):
     value: Optional[StrictInt] = Field(default=None, description="The vote that the user has given for the label. If present and zero, the user is permitted to vote on the label. If absent, the user is not permitted to vote on that label.")
     var_date: Optional[StrictStr] = Field(default=None, description="The time and date describing when the approval was made.", alias="date")
     post_submit: Optional[StrictBool] = Field(default=None, description="If true, this vote was made after the change was submitted.")
+    is_ai: Optional[StrictBool] = Field(default=None, description="If true, this vote was created by an AI agent.")
     permitted_voting_range: Optional[VotingRangeInfo] = Field(default=None, description="The VotingRangeInfo the user is authorized to vote on that label. If present, the user is permitted to vote on the label regarding the range values. If absent, the user is not permitted to vote on that label.")
     account_id: Optional[StrictInt] = Field(default=None, description="The numeric ID of the account.", alias="_account_id")
     name: Optional[StrictStr] = Field(default=None, description="The full name of the user. + Only set if detailed account information is requested. + See option DETAILED_ACCOUNTS for change queries + and option DETAILS for account queries.")
@@ -46,7 +47,7 @@ class ApprovalInfo(BaseModel):
     inactive: Optional[StrictBool] = Field(default=None, description="Whether the account is inactive.")
     deleted: Optional[StrictBool] = Field(default=None, description="Whether the account is deleted. + Only set if detailed account information is requested. + See option DETAILED_ACCOUNTS")
     tags: Optional[List[StrictStr]] = Field(default=None, description="List of additional tags that this account has. The only + current tag an account can have is SERVICE_USER. + Only set if detailed account information is requested. + See option DETAILED_ACCOUNTS")
-    __properties: ClassVar[List[str]] = ["tag", "value", "date", "post_submit", "permitted_voting_range", "_account_id", "name", "display_name", "email", "secondary_emails", "username", "avatars", "_more_accounts", "status", "inactive", "deleted", "tags"]
+    __properties: ClassVar[List[str]] = ["tag", "value", "date", "post_submit", "is_ai", "permitted_voting_range", "_account_id", "name", "display_name", "email", "secondary_emails", "username", "avatars", "_more_accounts", "status", "inactive", "deleted", "tags"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -112,6 +113,7 @@ class ApprovalInfo(BaseModel):
             "value": obj.get("value"),
             "date": obj.get("date"),
             "post_submit": obj.get("post_submit"),
+            "is_ai": obj.get("is_ai"),
             "permitted_voting_range": VotingRangeInfo.from_dict(obj["permitted_voting_range"]) if obj.get("permitted_voting_range") is not None else None,
             "_account_id": obj.get("_account_id"),
             "name": obj.get("name"),

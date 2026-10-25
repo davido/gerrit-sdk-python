@@ -19,7 +19,6 @@ from pydantic import StrictBool, StrictStr
 from typing import Any, Dict, List, Optional
 from gerrit_client.models.cache_info import CacheInfo
 from gerrit_client.models.capability_info import CapabilityInfo
-from gerrit_client.models.cleanup_changes_input import CleanupChangesInput
 from gerrit_client.models.config_update_entry_info import ConfigUpdateEntryInfo
 from gerrit_client.models.confirm_email_input import ConfirmEmailInput
 from gerrit_client.models.consistency_check_info import ConsistencyCheckInfo
@@ -32,7 +31,7 @@ from gerrit_client.models.get_config_server_indexes200_response_inner import Get
 from gerrit_client.models.index_changes_input import IndexChangesInput
 from gerrit_client.models.label_definition_info import LabelDefinitionInfo
 from gerrit_client.models.menu_entry import MenuEntry
-from gerrit_client.models.metric_json import MetricJson
+from gerrit_client.models.metric_info import MetricInfo
 from gerrit_client.models.migrate_passwords_to_tokens_input import MigratePasswordsToTokensInput
 from gerrit_client.models.post_caches_input import PostCachesInput
 from gerrit_client.models.reduce_max_token_lifetime_input import ReduceMaxTokenLifetimeInput
@@ -1385,8 +1384,9 @@ class ConfigApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ExperimentInfo:
-        """get_config_server_experiments_experiment_id
+        """Get Experiment
 
+        Retrieves the details of the experiment with the given name.
 
         :param experiment_id: (required)
         :type experiment_id: str
@@ -1451,8 +1451,9 @@ class ConfigApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ExperimentInfo]:
-        """get_config_server_experiments_experiment_id
+        """Get Experiment
 
+        Retrieves the details of the experiment with the given name.
 
         :param experiment_id: (required)
         :type experiment_id: str
@@ -1517,8 +1518,9 @@ class ConfigApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_config_server_experiments_experiment_id
+        """Get Experiment
 
+        Retrieves the details of the experiment with the given name.
 
         :param experiment_id: (required)
         :type experiment_id: str
@@ -2934,7 +2936,7 @@ class ConfigApi:
     ) -> List[LabelDefinitionInfo]:
         """List Global Labels
 
-        Lists the globally defined labels (labels that are added programatically via the LabelType extension point).
+        Lists the globally defined labels (labels that are added programmatically via the LabelType extension point).
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2997,7 +2999,7 @@ class ConfigApi:
     ) -> ApiResponse[List[LabelDefinitionInfo]]:
         """List Global Labels
 
-        Lists the globally defined labels (labels that are added programatically via the LabelType extension point).
+        Lists the globally defined labels (labels that are added programmatically via the LabelType extension point).
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3060,7 +3062,7 @@ class ConfigApi:
     ) -> RESTResponseType:
         """List Global Labels
 
-        Lists the globally defined labels (labels that are added programatically via the LabelType extension point).
+        Lists the globally defined labels (labels that are added programmatically via the LabelType extension point).
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3179,10 +3181,10 @@ class ConfigApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Dict[str, MetricJson]:
+    ) -> Dict[str, MetricInfo]:
         """List Metrics
 
-        Lists the metrics of the server, returning a map of metric name to a MetricJson entity.
+        Lists the metrics of the server, returning a map of metric name to a MetricInfo entity.
 
         :param data_only:
         :type data_only: bool
@@ -3220,7 +3222,7 @@ class ConfigApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Dict[str, MetricJson]",
+            '200': "Dict[str, MetricInfo]",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3250,10 +3252,10 @@ class ConfigApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Dict[str, MetricJson]]:
+    ) -> ApiResponse[Dict[str, MetricInfo]]:
         """List Metrics
 
-        Lists the metrics of the server, returning a map of metric name to a MetricJson entity.
+        Lists the metrics of the server, returning a map of metric name to a MetricInfo entity.
 
         :param data_only:
         :type data_only: bool
@@ -3291,7 +3293,7 @@ class ConfigApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Dict[str, MetricJson]",
+            '200': "Dict[str, MetricInfo]",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3324,7 +3326,7 @@ class ConfigApi:
     ) -> RESTResponseType:
         """List Metrics
 
-        Lists the metrics of the server, returning a map of metric name to a MetricJson entity.
+        Lists the metrics of the server, returning a map of metric name to a MetricInfo entity.
 
         :param data_only:
         :type data_only: bool
@@ -3362,7 +3364,7 @@ class ConfigApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Dict[str, MetricJson]",
+            '200': "Dict[str, MetricInfo]",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3460,7 +3462,7 @@ class ConfigApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> MetricJson:
+    ) -> MetricInfo:
         """Get Metric
 
         Retrieves a single metric of the server. The metric name is used as the \\{metric-id\\} and must be URL-encoded because it may contain slashes.
@@ -3501,7 +3503,7 @@ class ConfigApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "MetricJson",
+            '200': "MetricInfo",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3531,7 +3533,7 @@ class ConfigApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[MetricJson]:
+    ) -> ApiResponse[MetricInfo]:
         """Get Metric
 
         Retrieves a single metric of the server. The metric name is used as the \\{metric-id\\} and must be URL-encoded because it may contain slashes.
@@ -3572,7 +3574,7 @@ class ConfigApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "MetricJson",
+            '200': "MetricInfo",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3643,7 +3645,7 @@ class ConfigApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "MetricJson",
+            '200': "MetricInfo",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4477,7 +4479,7 @@ class ConfigApi:
     ) -> List[SubmitRequirementInfo]:
         """List Global Submit Requirements
 
-        Lists the globally defined submit requirements (submit requirements that are added programatically via the SubmitRequirement extension point).
+        Lists the globally defined submit requirements (submit requirements that are added programmatically via the SubmitRequirement extension point).
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4540,7 +4542,7 @@ class ConfigApi:
     ) -> ApiResponse[List[SubmitRequirementInfo]]:
         """List Global Submit Requirements
 
-        Lists the globally defined submit requirements (submit requirements that are added programatically via the SubmitRequirement extension point).
+        Lists the globally defined submit requirements (submit requirements that are added programmatically via the SubmitRequirement extension point).
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4603,7 +4605,7 @@ class ConfigApi:
     ) -> RESTResponseType:
         """List Global Submit Requirements
 
-        Lists the globally defined submit requirements (submit requirements that are added programatically via the SubmitRequirement extension point).
+        Lists the globally defined submit requirements (submit requirements that are added programmatically via the SubmitRequirement extension point).
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4971,6 +4973,7 @@ class ConfigApi:
     @validate_call
     def get_config_server_tasks(
         self,
+        state: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4988,6 +4991,8 @@ class ConfigApi:
 
         Lists the tasks from the background work queues that the Gerrit daemon is currently performing, or will perform in the near future.
 
+        :param state:
+        :type state: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5011,6 +5016,7 @@ class ConfigApi:
         """ # noqa: E501
 
         _param = self._get_config_server_tasks_serialize(
+            state=state,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5034,6 +5040,7 @@ class ConfigApi:
     @validate_call
     def get_config_server_tasks_with_http_info(
         self,
+        state: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5051,6 +5058,8 @@ class ConfigApi:
 
         Lists the tasks from the background work queues that the Gerrit daemon is currently performing, or will perform in the near future.
 
+        :param state:
+        :type state: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5074,6 +5083,7 @@ class ConfigApi:
         """ # noqa: E501
 
         _param = self._get_config_server_tasks_serialize(
+            state=state,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5097,6 +5107,7 @@ class ConfigApi:
     @validate_call
     def get_config_server_tasks_without_preload_content(
         self,
+        state: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5114,6 +5125,8 @@ class ConfigApi:
 
         Lists the tasks from the background work queues that the Gerrit daemon is currently performing, or will perform in the near future.
 
+        :param state:
+        :type state: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5137,6 +5150,7 @@ class ConfigApi:
         """ # noqa: E501
 
         _param = self._get_config_server_tasks_serialize(
+            state=state,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5155,6 +5169,7 @@ class ConfigApi:
 
     def _get_config_server_tasks_serialize(
         self,
+        state,
         _request_auth,
         _content_type,
         _headers,
@@ -5164,6 +5179,7 @@ class ConfigApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
+            'state': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -5177,6 +5193,10 @@ class ConfigApi:
 
         # process the path parameters
         # process the query parameters
+        if state is not None:
+            
+            _query_params.append(('state', state))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -6796,281 +6816,6 @@ class ConfigApi:
 
 
     @validate_call
-    def post_config_server_cleanup_changes(
-        self,
-        cleanup_changes_input: Optional[CleanupChangesInput] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
-        """post_config_server_cleanup_changes
-
-
-        :param cleanup_changes_input:
-        :type cleanup_changes_input: CleanupChangesInput
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._post_config_server_cleanup_changes_serialize(
-            cleanup_changes_input=cleanup_changes_input,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def post_config_server_cleanup_changes_with_http_info(
-        self,
-        cleanup_changes_input: Optional[CleanupChangesInput] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
-        """post_config_server_cleanup_changes
-
-
-        :param cleanup_changes_input:
-        :type cleanup_changes_input: CleanupChangesInput
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._post_config_server_cleanup_changes_serialize(
-            cleanup_changes_input=cleanup_changes_input,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def post_config_server_cleanup_changes_without_preload_content(
-        self,
-        cleanup_changes_input: Optional[CleanupChangesInput] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """post_config_server_cleanup_changes
-
-
-        :param cleanup_changes_input:
-        :type cleanup_changes_input: CleanupChangesInput
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._post_config_server_cleanup_changes_serialize(
-            cleanup_changes_input=cleanup_changes_input,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _post_config_server_cleanup_changes_serialize(
-        self,
-        cleanup_changes_input,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-        if cleanup_changes_input is not None:
-            _body_params = cleanup_changes_input
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json', 
-                        'application/x-www-form-urlencoded'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'basicAuth'
-        ]
-
-        return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/config/server/cleanup.changes',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
     def post_config_server_cleanup_draft_comments(
         self,
         _request_timeout: Union[
@@ -7086,8 +6831,9 @@ class ConfigApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> object:
-        """post_config_server_cleanup_draft_comments
+        """Cleanup of already published draft comments
 
+        This endpoint allows Gerrit administrators to cleanup already published draft comments that were not deleted.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7148,8 +6894,9 @@ class ConfigApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[object]:
-        """post_config_server_cleanup_draft_comments
+        """Cleanup of already published draft comments
 
+        This endpoint allows Gerrit administrators to cleanup already published draft comments that were not deleted.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7210,8 +6957,9 @@ class ConfigApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """post_config_server_cleanup_draft_comments
+        """Cleanup of already published draft comments
 
+        This endpoint allows Gerrit administrators to cleanup already published draft comments that were not deleted.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7579,8 +7327,9 @@ class ConfigApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> str:
-        """post_config_server_index_changes
+        """Index a set of changes
 
+        This endpoint allows Gerrit admins to index a set of changes with one request by providing a IndexChangesInput entity.
 
         :param index_changes_input:
         :type index_changes_input: IndexChangesInput
@@ -7645,8 +7394,9 @@ class ConfigApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[str]:
-        """post_config_server_index_changes
+        """Index a set of changes
 
+        This endpoint allows Gerrit admins to index a set of changes with one request by providing a IndexChangesInput entity.
 
         :param index_changes_input:
         :type index_changes_input: IndexChangesInput
@@ -7711,8 +7461,9 @@ class ConfigApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """post_config_server_index_changes
+        """Index a set of changes
 
+        This endpoint allows Gerrit admins to index a set of changes with one request by providing a IndexChangesInput entity.
 
         :param index_changes_input:
         :type index_changes_input: IndexChangesInput
@@ -9005,8 +8756,9 @@ class ConfigApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> object:
-        """post_config_server_passwords_to_tokens
+        """Migration of HTTP passwords to authentication tokens
 
+        This endpoint allows Gerrit administrators to migrate remaining HTTP passwords to authentication tokens. For the user the migration is invisible, i.e. the same credential is still valid.
 
         :param migrate_passwords_to_tokens_input:
         :type migrate_passwords_to_tokens_input: MigratePasswordsToTokensInput
@@ -9071,8 +8823,9 @@ class ConfigApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[object]:
-        """post_config_server_passwords_to_tokens
+        """Migration of HTTP passwords to authentication tokens
 
+        This endpoint allows Gerrit administrators to migrate remaining HTTP passwords to authentication tokens. For the user the migration is invisible, i.e. the same credential is still valid.
 
         :param migrate_passwords_to_tokens_input:
         :type migrate_passwords_to_tokens_input: MigratePasswordsToTokensInput
@@ -9137,8 +8890,9 @@ class ConfigApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """post_config_server_passwords_to_tokens
+        """Migration of HTTP passwords to authentication tokens
 
+        This endpoint allows Gerrit administrators to migrate remaining HTTP passwords to authentication tokens. For the user the migration is invisible, i.e. the same credential is still valid.
 
         :param migrate_passwords_to_tokens_input:
         :type migrate_passwords_to_tokens_input: MigratePasswordsToTokensInput
@@ -9277,8 +9031,9 @@ class ConfigApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> object:
-        """post_config_server_reduce_token_lifetime
+        """Apply maximum lifetime to authentication tokens
 
+        This endpoint allows Gerrit administrators to apply a shorter maximum lifetime to existing authentication tokens. This is required, when a shorter maximum lifetime is enforced. Changing the configuration will not apply that maximum to existing tokens.
 
         :param reduce_max_token_lifetime_input:
         :type reduce_max_token_lifetime_input: ReduceMaxTokenLifetimeInput
@@ -9344,8 +9099,9 @@ class ConfigApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[object]:
-        """post_config_server_reduce_token_lifetime
+        """Apply maximum lifetime to authentication tokens
 
+        This endpoint allows Gerrit administrators to apply a shorter maximum lifetime to existing authentication tokens. This is required, when a shorter maximum lifetime is enforced. Changing the configuration will not apply that maximum to existing tokens.
 
         :param reduce_max_token_lifetime_input:
         :type reduce_max_token_lifetime_input: ReduceMaxTokenLifetimeInput
@@ -9411,8 +9167,9 @@ class ConfigApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """post_config_server_reduce_token_lifetime
+        """Apply maximum lifetime to authentication tokens
 
+        This endpoint allows Gerrit administrators to apply a shorter maximum lifetime to existing authentication tokens. This is required, when a shorter maximum lifetime is enforced. Changing the configuration will not apply that maximum to existing tokens.
 
         :param reduce_max_token_lifetime_input:
         :type reduce_max_token_lifetime_input: ReduceMaxTokenLifetimeInput

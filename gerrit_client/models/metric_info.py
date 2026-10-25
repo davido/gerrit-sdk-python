@@ -19,14 +19,14 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
-from gerrit_client.models.field_json import FieldJson
+from gerrit_client.models.metric_field_info import MetricFieldInfo
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
 
-class MetricJson(BaseModel):
+class MetricInfo(BaseModel):
     """
-    MetricJson
+    MetricInfo
     """ # noqa: E501
     description: Optional[StrictStr] = Field(default=None, description="The description of the metric.")
     unit: Optional[StrictStr] = Field(default=None, description="The unit of measurement of the recorded values.")
@@ -51,7 +51,7 @@ class MetricJson(BaseModel):
     max: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The maximum recorded value.")
     sum: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The sum of the recorded values.")
     std_dev: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The standard deviation of the recorded values.")
-    fields: Optional[List[FieldJson]] = Field(default=None, description="The fields of the metric as a list of FieldJson entities.")
+    fields: Optional[List[MetricFieldInfo]] = Field(default=None, description="The fields of the metric as a list of MetricFieldInfo entities.")
     buckets: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, description="The per-field-value breakdown of the metric, as a map of field values to the recorded value for that combination.")
     __properties: ClassVar[List[str]] = ["description", "unit", "constant", "rate", "gauge", "cumulative", "count", "value", "rate_1m", "rate_5m", "rate_15m", "rate_mean", "p50", "p75", "p95", "p98", "p99", "p99_9", "min", "avg", "max", "sum", "std_dev", "fields", "buckets"]
 
@@ -73,7 +73,7 @@ class MetricJson(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of MetricJson from a JSON string"""
+        """Create an instance of MetricInfo from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -104,7 +104,7 @@ class MetricJson(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of MetricJson from a dict"""
+        """Create an instance of MetricInfo from a dict"""
         if obj is None:
             return None
 
@@ -135,7 +135,7 @@ class MetricJson(BaseModel):
             "max": obj.get("max"),
             "sum": obj.get("sum"),
             "std_dev": obj.get("std_dev"),
-            "fields": [FieldJson.from_dict(_item) for _item in obj["fields"]] if obj.get("fields") is not None else None,
+            "fields": [MetricFieldInfo.from_dict(_item) for _item in obj["fields"]] if obj.get("fields") is not None else None,
             "buckets": obj.get("buckets")
         })
         return _obj

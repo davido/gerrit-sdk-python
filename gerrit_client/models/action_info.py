@@ -31,7 +31,7 @@ class ActionInfo(BaseModel):
     label: Optional[StrictStr] = Field(default=None, description="Short title to display to a user describing the action. In the Gerrit web interface the label is used as the text on the button presented in the UI.")
     title: Optional[StrictStr] = Field(default=None, description="Longer text to display describing the action. In a web UI this should be the title attribute of the element, displaying when the user hovers the mouse.")
     enabled: Optional[StrictBool] = Field(default=None, description="If true the action is permitted at this time and the caller is likely allowed to execute it. This may change if state is updated at the server or permissions are modified. Not present if false.")
-    enabled_options: Optional[List[StrictStr]] = Field(default=None, description="Optional list of enabled options. + See the list of suppported options below.")
+    enabled_options: Optional[List[StrictStr]] = Field(default=None, description="Optional list of enabled options. + See the list of supported options below.")
     __properties: ClassVar[List[str]] = ["method", "label", "title", "enabled", "enabled_options"]
 
     model_config = ConfigDict(

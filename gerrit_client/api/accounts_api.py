@@ -13412,8 +13412,9 @@ class AccountsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> str:
-        """put_accounts_account_id_emails_email_id_avatar
+        """Set Avatar Email
 
+        Sets an email address as the avatar email address for an account. The avatar email address is used for avatar lookup, e.g. via Gravatar.
 
         :param account_id: (required)
         :type account_id: str
@@ -13482,8 +13483,9 @@ class AccountsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[str]:
-        """put_accounts_account_id_emails_email_id_avatar
+        """Set Avatar Email
 
+        Sets an email address as the avatar email address for an account. The avatar email address is used for avatar lookup, e.g. via Gravatar.
 
         :param account_id: (required)
         :type account_id: str
@@ -13552,8 +13554,9 @@ class AccountsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """put_accounts_account_id_emails_email_id_avatar
+        """Set Avatar Email
 
+        Sets an email address as the avatar email address for an account. The avatar email address is used for avatar lookup, e.g. via Gravatar.
 
         :param account_id: (required)
         :type account_id: str

@@ -68,7 +68,6 @@ from gerrit_client.models.check_groups_result_info import CheckGroupsResultInfo
 from gerrit_client.models.check_project_input import CheckProjectInput
 from gerrit_client.models.check_project_result_info import CheckProjectResultInfo
 from gerrit_client.models.cherry_pick_input import CherryPickInput
-from gerrit_client.models.cleanup_changes_input import CleanupChangesInput
 from gerrit_client.models.comment_info import CommentInfo
 from gerrit_client.models.comment_input import CommentInput
 from gerrit_client.models.comment_link_info import CommentLinkInfo
@@ -127,7 +126,6 @@ from gerrit_client.models.entries_info import EntriesInfo
 from gerrit_client.models.evaluate_change_query_expression_result_info import EvaluateChangeQueryExpressionResultInfo
 from gerrit_client.models.experiment_info import ExperimentInfo
 from gerrit_client.models.fetch_info import FetchInfo
-from gerrit_client.models.field_json import FieldJson
 from gerrit_client.models.file_change import FileChange
 from gerrit_client.models.file_content_input import FileContentInput
 from gerrit_client.models.file_meta import FileMeta
@@ -190,7 +188,8 @@ from gerrit_client.models.merge_input import MergeInput
 from gerrit_client.models.merge_patch_set_input import MergePatchSetInput
 from gerrit_client.models.mergeable_info import MergeableInfo
 from gerrit_client.models.metadata_info import MetadataInfo
-from gerrit_client.models.metric_json import MetricJson
+from gerrit_client.models.metric_field_info import MetricFieldInfo
+from gerrit_client.models.metric_info import MetricInfo
 from gerrit_client.models.migrate_label_functions_to_submit_requirement_status import MigrateLabelFunctionsToSubmitRequirementStatus
 from gerrit_client.models.migrate_labels_info import MigrateLabelsInfo
 from gerrit_client.models.migrate_labels_review_info import MigrateLabelsReviewInfo

@@ -38,7 +38,7 @@ class CommonFileInfo(BaseModel):
     lines_deleted: Optional[StrictInt] = Field(default=None, description="Number of deleted lines. + Not set for binary files or if no lines were deleted. + An empty last line is not included in the count and hence this number can differ by one from details provided in DiffInfo.")
     size_delta: Optional[StrictInt] = Field(default=None, description="Number of bytes by which the file size increased/decreased.")
     size: Optional[StrictInt] = Field(default=None, description="File size in bytes.")
-    diffs_too_expensive_to_compute: Optional[StrictBool] = Field(default=None, description="Whether the diff of the file is too expensive to compute; when set the diff content is omitted.")
+    diffs_too_expensive_to_compute: Optional[StrictBool] = Field(default=None, description="Whether Gerrit skipped expensive diff data for this file because diff computation timed out. This can only be set when the GerritBackendFeature__timeout_file_diff_computation experiment is enabled; when the experiment is disabled, file diffs are computed without this timeout and the field is not set.")
     __properties: ClassVar[List[str]] = ["status", "old_mode", "new_mode", "old_sha", "new_sha", "binary", "old_path", "lines_inserted", "lines_deleted", "size_delta", "size", "diffs_too_expensive_to_compute"]
 
     model_config = ConfigDict(

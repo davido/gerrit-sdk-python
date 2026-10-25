@@ -927,6 +927,7 @@ class PluginsApi:
     ) -> PluginInfo:
         """Disable Plugin
 
+        Disables a plugin on the Gerrit server.
 
         :param plugin_id: (required)
         :type plugin_id: str
@@ -993,6 +994,7 @@ class PluginsApi:
     ) -> ApiResponse[PluginInfo]:
         """Disable Plugin
 
+        Disables a plugin on the Gerrit server.
 
         :param plugin_id: (required)
         :type plugin_id: str
@@ -1059,6 +1061,7 @@ class PluginsApi:
     ) -> RESTResponseType:
         """Disable Plugin
 
+        Disables a plugin on the Gerrit server.
 
         :param plugin_id: (required)
         :type plugin_id: str

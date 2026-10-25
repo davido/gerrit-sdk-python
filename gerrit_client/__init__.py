@@ -89,7 +89,6 @@ __all__ = [
     "CheckProjectInput",
     "CheckProjectResultInfo",
     "CherryPickInput",
-    "CleanupChangesInput",
     "CommentInfo",
     "CommentInput",
     "CommentLinkInfo",
@@ -148,7 +147,6 @@ __all__ = [
     "EvaluateChangeQueryExpressionResultInfo",
     "ExperimentInfo",
     "FetchInfo",
-    "FieldJson",
     "FileChange",
     "FileContentInput",
     "FileMeta",
@@ -211,7 +209,8 @@ __all__ = [
     "MergePatchSetInput",
     "MergeableInfo",
     "MetadataInfo",
-    "MetricJson",
+    "MetricFieldInfo",
+    "MetricInfo",
     "MigrateLabelFunctionsToSubmitRequirementStatus",
     "MigrateLabelsInfo",
     "MigrateLabelsReviewInfo",
@@ -392,7 +391,6 @@ from gerrit_client.models.check_groups_result_info import CheckGroupsResultInfo 
 from gerrit_client.models.check_project_input import CheckProjectInput as CheckProjectInput
 from gerrit_client.models.check_project_result_info import CheckProjectResultInfo as CheckProjectResultInfo
 from gerrit_client.models.cherry_pick_input import CherryPickInput as CherryPickInput
-from gerrit_client.models.cleanup_changes_input import CleanupChangesInput as CleanupChangesInput
 from gerrit_client.models.comment_info import CommentInfo as CommentInfo
 from gerrit_client.models.comment_input import CommentInput as CommentInput
 from gerrit_client.models.comment_link_info import CommentLinkInfo as CommentLinkInfo
@@ -451,7 +449,6 @@ from gerrit_client.models.entries_info import EntriesInfo as EntriesInfo
 from gerrit_client.models.evaluate_change_query_expression_result_info import EvaluateChangeQueryExpressionResultInfo as EvaluateChangeQueryExpressionResultInfo
 from gerrit_client.models.experiment_info import ExperimentInfo as ExperimentInfo
 from gerrit_client.models.fetch_info import FetchInfo as FetchInfo
-from gerrit_client.models.field_json import FieldJson as FieldJson
 from gerrit_client.models.file_change import FileChange as FileChange
 from gerrit_client.models.file_content_input import FileContentInput as FileContentInput
 from gerrit_client.models.file_meta import FileMeta as FileMeta
@@ -514,7 +511,8 @@ from gerrit_client.models.merge_input import MergeInput as MergeInput
 from gerrit_client.models.merge_patch_set_input import MergePatchSetInput as MergePatchSetInput
 from gerrit_client.models.mergeable_info import MergeableInfo as MergeableInfo
 from gerrit_client.models.metadata_info import MetadataInfo as MetadataInfo
-from gerrit_client.models.metric_json import MetricJson as MetricJson
+from gerrit_client.models.metric_field_info import MetricFieldInfo as MetricFieldInfo
+from gerrit_client.models.metric_info import MetricInfo as MetricInfo
 from gerrit_client.models.migrate_label_functions_to_submit_requirement_status import MigrateLabelFunctionsToSubmitRequirementStatus as MigrateLabelFunctionsToSubmitRequirementStatus
 from gerrit_client.models.migrate_labels_info import MigrateLabelsInfo as MigrateLabelsInfo
 from gerrit_client.models.migrate_labels_review_info import MigrateLabelsReviewInfo as MigrateLabelsReviewInfo

@@ -37,7 +37,8 @@ class GerritInfo(BaseModel):
     instance_id: Optional[StrictStr] = Field(default=None, description="Short identifier for this Gerrit installation.")
     default_branch: Optional[StrictStr] = Field(default=None, description="Name of the default branch to use on the project creation.")
     project_state_predicate_enabled: Optional[StrictBool] = Field(default=None, description="Whether the instance supports filtering projects by state.")
-    __properties: ClassVar[List[str]] = ["all_projects", "all_users", "doc_search", "doc_url", "edit_gpg_keys", "report_bug_url", "primary_weblink_name", "instance_id", "default_branch", "project_state_predicate_enabled"]
+    submit_commit_url: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["all_projects", "all_users", "doc_search", "doc_url", "edit_gpg_keys", "report_bug_url", "primary_weblink_name", "instance_id", "default_branch", "project_state_predicate_enabled", "submit_commit_url"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -99,7 +100,8 @@ class GerritInfo(BaseModel):
             "primary_weblink_name": obj.get("primary_weblink_name"),
             "instance_id": obj.get("instance_id"),
             "default_branch": obj.get("default_branch"),
-            "project_state_predicate_enabled": obj.get("project_state_predicate_enabled")
+            "project_state_predicate_enabled": obj.get("project_state_predicate_enabled"),
+            "submit_commit_url": obj.get("submit_commit_url")
         })
         return _obj
 

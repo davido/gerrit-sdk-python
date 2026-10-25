@@ -27,7 +27,7 @@ class NotifyInfo(BaseModel):
     """
     NotifyInfo
     """ # noqa: E501
-    accounts: Optional[List[StrictStr]] = Field(default=None, description="A list of account IDs that identify the accounts that should be should be notified.")
+    accounts: Optional[List[StrictStr]] = Field(default=None, description="A list of account IDs that identify the accounts that should be notified.")
     __properties: ClassVar[List[str]] = ["accounts"]
 
     model_config = ConfigDict(

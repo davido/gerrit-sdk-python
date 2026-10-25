@@ -3388,8 +3388,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """delete_changes_change_id_revisions_revision_id_reviewers_reviewer_id
+        """Delete Reviewer
 
+        'POST /changes/\\{change-id\\}/reviewers/\\{account-id\\}/delete' --
 
         :param change_id: (required)
         :type change_id: str
@@ -3462,8 +3463,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """delete_changes_change_id_revisions_revision_id_reviewers_reviewer_id
+        """Delete Reviewer
 
+        'POST /changes/\\{change-id\\}/reviewers/\\{account-id\\}/delete' --
 
         :param change_id: (required)
         :type change_id: str
@@ -3536,8 +3538,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_changes_change_id_revisions_revision_id_reviewers_reviewer_id
+        """Delete Reviewer
 
+        'POST /changes/\\{change-id\\}/reviewers/\\{account-id\\}/delete' --
 
         :param change_id: (required)
         :type change_id: str
@@ -3670,8 +3673,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """delete_changes_change_id_revisions_revision_id_reviewers_reviewer_id_votes_vote_id
+        """Delete Vote
 
+        'POST /changes/\\{change-id\\}/reviewers/\\{account-id\\}/votes/\\{label-id\\}/delete' --
 
         :param change_id: (required)
         :type change_id: str
@@ -3748,8 +3752,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """delete_changes_change_id_revisions_revision_id_reviewers_reviewer_id_votes_vote_id
+        """Delete Vote
 
+        'POST /changes/\\{change-id\\}/reviewers/\\{account-id\\}/votes/\\{label-id\\}/delete' --
 
         :param change_id: (required)
         :type change_id: str
@@ -3826,8 +3831,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_changes_change_id_revisions_revision_id_reviewers_reviewer_id_votes_vote_id
+        """Delete Vote
 
+        'POST /changes/\\{change-id\\}/reviewers/\\{account-id\\}/votes/\\{label-id\\}/delete' --
 
         :param change_id: (required)
         :type change_id: str
@@ -6913,8 +6919,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> bytes:
-        """get_changes_change_id_edit_change_edit_id
+        """Retrieve file content from Change Edit
 
+        Retrieves content of a file from a change edit.
 
         :param change_id: (required)
         :type change_id: str
@@ -6988,8 +6995,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[bytes]:
-        """get_changes_change_id_edit_change_edit_id
+        """Retrieve file content from Change Edit
 
+        Retrieves content of a file from a change edit.
 
         :param change_id: (required)
         :type change_id: str
@@ -7063,8 +7071,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_changes_change_id_edit_change_edit_id
+        """Retrieve file content from Change Edit
 
+        Retrieves content of a file from a change edit.
 
         :param change_id: (required)
         :type change_id: str
@@ -7205,8 +7214,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetMetaFileInfo:
-        """get_changes_change_id_edit_change_edit_id_meta
+        """Retrieve meta data of a file from Change Edit
 
+        Retrieves meta data of a file from a change edit. Currently only web links are returned.
 
         :param change_id: (required)
         :type change_id: str
@@ -7275,8 +7285,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetMetaFileInfo]:
-        """get_changes_change_id_edit_change_edit_id_meta
+        """Retrieve meta data of a file from Change Edit
 
+        Retrieves meta data of a file from a change edit. Currently only web links are returned.
 
         :param change_id: (required)
         :type change_id: str
@@ -7345,8 +7356,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_changes_change_id_edit_change_edit_id_meta
+        """Retrieve meta data of a file from Change Edit
 
+        Retrieves meta data of a file from a change edit. Currently only web links are returned.
 
         :param change_id: (required)
         :type change_id: str
@@ -7478,8 +7490,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> bytes:
-        """get_changes_change_id_edit_message
+        """Retrieve commit message from Change Edit or current patch set of the change
 
+        Retrieves commit message from change edit.
 
         :param change_id: (required)
         :type change_id: str
@@ -7548,8 +7561,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[bytes]:
-        """get_changes_change_id_edit_message
+        """Retrieve commit message from Change Edit or current patch set of the change
 
+        Retrieves commit message from change edit.
 
         :param change_id: (required)
         :type change_id: str
@@ -7618,8 +7632,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_changes_change_id_edit_message
+        """Retrieve commit message from Change Edit or current patch set of the change
 
+        Retrieves commit message from change edit.
 
         :param change_id: (required)
         :type change_id: str
@@ -18728,8 +18743,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[ReviewerInfo]:
-        """get_changes_change_id_revisions_revision_id_reviewers_reviewer_id
+        """Get Reviewer
 
+        Retrieves a reviewer of a change.
 
         :param change_id: (required)
         :type change_id: str
@@ -18802,8 +18818,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[List[ReviewerInfo]]:
-        """get_changes_change_id_revisions_revision_id_reviewers_reviewer_id
+        """Get Reviewer
 
+        Retrieves a reviewer of a change.
 
         :param change_id: (required)
         :type change_id: str
@@ -18876,8 +18893,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_changes_change_id_revisions_revision_id_reviewers_reviewer_id
+        """Get Reviewer
 
+        Retrieves a reviewer of a change.
 
         :param change_id: (required)
         :type change_id: str
@@ -23883,8 +23901,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """post_changes_change_id_edit_publish
+        """Publish Change Edit
 
+        Promotes change edit to a regular patch set.
 
         :param change_id: (required)
         :type change_id: str
@@ -23953,8 +23972,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """post_changes_change_id_edit_publish
+        """Publish Change Edit
 
+        Promotes change edit to a regular patch set.
 
         :param change_id: (required)
         :type change_id: str
@@ -24023,8 +24043,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """post_changes_change_id_edit_publish
+        """Publish Change Edit
 
+        Promotes change edit to a regular patch set.
 
         :param change_id: (required)
         :type change_id: str
@@ -26756,8 +26777,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """post_changes_change_id_private_delete
+        """Unmark Private
 
+        Marks the change to be non-private. Note users can only unmark own private changes.
 
         :param change_id: (required)
         :type change_id: str
@@ -26826,8 +26848,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """post_changes_change_id_private_delete
+        """Unmark Private
 
+        Marks the change to be non-private. Note users can only unmark own private changes.
 
         :param change_id: (required)
         :type change_id: str
@@ -26896,8 +26919,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """post_changes_change_id_private_delete
+        """Unmark Private
 
+        Marks the change to be non-private. Note users can only unmark own private changes.
 
         :param change_id: (required)
         :type change_id: str
@@ -31821,8 +31845,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ReviewerResult:
-        """post_changes_change_id_revisions_revision_id_reviewers
+        """Add Reviewer
 
+        Adds one user or all members of one group as reviewer to the change.
 
         :param change_id: (required)
         :type change_id: str
@@ -31895,8 +31920,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ReviewerResult]:
-        """post_changes_change_id_revisions_revision_id_reviewers
+        """Add Reviewer
 
+        Adds one user or all members of one group as reviewer to the change.
 
         :param change_id: (required)
         :type change_id: str
@@ -31969,8 +31995,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """post_changes_change_id_revisions_revision_id_reviewers
+        """Add Reviewer
 
+        Adds one user or all members of one group as reviewer to the change.
 
         :param change_id: (required)
         :type change_id: str
@@ -32125,8 +32152,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """post_changes_change_id_revisions_revision_id_reviewers_reviewer_id_delete
+        """Delete Reviewer
 
+        Deletes a reviewer from a change. Deleting a reviewer also removes that user from the attention set.
 
         :param change_id: (required)
         :type change_id: str
@@ -32203,8 +32231,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """post_changes_change_id_revisions_revision_id_reviewers_reviewer_id_delete
+        """Delete Reviewer
 
+        Deletes a reviewer from a change. Deleting a reviewer also removes that user from the attention set.
 
         :param change_id: (required)
         :type change_id: str
@@ -32281,8 +32310,9 @@ class ChangesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """post_changes_change_id_revisions_revision_id_reviewers_reviewer_id_delete
+        """Delete Reviewer
 
+        Deletes a reviewer from a change. Deleting a reviewer also removes that user from the attention set.
 
         :param change_id: (required)
         :type change_id: str

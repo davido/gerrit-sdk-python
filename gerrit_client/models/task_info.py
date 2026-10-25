@@ -29,7 +29,7 @@ class TaskInfo(BaseModel):
     TaskInfo
     """ # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="The ID of the task.")
-    state: Optional[State] = Field(default=None, description="The state of the task, can be DONE, CANCELLED, RUNNING, READY, SLEEPING and OTHER.")
+    state: Optional[State] = Field(default=None, description="The state of the task, can be DONE, CANCELLED, STOPPING, RUNNING, STARTING, PARKED, READY, SLEEPING and OTHER.")
     start_time: Optional[StrictStr] = Field(default=None, description="The start time of the task.")
     delay: Optional[StrictInt] = Field(default=None, description="The remaining delay of the task.")
     command: Optional[StrictStr] = Field(default=None, description="The command of the task.")

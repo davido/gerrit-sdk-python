@@ -27,7 +27,7 @@ class OwnerInput(BaseModel):
     """
     OwnerInput
     """ # noqa: E501
-    owner: Optional[StrictStr] = Field(default=None, description="The id of the group that should own this group.")
+    owner: Optional[StrictStr] = Field(default=None, description="The group id of the group that should own this group. The group can be specified by UUID, legacy numeric ID, or unique name.")
     __properties: ClassVar[List[str]] = ["owner"]
 
     model_config = ConfigDict(
