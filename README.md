@@ -21,7 +21,7 @@ the client never drifts from the server.
    that emitter's output.
 3. **`generate.sh` generates the package.** openapi-generator (python, pydantic v2)
    turns the spec into `gerrit_client/`.
-4. **A consumer reuses it by tag.** `pip install "git+…@v3.15.0-SNAPSHOT"`, or run the
+4. **A consumer reuses it by tag.** `pip install "git+…@v3.16.0-SNAPSHOT"`, or run the
    bundled example — see [Use it](#use-it).
 
 The whole story demonstrates feasibility for Gerrit issue
@@ -30,8 +30,8 @@ Swagger from OpenApi for REST API").
 
 ## Version
 
-Generated from **Gerrit 3.15.0-SNAPSHOT** and tagged **`v3.15.0-SNAPSHOT`** — the tag
-mirrors the Gerrit version. The *package* version is `3.15.0.dev0`: PEP 440 forbids a
+Generated from **Gerrit 3.16.0-SNAPSHOT** and tagged **`v3.16.0-SNAPSHOT`** — the tag
+mirrors the Gerrit version. The *package* version is `3.16.0.dev0`: PEP 440 forbids a
 `-SNAPSHOT` suffix, so the pre-release is expressed as `.dev0` while the git tag keeps
 the Gerrit label.
 
@@ -42,8 +42,13 @@ the Gerrit label.
 - `gerrit_xssi/` — a hand-written `GerritApiClient(ApiClient)` subclass that strips
   Gerrit's `)]}'` XSSI guard before deserialization (the one Gerrit-specific step; see
   below). It lives outside the generated package, so regeneration never touches it.
-- `examples/get-change-detail/` — a runnable example: an anonymous `GET /changes/{id}`
-  rendered as a colored, Web-UI-style summary using Gerrit's own palette.
+- `examples/` — runnable examples that consume the SDK against a live Gerrit:
+  - `get-change-detail/` — anonymous `GET /changes/{id}` rendered as a colored,
+    Web-UI-style summary using Gerrit's own palette (no auth).
+  - `get-comments/` — inline comments and change messages rendered chronologically;
+    authenticated via `~/.gitcookies`, or pass `--anonymous` for public endpoints.
+  - `post-draft-comment/` — creates an unpublished draft comment via
+    `PUT /a/changes/{id}/revisions/{rev}/drafts` (requires auth via `~/.gitcookies`).
 - `rest-api-openapi.json`, `generate.sh` — the pinned spec and the generation script.
 
 ## Regenerate
@@ -93,7 +98,7 @@ python examples/get-change-detail/main.py --change 622261
 `pip install` the SDK straight from the tag, in your own project or a throwaway venv:
 
 ```bash
-pip install "git+https://github.com/davido/gerrit-sdk-python@v3.15.0-SNAPSHOT"
+pip install "git+https://github.com/davido/gerrit-sdk-python@v3.16.0-SNAPSHOT"
 ```
 
 ```python
