@@ -34,7 +34,7 @@ npx --yes @openapitools/openapi-generator-cli@2.41.0 generate \
   --additional-properties=packageName=gerrit_client,projectName=gerrit-sdk-python,packageVersion="$PKG_VERSION" \
   >/dev/null
 
-echo "3/3 sync package version into the hand-written pyproject.toml"
+echo "3/4 sync package version into the hand-written pyproject.toml"
 python3 -c '
 import re, sys
 v = sys.argv[1]
@@ -42,5 +42,26 @@ s = open("pyproject.toml").read()
 s = re.sub(r"^version = \".*\"", f"version = \"{v}\"", s, count=1, flags=re.M)
 open("pyproject.toml", "w").write(s)
 ' "$PKG_VERSION"
+
+echo "4/4 sync Gerrit version into the hand-written README.md"
+# README.md is protected by .openapi-generator-ignore, so the generator never rewrites
+# it. Keep its Gerrit-version tokens in step with the spec here, reusing the same
+# VERSION/PKG_VERSION derived above (no second source of truth). The substitutions are
+# anchored to the Gerrit-release context so they never touch unrelated versions
+# (OkHttp, pydantic, generator-cli, urllib3, package deps).
+python3 -c '
+import re, sys
+VERSION, PKG_VERSION = sys.argv[1], sys.argv[2]
+s = open("README.md").read()
+SNAP = r"\d+\.\d+\.\d+-SNAPSHOT"      # Gerrit snapshot form X.Y.Z-SNAPSHOT
+DEV  = r"\d+\.\d+\.\d+(?:\.dev\d+)?"  # PEP 440 package form X.Y.Z[.devN]
+# 1. "Gerrit X.Y.Z-SNAPSHOT" (bare version right after the word Gerrit).
+s = re.sub(r"(Gerrit )" + SNAP, r"\g<1>" + VERSION, s)
+# 2. "vX.Y.Z-SNAPSHOT" (git tag form: a v immediately before the version).
+s = re.sub(r"(?<![\w.])v" + SNAP, "v" + VERSION, s)
+# 3. the package version in backticks: `X.Y.Z.devN`.
+s = re.sub(r"(`)" + DEV + r"(`)", r"\g<1>" + PKG_VERSION + r"\g<2>", s)
+open("README.md", "w").write(s)
+' "$VERSION" "$PKG_VERSION"
 
 echo "done: gerrit_client/ regenerated from $SPEC; XSSI handled by gerrit_xssi (no source patch)"
