@@ -28,3 +28,6 @@ build-backend = "setuptools.build_meta"
 # packaged (no __init__.py in examples/).
 [tool.setuptools.packages.find]
 include = ["gerrit_client*", "gerrit_xssi*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
