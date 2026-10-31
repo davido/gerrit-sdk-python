@@ -43,15 +43,34 @@ s = re.sub(r"^version = \".*\"", f"version = \"{v}\"", s, count=1, flags=re.M)
 open("pyproject.toml", "w").write(s)
 ' "$PKG_VERSION"
 
-echo "4/4 sync Gerrit version into the hand-written README.md"
+echo "4/4 sync Gerrit version + surface counts into the hand-written README.md"
 # README.md is protected by .openapi-generator-ignore, so the generator never rewrites
 # it. Keep its Gerrit-version tokens in step with the spec here, reusing the same
 # VERSION/PKG_VERSION derived above (no second source of truth). The substitutions are
 # anchored to the Gerrit-release context so they never touch unrelated versions
-# (OkHttp, pydantic, generator-cli, urllib3, package deps).
+# (OkHttp, pydantic, generator-cli, urllib3, package deps). The "What's in this repo"
+# surface counts (operations / API classes / models) are recomputed from the freshly
+# generated package so they can never rot: operations = main op methods across api/*.py
+# (each op also emits _with_http_info / _without_preload_content / _*_serialize helpers,
+# which are excluded); API classes = api/*.py; models = models/*.py (both minus __init__).
 python3 -c '
-import re, sys
+import re, sys, glob, os
 VERSION, PKG_VERSION = sys.argv[1], sys.argv[2]
+
+def mods(sub):
+    return [p for p in glob.glob(f"gerrit_client/{sub}/*.py")
+            if os.path.basename(p) != "__init__.py"]
+
+api_files = mods("api")
+model_count = len(mods("models"))
+api_count = len(api_files)
+op_count = 0
+for p in api_files:
+    for line in open(p):
+        if (line.startswith("    def ") and "__init__" not in line
+                and not re.search(r"_with_http_info|_without_preload_content|_serialize", line)):
+            op_count += 1
+
 s = open("README.md").read()
 SNAP = r"\d+\.\d+\.\d+-SNAPSHOT"      # Gerrit snapshot form X.Y.Z-SNAPSHOT
 DEV  = r"\d+\.\d+\.\d+(?:\.dev\d+)?"  # PEP 440 package form X.Y.Z[.devN]
@@ -61,6 +80,10 @@ s = re.sub(r"(Gerrit )" + SNAP, r"\g<1>" + VERSION, s)
 s = re.sub(r"(?<![\w.])v" + SNAP, "v" + VERSION, s)
 # 3. the package version in backticks: `X.Y.Z.devN`.
 s = re.sub(r"(`)" + DEV + r"(`)", r"\g<1>" + PKG_VERSION + r"\g<2>", s)
+# 4. surface counts in the one "**N operations** across **M API classes** ... **K ... models**" line.
+s = re.sub(r"\*\*\d+ operations\*\*",   f"**{op_count} operations**",    s)
+s = re.sub(r"\*\*\d+ API classes\*\*",  f"**{api_count} API classes**",  s)
+s = re.sub(r"\*\*\d+ pydantic models\*\*", f"**{model_count} pydantic models**", s)
 open("README.md", "w").write(s)
 ' "$VERSION" "$PKG_VERSION"
 

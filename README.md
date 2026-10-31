@@ -37,8 +37,8 @@ the Gerrit label.
 
 ## What's in this repo
 
-- `gerrit_client/` — the generated package: **341 operations** across **7 API classes**
-  (`api/`) and **278 pydantic models** (`models/`), over `urllib3`.
+- `gerrit_client/` — the generated package: **338 operations** across **7 API classes**
+  (`api/`) and **279 pydantic models** (`models/`), over `urllib3`.
 - `gerrit_xssi/` — a hand-written `GerritApiClient(ApiClient)` subclass that strips
   Gerrit's `)]}'` XSSI guard before deserialization (the one Gerrit-specific step; see
   below). It lives outside the generated package, so regeneration never touches it.
