@@ -25,6 +25,7 @@ from gerrit_client.models.config_parameter_info import ConfigParameterInfo
 from gerrit_client.models.inherited_boolean_info import InheritedBooleanInfo
 from gerrit_client.models.max_object_size_limit_info import MaxObjectSizeLimitInfo
 from gerrit_client.models.project_state import ProjectState
+from gerrit_client.models.ref_storage import RefStorage
 from gerrit_client.models.submit_type import SubmitType
 from gerrit_client.models.submit_type_info import SubmitTypeInfo
 from typing import Optional, Set
@@ -54,11 +55,12 @@ class ConfigInfo(BaseModel):
     submit_type: Optional[SubmitType] = Field(default=None, description="Deprecated; equivalent to value in default_submit_type.")
     default_submit_type: Optional[SubmitTypeInfo] = Field(default=None, description="SubmitTypeInfo that describes the default submit type of the project, when not overridden at the change level.")
     state: Optional[ProjectState] = Field(default=None, description="The state of the project, can be ACTIVE, READ_ONLY or HIDDEN. + Not set if the project state is ACTIVE.")
+    ref_storage: Optional[RefStorage] = Field(default=None, description="The ref storage format of the project's repository (FILES or REFTABLE). The request fails if the repository cannot be opened.")
     plugin_config: Optional[Dict[str, Dict[str, ConfigParameterInfo]]] = Field(default=None, description="Plugin configuration as map which maps the plugin name to a map of parameter names to ConfigParameterInfo entities. Only filled for users who have read access to refs/meta/config.")
     actions: Optional[Dict[str, ActionInfo]] = Field(default=None, description="Actions the caller might be able to perform on this project. The information is a map of view names to")
     commentlinks: Optional[Dict[str, CommentLinkInfo]] = Field(default=None, description="Map with the comment link configurations of the project. The name of the comment link configuration is mapped to a CommentlinkInfo entity.")
     extension_panel_names: Optional[Dict[str, List[StrictStr]]] = Field(default=None, description="Views that are shown as extension panels, as a map of panel section name to the list of panel names configured for the project.")
-    __properties: ClassVar[List[str]] = ["description", "use_contributor_agreements", "use_content_merge", "use_signed_off_by", "create_new_change_for_all_not_in_target", "require_change_id", "enable_signed_push", "require_signed_push", "reject_implicit_merges", "private_by_default", "work_in_progress_by_default", "enable_reviewer_by_email", "match_author_to_committer_date", "reject_empty_commit", "skip_adding_author_and_committer_as_reviewers", "max_object_size_limit", "submit_type", "default_submit_type", "state", "plugin_config", "actions", "commentlinks", "extension_panel_names"]
+    __properties: ClassVar[List[str]] = ["description", "use_contributor_agreements", "use_content_merge", "use_signed_off_by", "create_new_change_for_all_not_in_target", "require_change_id", "enable_signed_push", "require_signed_push", "reject_implicit_merges", "private_by_default", "work_in_progress_by_default", "enable_reviewer_by_email", "match_author_to_committer_date", "reject_empty_commit", "skip_adding_author_and_committer_as_reviewers", "max_object_size_limit", "submit_type", "default_submit_type", "state", "ref_storage", "plugin_config", "actions", "commentlinks", "extension_panel_names"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -198,6 +200,7 @@ class ConfigInfo(BaseModel):
             "submit_type": obj.get("submit_type"),
             "default_submit_type": SubmitTypeInfo.from_dict(obj["default_submit_type"]) if obj.get("default_submit_type") is not None else None,
             "state": obj.get("state"),
+            "ref_storage": obj.get("ref_storage"),
             "plugin_config": dict(
                 (_k, dict(
                     (_ik, ConfigParameterInfo.from_dict(_iv))

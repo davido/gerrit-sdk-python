@@ -231,6 +231,8 @@ from gerrit_client.models.rebase_change_edit_input import RebaseChangeEditInput
 from gerrit_client.models.rebase_input import RebaseInput
 from gerrit_client.models.receive_info import ReceiveInfo
 from gerrit_client.models.reduce_max_token_lifetime_input import ReduceMaxTokenLifetimeInput
+from gerrit_client.models.ref_storage import RefStorage
+from gerrit_client.models.ref_storage_input import RefStorageInput
 from gerrit_client.models.reflog_entry_info import ReflogEntryInfo
 from gerrit_client.models.reindex_index_version_input import ReindexIndexVersionInput
 from gerrit_client.models.related_change_and_commit_info import RelatedChangeAndCommitInfo

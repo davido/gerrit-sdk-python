@@ -21,6 +21,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from gerrit_client.models.config_value import ConfigValue
 from gerrit_client.models.inheritable_boolean import InheritableBoolean
+from gerrit_client.models.ref_storage import RefStorage
 from gerrit_client.models.submit_type import SubmitType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -35,6 +36,7 @@ class ProjectInput(BaseModel):
     description: Optional[StrictStr] = Field(default=None, description="The description of the project.")
     permissions_only: Optional[StrictBool] = Field(default=None, description="Whether a permission-only project should be created.")
     create_empty_commit: Optional[StrictBool] = Field(default=None, description="Whether an empty initial commit should be created.")
+    ref_storage: Optional[RefStorage] = Field(default=None, description="The ref storage format for the project's repository (FILES, REFTABLE). + If not set, the repository manager selects the format. Local disk storage uses JGit's init defaults, falling back to FILES.")
     submit_type: Optional[SubmitType] = Field(default=None, description="The submit type that should be set for the project (MERGE_IF_NECESSARY, REBASE_IF_NECESSARY, REBASE_ALWAYS, FAST_FORWARD_ONLY, MERGE_ALWAYS, CHERRY_PICK). + If not set, MERGE_IF_NECESSARY is set as submit type unless repository.<name>.defaultSubmitType is set to a different value.")
     branches: Optional[List[StrictStr]] = Field(default=None, description="A list of branches that should be initially created. + For the branch names the refs/heads/ prefix can be omitted. + The first entry of the list will be the default branch. + If the list is empty, host-level default is used.")
     owners: Optional[List[StrictStr]] = Field(default=None, description="A list of groups that should be assigned as project owner. + Each group in the list must be specified as group-id. + If not set, the groups that are configured as default owners are set as project owners.")
@@ -49,7 +51,7 @@ class ProjectInput(BaseModel):
     max_object_size_limit: Optional[StrictStr] = Field(default=None, description="Max allowed Git object size for this project. Common unit suffixes of 'k', 'm', or 'g' are supported.")
     plugin_config_values: Optional[Dict[str, Dict[str, ConfigValue]]] = Field(default=None, description="Plugin configuration values as map which maps the plugin name to a map of parameter names to values.")
     init_only: Optional[StrictBool] = Field(default=None, description="If set, only the project initialization is being (re-)done and the repository creation is skipped. The project initialization consists out of setting HEAD, creating the project.config file in refs/meta/config and creating initial branches with empty commits.")
-    __properties: ClassVar[List[str]] = ["name", "parent", "description", "permissions_only", "create_empty_commit", "submit_type", "branches", "owners", "use_contributor_agreements", "use_signed_off_by", "use_content_merge", "require_change_id", "create_new_change_for_all_not_in_target", "reject_empty_commit", "enable_signed_push", "require_signed_push", "max_object_size_limit", "plugin_config_values", "init_only"]
+    __properties: ClassVar[List[str]] = ["name", "parent", "description", "permissions_only", "create_empty_commit", "ref_storage", "submit_type", "branches", "owners", "use_contributor_agreements", "use_signed_off_by", "use_content_merge", "require_change_id", "create_new_change_for_all_not_in_target", "reject_empty_commit", "enable_signed_push", "require_signed_push", "max_object_size_limit", "plugin_config_values", "init_only"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -115,6 +117,7 @@ class ProjectInput(BaseModel):
             "description": obj.get("description"),
             "permissions_only": obj.get("permissions_only"),
             "create_empty_commit": obj.get("create_empty_commit"),
+            "ref_storage": obj.get("ref_storage"),
             "submit_type": obj.get("submit_type"),
             "branches": obj.get("branches"),
             "owners": obj.get("owners"),
