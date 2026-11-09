@@ -100,6 +100,8 @@ def parse_args(argv=None):
                      help="mark the thread resolved")
     res.add_argument("--unresolved", dest="unresolved", action="store_true", default=None,
                      help="mark the thread unresolved")
+    ap.add_argument("--is-ai", dest="is_ai", action="store_true", default=None,
+                    help="mark the comment as AI-generated (sets is_ai=true)")
     ap.add_argument("--cookies", default="~/.gitcookies")
     ap.add_argument("--anonymous", action="store_true",
                     help="(cannot create drafts; useful only with --dry-run)")
@@ -125,6 +127,7 @@ def main(argv=None):
         in_reply_to=args.in_reply_to,
         side=args.side,
         unresolved=args.unresolved,
+        is_ai=args.is_ai,
     )
 
     if args.dry_run:
@@ -142,7 +145,7 @@ def main(argv=None):
         sys.exit(f"error creating draft: {e.status} {e.reason}\n{e.body}")
 
     print("DRAFT CREATED (unpublished):")
-    for k in ("id", "path", "line", "in_reply_to", "unresolved", "updated"):
+    for k in ("id", "path", "line", "in_reply_to", "unresolved", "is_ai", "updated"):
         print(f"  {k:<12}{getattr(res, k, None)}")
     print(f"  {'message':<12}{res.message}")
 
