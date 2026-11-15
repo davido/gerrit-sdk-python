@@ -30,11 +30,12 @@ class ChangeConfigInfo(BaseModel):
     allow_blame: Optional[StrictBool] = Field(default=None, description="Whether blame on side by side diff is allowed.")
     disable_private_changes: Optional[StrictBool] = Field(default=None, description="Returns true if private changes are disabled.")
     update_delay: Optional[StrictInt] = Field(default=None, description="How often in seconds the web interface should poll for updates to the currently open change.")
-    submit_whole_topic: Optional[StrictBool] = Field(default=None, description="A configuration if the whole topic is submitted.")
+    submit_whole_topic: Optional[StrictBool] = Field(default=None, description="Configuration that enforces the whole topic to be submitted. Deprecated; use enforce_whole_topic_submit.")
+    enforce_whole_topic_submit: Optional[StrictBool] = Field(default=None, description="Configuration that enforces the whole topic to be submitted.")
     mergeability_computation_behavior: Optional[StrictStr] = Field(default=None, description="Value of the configuration parameter that controls whether the mergeability bit in ChangeInfo will never be set and if the bit is indexed.")
     conflicts_predicate_enabled: Optional[StrictBool] = Field(default=None, description="Are conflicts enabled?.")
     allow_markdown_base64_images_in_comments: Optional[StrictBool] = Field(default=None, description="Are markdown base64 images in comments allowed?.")
-    __properties: ClassVar[List[str]] = ["allow_blame", "disable_private_changes", "update_delay", "submit_whole_topic", "mergeability_computation_behavior", "conflicts_predicate_enabled", "allow_markdown_base64_images_in_comments"]
+    __properties: ClassVar[List[str]] = ["allow_blame", "disable_private_changes", "update_delay", "submit_whole_topic", "enforce_whole_topic_submit", "mergeability_computation_behavior", "conflicts_predicate_enabled", "allow_markdown_base64_images_in_comments"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -91,6 +92,7 @@ class ChangeConfigInfo(BaseModel):
             "disable_private_changes": obj.get("disable_private_changes"),
             "update_delay": obj.get("update_delay"),
             "submit_whole_topic": obj.get("submit_whole_topic"),
+            "enforce_whole_topic_submit": obj.get("enforce_whole_topic_submit"),
             "mergeability_computation_behavior": obj.get("mergeability_computation_behavior"),
             "conflicts_predicate_enabled": obj.get("conflicts_predicate_enabled"),
             "allow_markdown_base64_images_in_comments": obj.get("allow_markdown_base64_images_in_comments")

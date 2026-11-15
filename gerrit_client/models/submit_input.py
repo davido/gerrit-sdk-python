@@ -33,7 +33,8 @@ class SubmitInput(BaseModel):
     on_behalf_of: Optional[StrictStr] = Field(default=None, description="If set, submit the change on behalf of the given user. The value may take any format accepted by the accounts REST API. Using this option requires Submit (On Behalf Of) permission on the branch.")
     notify: Optional[NotifyHandling] = Field(default=None, description="Notify handling that defines to whom email notifications should be sent after the change is submitted. + Allowed values are NONE, OWNER, OWNER_REVIEWERS and ALL. + If not set, the default is ALL. + Ignored if a post approval diff is present (i.e.")
     notify_details: Optional[Dict[str, NotifyInfo]] = Field(default=None, description="Additional information about whom to notify about the update as a map of recipient type to NotifyInfo entity.")
-    __properties: ClassVar[List[str]] = ["wait_for_merge", "on_behalf_of", "notify", "notify_details"]
+    submit_whole_topic: Optional[StrictBool] = Field(default=None, description="If true, all open changes that share the topic of the submitted change are also submitted together in a single operation. Defaults to false.")
+    __properties: ClassVar[List[str]] = ["wait_for_merge", "on_behalf_of", "notify", "notify_details", "submit_whole_topic"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -100,7 +101,8 @@ class SubmitInput(BaseModel):
                 for _k, _v in obj["notify_details"].items()
             )
             if obj.get("notify_details") is not None
-            else None
+            else None,
+            "submit_whole_topic": obj.get("submit_whole_topic")
         })
         return _obj
 
