@@ -17,8 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from gerrit_client.models.fix_suggestion_info import FixSuggestionInfo
+from gerrit_client.models.range import Range
+from gerrit_client.models.side import Side
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -27,8 +30,21 @@ class CommentInput(BaseModel):
     """
     CommentInput
     """ # noqa: E501
-    enable_context: Optional[StrictBool] = Field(default=None, description="Whether to include the source lines around the comment as context in the response.")
-    __properties: ClassVar[List[str]] = ["enable_context"]
+    unresolved: Optional[StrictBool] = Field(default=None, description="Whether or not the comment must be addressed by the user. This value will default to false if the comment is an orphan, or the value of the in_reply_to comment if it is supplied.")
+    patch_set: Optional[StrictInt] = Field(default=None, description="The patch set number for the comment; only set in contexts where + comments may be returned for multiple patch sets.")
+    id: Optional[StrictStr] = Field(default=None, description="The URL encoded UUID of the comment if an existing draft comment should be updated.")
+    path: Optional[StrictStr] = Field(default=None, description="The file path for which the inline comment should be added. + Doesn't need to be set if contained in a map where the key is the file path.")
+    side: Optional[Side] = Field(default=None, description="The side on which the comment should be added. + Allowed values are REVISION and PARENT. + If not set, the default is REVISION.")
+    parent: Optional[StrictInt] = Field(default=None, description="The 1-based parent number. Used only for merge commits when side == PARENT. When not set the comment is for the auto-merge tree.")
+    line: Optional[StrictInt] = Field(default=None, description="The number of the line for which the comment should be added. + 0 if it is a file comment. + If neither line nor range is set, a file comment is added. + If range is set, this value is ignored in favor of the end_line of the range. + When updating a draft without path, the draft keeps its line.")
+    range: Optional[Range] = Field(default=None, description="The range of the comment as a CommentRange entity.")
+    in_reply_to: Optional[StrictStr] = Field(default=None, description="The URL encoded UUID of the comment to which this comment is a reply.")
+    updated: Optional[StrictStr] = Field(default=None, description="The timestamp of this comment. + Accepted but ignored.")
+    message: Optional[StrictStr] = Field(default=None, description="The comment message. + If not set and an existing draft comment is updated, the existing draft comment is deleted.")
+    commit_id: Optional[StrictStr] = Field(default=None, description="Hex commit SHA-1 (40 characters string) of the commit of the patchset to which this comment applies.")
+    fix_suggestions: Optional[List[FixSuggestionInfo]] = Field(default=None, description="Suggested fixes for this comment as a list of FixSuggestionInfo entities.")
+    is_ai: Optional[StrictBool] = Field(default=None, description="Whether the comment was created by an AI agent. Not set if false.")
+    __properties: ClassVar[List[str]] = ["unresolved", "patch_set", "id", "path", "side", "parent", "line", "range", "in_reply_to", "updated", "message", "commit_id", "fix_suggestions", "is_ai"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -69,6 +85,15 @@ class CommentInput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of range
+        if self.range:
+            _dict['range'] = self.range.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in fix_suggestions (list)
+        _items = []
+        if self.fix_suggestions:
+            for _item_fix_suggestions in self.fix_suggestions:
+                _items.append(_item_fix_suggestions.to_dict() if _item_fix_suggestions is not None else None)
+            _dict['fix_suggestions'] = _items
         return _dict
 
     @classmethod
@@ -81,7 +106,20 @@ class CommentInput(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "enable_context": obj.get("enable_context")
+            "unresolved": obj.get("unresolved"),
+            "patch_set": obj.get("patch_set"),
+            "id": obj.get("id"),
+            "path": obj.get("path"),
+            "side": obj.get("side"),
+            "parent": obj.get("parent"),
+            "line": obj.get("line"),
+            "range": Range.from_dict(obj["range"]) if obj.get("range") is not None else None,
+            "in_reply_to": obj.get("in_reply_to"),
+            "updated": obj.get("updated"),
+            "message": obj.get("message"),
+            "commit_id": obj.get("commit_id"),
+            "fix_suggestions": [FixSuggestionInfo.from_dict(_item) for _item in obj["fix_suggestions"]] if obj.get("fix_suggestions") is not None else None,
+            "is_ai": obj.get("is_ai")
         })
         return _obj
 

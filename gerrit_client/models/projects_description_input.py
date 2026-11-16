@@ -28,7 +28,8 @@ class ProjectsDescriptionInput(BaseModel):
     ProjectsDescriptionInput
     """ # noqa: E501
     commit_message: Optional[StrictStr] = Field(default=None, description="Message that should be used to commit the change of the project description in the project.config file to the refs/meta/config branch.")
-    __properties: ClassVar[List[str]] = ["commit_message"]
+    description: Optional[StrictStr] = Field(default=None, description="The project description. + The project description will be deleted if not set.")
+    __properties: ClassVar[List[str]] = ["commit_message", "description"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -81,7 +82,8 @@ class ProjectsDescriptionInput(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "commit_message": obj.get("commit_message")
+            "commit_message": obj.get("commit_message"),
+            "description": obj.get("description")
         })
         return _obj
 

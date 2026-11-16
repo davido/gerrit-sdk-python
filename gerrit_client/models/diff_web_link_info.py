@@ -29,10 +29,10 @@ class DiffWebLinkInfo(BaseModel):
     """ # noqa: E501
     show_on_side_by_side_diff_view: Optional[StrictBool] = Field(default=None, description="Whether the web link should be shown on the side-by-side diff screen.")
     show_on_unified_diff_view: Optional[StrictBool] = Field(default=None, description="Whether the web link should be shown on the unified diff screen.")
-    name: Optional[StrictStr] = Field(default=None, description="See WebLinkInfo")
-    tooltip: Optional[StrictStr] = Field(default=None, description="See WebLinkInfo")
-    image_url: Optional[StrictStr] = Field(default=None, description="See WebLinkInfo")
-    url: Optional[StrictStr] = Field(default=None, description="See WebLinkInfo")
+    name: Optional[StrictStr] = Field(default=None, description="The text to be linkified.")
+    tooltip: Optional[StrictStr] = Field(default=None, description="Tooltip to show when hovering over the link. Using \"Open in $NAME_OF_EXTERNAL_TOOL\" is a good option here.")
+    image_url: Optional[StrictStr] = Field(default=None, description="URL to the icon of the link.")
+    url: Optional[StrictStr] = Field(default=None, description="The link URL.")
     __properties: ClassVar[List[str]] = ["show_on_side_by_side_diff_view", "show_on_unified_diff_view", "name", "tooltip", "image_url", "url"]
 
     model_config = ConfigDict(
