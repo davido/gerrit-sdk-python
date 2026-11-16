@@ -51,7 +51,8 @@ def print_change_details(base, ci):
     print(f"  {status_badge(ci)}  {sgr('#' + str(ci.number or 0), BOLD)}")
     print(f"  {sgr(ci.subject or '', BOLD)}")
     print(rule())
-    print(f"  {fg(f'{base}/c/{ci.project or ''}/+/{ci.number or 0}', BLUE_700)}")
+    url = f"{base}/c/{ci.project or ''}/+/{ci.number or 0}"
+    print(f"  {fg(url, BLUE_700)}")
 
     section("Change Info")
     row("Owner", account(ci.owner))
